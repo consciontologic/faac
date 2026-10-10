@@ -51,7 +51,7 @@ Release dispatch is explicit. Neither a tag push, label, completed check, nor me
 
 Publication reuses that source evidence rather than rerunning application tests, PTY checks, dependency auditing, or scanners. It builds the npm package and container, validates archive contents and identity, verifies checksums, and publishes provenance. It does not rerun package/container smokes, tests, or scanners: those results come from the eligible PR. Archive and checksum validation protect publication integrity without repeating those jobs.
 
-The existing `release` environment controls any configured deployment restrictions. No new human-approval rule is imported from the reference project. Respect the actual environment and branch protections; never approve or bypass a gate without authorization.
+Package publication uses no GitHub deployment environment: there is no server deployment. Release run names, release titles, Git tags, and image version tags use the bare semantic version. `make git` publishes the prepared work branch; the explicit workflow dispatch publishes the version after its protected PRs reach `main`.
 
 Assets use bare versions:
 

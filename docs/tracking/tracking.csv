@@ -14,3 +14,5 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,commit,completed,ci: match wfform PR checks and remove delivery automation,,pending
 2026-10-10T09:25:22Z,faac-main-skip-20261010,codex,ci,review,passed,"Independent review and 19 policy tests pass; all five jobs skip ordinary main PRs, and explicit release alone verifies prior source evidence; actionlint and docs pass",,
 2026-10-10T09:25:22Z,faac-main-skip-20261010,codex,ci,commit,completed,ci: skip every check job on ordinary main promotions,,pending
+2026-10-10T09:40:42Z,faac-release-env-20261010,codex,release,review,passed,"Independent review, 147 tests, typecheck, docs, actionlint and installed 0.1.1 package pass; misleading deployment and empty release environment deleted on GitHub",,
+2026-10-10T09:40:42Z,faac-release-env-20261010,codex,release,commit,completed,fix(release): remove deployment environment and prepare 0.1.1,,pending

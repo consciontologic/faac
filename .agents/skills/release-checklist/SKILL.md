@@ -19,7 +19,7 @@ All five CI jobs, including GitFlow, run only in the eligible PR lanes. Ordinary
 
 ## Publication
 
-Explicitly dispatch `release.yml` on main with the committed version. No tag push, label, merge, completed check, or delivery controller starts publication. Respect the configured release environment; do not invent or bypass approval rules.
+Explicitly dispatch `release.yml` on main with the committed version. No tag push, label, merge, completed check, or delivery controller starts publication. Package publication does not use a deployment environment or create deployment records. Keep branch protections and source-evidence checks intact.
 
 The workflow builds package/container artifacts, checks allowed archive contents, identity, checksums and provenance, then publishes the immutable bare-version tag and assets. Existing tags/assets must not be moved or replaced. After a failure, inspect remote state before rerunning the failed job with its original artifacts.
 

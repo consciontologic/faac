@@ -2,11 +2,12 @@
 
 Changes use semantic versions. Dated verification remains in [reports](docs/reports/README.md).
 
-## Unreleased
+## 0.1.1 — release workflow cleanup
 
 - Remove the delivery workflow/controller and automatic label-driven tasks, repairs, merges, promotions, backmerges, and release dispatch at the owner's request.
 - Run all five CI jobs only for any PR into `develop` or a hotfix PR into `main`; skip every job on ordinary main promotion and remove push, merge, scheduled, and manual CI duplication.
 - Validate exact-tree prior PR evidence only during explicit release publication, without rerunning tests, smokes, or scanners.
+- Publish package releases without a GitHub deployment environment and name each run by its semantic version.
 - Retain explicit local MAI-Code-1.1-Flash delegation with one submission and a durable receipt.
 
 - Adopt the agentic-workspace scaffold with filled project, architecture, design, and contributor documentation.

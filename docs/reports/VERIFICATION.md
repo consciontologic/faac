@@ -123,3 +123,13 @@ The corrected source at 5911d64 passed all five eligible checks: [Quality and Pa
 Before promotion, live API verification exposed a compatibility error: GitHub API 2026-03-10 removes `merge_commit_sha`, while 2022-11-28 returned the actual merge commit. The release-evidence client now pins that supported read contract without downgrading Copilot task submission or relaxing tree/check validation. [GitHub breaking changes](https://docs.github.com/en/rest/about-the-rest-api/breaking-changes) documents the removal.
 
 The corrected evidence client successfully validated the real merged PR #1 and its four workflow runs. Its transport tests verify the legacy release header, the unchanged modern Copilot header, and rejection of unreviewed versions. All 39 Git/DevOps tests, documentation validation, and actionlint with ShellCheck passed; independent review found no blockers.
+
+## Published 0.1.1 — 2026-10-10
+
+[Release 0.1.1](https://github.com/consciontologic/faac/releases/tag/0.1.1) published successfully in [run 38043218816](https://github.com/consciontologic/faac/actions/runs/38043218816) from commit `25356647efb1481314344bd83991a2ccf37ea22b`. [Source PR #2](https://github.com/consciontologic/faac/pull/2) passed all five required jobs; [promotion PR #3](https://github.com/consciontologic/faac/pull/3) preserved the validated Git tree and skipped all five jobs without runners. No push CI ran on the released main commit.
+
+Anonymous downloads verified the package and inventory checksums. A fresh isolated install passed CLI version/help, launch and explicit workspace selection, guidance initialization, session resume, and existing-file preservation. An anonymous pull of `ghcr.io/consciontologic/faac:0.1.1` resolved to `sha256:72fe1063a5cbb41cb40100feb2bbfcb53aa63c3dec4f96b9b68939676bbbc48a`; its nonroot, read-only, network-disabled smoke passed workspace and session persistence. These checks made no model-provider calls.
+
+## Release deployment visibility — 2026-10-10
+
+The owner subsequently requested restoration of GitHub Deployments visibility and explicitly approved the `release` environment name. Version 0.1.2 restores the publication job's environment binding and points its deployment URL to the version's release page. It also applies Knowoff's curated changelog procedure and uses the committed version section for release notes. This supersedes the no-environment policy above; historical 0.1.1 verification remains accurate. There is still no application-server rollout.

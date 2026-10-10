@@ -95,8 +95,12 @@ jobs:
     needs: prepare
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    environment:
+      name: release
+      url: https://github.com/${{ github.repository }}/releases/tag/${{ needs.prepare.outputs.version }}
     permissions:
       contents: write
+      deployments: write
       packages: write
       id-token: write
       attestations: write
@@ -175,4 +179,4 @@ jobs:
         env:
           RESULT: ${{ job.status }}
         run: |
-          printf '\n**Publication: %s.**\n' "$RESULT" >> "$GITHUB_STEP_SUMMARY"
+          printf '\n**Publication: %s.** Environment: release (package publication).\n' "$RESULT" >> "$GITHUB_STEP_SUMMARY"

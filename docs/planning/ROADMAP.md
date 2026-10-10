@@ -7,7 +7,7 @@ This is the sequenced project plan. Checked items are implemented; remaining liv
 | 1. Terminal coding agent              | Implemented and tested                            |
 | 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending |
 | 3. Upstream synchronization           | Implemented and tested                            |
-| 4. PR checks and explicit publication | Locally verified; hosted PR evidence pending        |
+| 4. PR checks and explicit publication | Verified locally and on GitHub                    |
 | 5. Additional live evidence           | Requires external accounts/quota conditions       |
 
 ## Phase 1 — Terminal coding agent
@@ -54,10 +54,10 @@ Scope: `pr-policy`. Acceptance: policy tests, workflow lint, eligible PR evidenc
 - [x] Verify exact-tree prior PR evidence is enforced only during explicit release validation.
 - [x] Verify explicit release authorization reuses prior PR results without rerunning tests, smokes, or scanners.
 - [x] Observe successful eligible PR jobs on GitHub with the revised policy.
-- [ ] Observe all-five promotion skips on GitHub with the revised policy.
+- [x] Observe all-five promotion skips on GitHub with the revised policy.
 - [ ] Obtain an actual completed native Copilot review when account quota permits.
 
-The earlier controller and manually dispatched diagnostics remain dated evidence in [verification](../reports/VERIFICATION.md). They do not establish the revised policy's hosted success. Automatic delivery and permanent controller credentials are no longer planned. The proven public release/container and explicit MAI task remain valid historical results.
+The earlier controller and manually dispatched diagnostics remain dated evidence in [verification](../reports/VERIFICATION.md). The revised policy was verified by eligible source PRs #1 and #2, promotion PR #3 with all five jobs skipped before runner allocation, and the successful 0.1.1 release run. Automatic delivery and permanent controller credentials are no longer planned. The proven public release/container and explicit MAI task remain valid historical results.
 
 ## Phase 5 — Additional live evidence
 

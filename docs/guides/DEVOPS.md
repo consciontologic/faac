@@ -35,7 +35,7 @@ A maintainer or explicitly authorized coordinating agent requests review, handle
 
 Native Copilot review chooses its own model; the task model cannot select it. Where the account exposes review effort, Lite is the inexpensive option. Quota failure is not a successful review, including a `COMMENTED` response saying no review was performed. A local AI review is separate evidence and must not be represented as native Copilot approval. See [model selection](MODEL_PROFILES.md).
 
-The required names are **Quality, Package, Container, Security, and GitFlow**. Quality, package, container, and security work runs only on **any PR into `develop`** or a **hotfix PR into `main`**. Ordinary `develop` → `main` promotion skips those jobs and uses a lightweight GitFlow gate to verify the exact tree's prior eligible PR evidence. No push, merge, scheduled, or manual CI duplication is configured. [GitFlow](GITFLOW.md) defines the lanes and the changed-tree recovery path.
+The required names are **Quality, Package, Container, Security, and GitFlow**. All five jobs run only on **any PR into `develop`** or a **hotfix PR into `main`**. Ordinary `develop` → `main` promotion skips all five without allocating their runners. Required check names remain configured, but skipped checks are not new test evidence. The coordinator must preserve the validated full Git tree; exact-tree evidence is enforced only by explicit release validation. No push, merge, scheduled, or manual CI duplication is configured. [GitFlow](GITFLOW.md) defines the lanes and the changed-tree recovery path.
 
 ## Release a version
 
@@ -47,7 +47,7 @@ gh workflow run release.yml --ref main -f version=0.1.1
 
 Replace `0.1.1` with the new version actually committed on `main`. Existing `0.1.0` assets are immutable; this example is not an instruction to rebuild or replace them.
 
-Release dispatch is explicit. Neither a tag push, label, completed check, nor merge starts publication. The workflow checks current `main`, the committed version, and its merged main PR. A hotfix supplies its own successful checks; a develop promotion must match the full Git tree from a successful merged develop PR. It records the source PR and check runs. A changed or unproven tree must return through the PR quality lane.
+Release dispatch is explicit. Neither a tag push, label, completed check, nor merge starts publication. The workflow checks current `main`, the committed version, and its merged main PR. A hotfix supplies its own successful checks; a develop promotion must match the full Git tree from a successful merged develop PR. It reads actual GitHub PR, check-run, job, and commit metadata, records the source PR and check runs, and blocks publication if the evidence is missing or inconsistent. A changed or unproven tree must return through the PR quality lane.
 
 Publication reuses that source evidence rather than rerunning application tests, PTY checks, dependency auditing, or scanners. It builds the npm package and container, validates archive contents and identity, verifies checksums, and publishes provenance. It does not rerun package/container smokes, tests, or scanners: those results come from the eligible PR. Archive and checksum validation protect publication integrity without repeating those jobs.
 

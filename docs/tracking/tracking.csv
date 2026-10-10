@@ -12,3 +12,5 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T09:02:24Z,faac-semver-20261010,codex,delivery,commit,completed,fix(release): use bare semantic version names for releases and packages,,pending
 2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,review,passed,"Independent review passed; 147 tests, workflow lint, package install, PTY, Docker and security checks pass; PR-only policy and exact-tree evidence verified locally",,
 2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,commit,completed,ci: match wfform PR checks and remove delivery automation,,pending
+2026-10-10T09:25:22Z,faac-main-skip-20261010,codex,ci,review,passed,"Independent review and 19 policy tests pass; all five jobs skip ordinary main PRs, and explicit release alone verifies prior source evidence; actionlint and docs pass",,
+2026-10-10T09:25:22Z,faac-main-skip-20261010,codex,ci,commit,completed,ci: skip every check job on ordinary main promotions,,pending

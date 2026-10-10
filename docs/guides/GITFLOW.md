@@ -37,19 +37,19 @@ Follow [AGENTS.md](../../AGENTS.md): record tracking, inspect the staged set, an
 
 ## Exactly when checks run
 
-The five named gates are **Quality, Package, Container, Security, and GitFlow**.
+The five required check names remain **Quality, Package, Container, Security, and GitFlow**.
 
 - **Any PR into `develop`:** runs the four quality/package/security jobs and the GitFlow gate.
 - **Hotfix PR into `main`:** runs the same checks. Recognized branches are `hotfix/*`, `codex/hotfix/*`, `claude/hotfix/*`, and same-repository `copilot/*` with `work:hotfix`.
-- **Ordinary same-repository `develop` → `main` promotion:** skips the four expensive jobs. The lightweight GitFlow gate verifies that the full source tree already passed the required checks in a merged eligible PR.
-- **Pushes, merges, schedules, and manual CI dispatch:** do not start another quality/security run.
+- **Ordinary same-repository `develop` → `main` promotion:** skips all five jobs, including GitFlow, without allocating their runners. A skipped check does not mean a test ran.
+- **Pushes, merges, schedules, and manual CI dispatch:** do not start CI jobs.
 
-PR changes and hotfix-label changes update the applicable gate. Promotion must retain the validated tree. If conflict resolution or another edit changes that tree, validate the changed source through `develop` before promotion. A skipped promotion job is not fresh quality evidence; the source-evidence gate supplies that check.
+PR changes and hotfix-label changes update the applicable lane. The coordinating maintainer or authorized agent must preserve the validated full Git tree during promotion. If conflict resolution or another edit changes that tree, validate the changed source through `develop` before promotion. The skipped promotion checks supply no new test evidence. Exact-tree validation runs only in the explicitly dispatched release workflow, which refuses publication when actual GitHub PR, check, or tree metadata cannot prove the source.
 
 Earlier manual CI runs were diagnostic only. GitHub does not count `workflow_dispatch` job checks as required PR evidence; see [the official rule](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks#checks-from-some-workflow-jobs-are-not-evaluated).
 
 ## Publish a release
 
-After the verified promotion or hotfix merges, explicitly dispatch `release.yml` on `main` for the committed version. The publisher validates previous PR evidence, builds the artifacts, and checks archive integrity, checksums, and provenance. It does not rerun tests, smokes, or security scans.
+After the coordinated promotion or verified hotfix merges, explicitly dispatch `release.yml` on `main` for the committed version. The publisher validates previous PR evidence, builds the artifacts, and checks archive integrity, checksums, and provenance. It does not rerun tests, smokes, or security scans.
 
 Release names and tags are bare semantic versions, such as `0.1.0`. Assets are `0.1.0.tgz`, `0.1.0.cdx.json`, and `SHA256SUMS`; the image is `ghcr.io/consciontologic/faac:0.1.0`. No `latest` or commit-SHA image aliases are published by future releases. See [DevOps](DEVOPS.md#release-a-version) for the command and recovery.

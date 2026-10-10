@@ -24,7 +24,7 @@
 
 ## Current context
 
-The application has completed authenticated OpenRouter coding and resume checks. Alternate-model continuation was verified with a clearly labeled injected fault. Groq authenticated fallback and natural quota exhaustion remain unverified. The repository uses agentic-workspace and wfform-style PR-only CI. Any PR into develop and hotfix PRs into main run quality/package/security jobs. Ordinary develop promotion reuses exact-tree prior PR evidence through a lightweight GitFlow gate. The delivery controller has been removed; Copilot tasks and releases require explicit local/maintainer action.
+The application has completed authenticated OpenRouter coding and resume checks. Alternate-model continuation was verified with a clearly labeled injected fault. Groq authenticated fallback and natural quota exhaustion remain unverified. The repository uses agentic-workspace and wfform-style PR-only CI. Any PR into develop and hotfix PRs into main run all five CI jobs. Ordinary develop promotion skips all five, including GitFlow; the coordinator preserves the validated full tree. Exact-tree prior PR evidence is enforced only during explicit release validation. The delivery controller has been removed; Copilot tasks and releases require explicit local/maintainer action.
 
 ## Project conventions
 

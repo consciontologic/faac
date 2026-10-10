@@ -15,7 +15,7 @@ Use before publishing a faac version. Read [the release guide](../../../docs/gui
 - Preserve the exact source tree. Changed source needs fresh checks through develop before publication.
 - Review the recorded source PR and check-run evidence. Do not substitute old manual-dispatch diagnostics or a skipped promotion job for actual source validation.
 
-Quality, package, container, and security jobs run only in the eligible PR lanes. Do not trigger duplicate tests, smokes, or scans during promotion or release. The release workflow validates earlier evidence and performs artifact-build/integrity work.
+All five CI jobs, including GitFlow, run only in the eligible PR lanes. Ordinary main promotion skips all five; the coordinator must preserve the validated full tree. Exact-tree prior PR evidence is enforced only during explicit release validation. Do not trigger duplicate tests, smokes, or scans during promotion or release. The release workflow validates earlier evidence and performs artifact-build/integrity work.
 
 ## Publication
 

@@ -20,7 +20,7 @@ Children return evidence and do not stage another agent's files. A failed gate s
 
 A maintainer or authorized local coordinator explicitly delegates a bounded task, requests review, and coordinates PR merging. Labels and finished checks do not trigger tasks, repairs, merges, promotions, or releases. The local request helper uses [model policy](MODEL_PROFILES.md) and a receipt; account entitlement still applies. See [DevOps](DEVOPS.md).
 
-Quality/package/security jobs run only on PRs into develop or hotfix PRs into main. Ordinary main promotion uses exact-tree prior evidence through the lightweight GitFlow gate. Release dispatch builds artifacts from validated source without rerunning tests or scanners.
+All five CI jobs run only on PRs into develop or hotfix PRs into main. Ordinary main promotion skips all five jobs; the coordinator preserves the validated full tree. Explicit release dispatch enforces exact-tree prior PR evidence before building artifacts, without rerunning tests or scanners.
 
 AI review does not replace tests or branch protection. Do not claim approval, a live request, an image publication, or a release unless its actual result was observed. Never fabricate human review or bypass unavailable checks.
 

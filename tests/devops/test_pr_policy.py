@@ -1,5 +1,4 @@
 """Exercise actual workflow predicates and the read-only GitFlow PR gate."""
-import copy
 import json
 from pathlib import Path
 import re
@@ -64,7 +63,7 @@ class PRPolicy(unittest.TestCase):
                ('copilot/fix','main',REPO,(),False),('develop','main',REPO,(),False),
                ('release/0.2.0','main',REPO,(),False),('feature/fix','main',REPO,(),False),
                ('anything','other',REPO,(),False)]
-        for filename in ('ci','container','security'):
+        for filename in ('ci','container','security','gitflow'):
             text=(ROOT/f'.github/workflows/{filename}.yml').read_text()
             predicates=re.findall(r'    if: >-\n((?:      .*\n)+)',text)
             self.assertEqual(len(predicates),2 if filename=='ci' else 1)
@@ -102,19 +101,14 @@ class PRPolicy(unittest.TestCase):
             self.assertIn('quality checks run',gitflow.check_event({'pull_request':pull},'pull_request',REPO))
         for event in ('push','schedule','workflow_dispatch'):
             with self.assertRaisesRegex(ValueError,'only'):gitflow.check_event({'pull_request':pr()},event,REPO)
-        with self.assertRaisesRegex(ValueError,'Main accepts'):
+        with self.assertRaisesRegex(ValueError,'only for develop'):
             gitflow.check_event({'pull_request':pr('feature/not-release','main')},'pull_request',REPO)
 
-    def test_promotion_reuses_evidence_and_refuses_stale_event(self):
-        pull=pr('develop','main')
-        class Client:
-            def request(self,path):return copy.deepcopy(pull)
-        with patch('release_evidence.verify_promotion',return_value={'source_pr':4,'tree_sha':'c'*40}) as verify:
-            result=gitflow.check_event({'pull_request':pull},'pull_request',REPO,Client())
-            self.assertIn('reuse prior checks; no scans/builds/tests run',result)
-            verify.assert_called_once()
-            old=copy.deepcopy(pull);old['head']['sha']='d'*40
-            with self.assertRaisesRegex(ValueError,'moved'):
-                gitflow.check_event({'pull_request':old},'pull_request',REPO,Client())
+    def test_off_lane_pr_rejects_without_promotion_evidence_or_network(self):
+        with patch('release_evidence.verify_promotion') as verify:
+            for head,base in [('develop','main'),('release/0.2.0','main'),('anything','other')]:
+                with self.assertRaisesRegex(ValueError,'only for develop'):
+                    gitflow.check_event({'pull_request':pr(head,base)},'pull_request',REPO)
+            verify.assert_not_called()
 
 if __name__=='__main__':unittest.main()

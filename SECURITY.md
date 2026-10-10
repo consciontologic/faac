@@ -18,6 +18,6 @@ Upstream synchronization fetches into a faac-owned Git cache and parses a bounde
 
 PR text and source are untrusted inputs. Eligible PR jobs run with read-only permissions and no provider or publication secrets. Explicit Copilot tasks use a process-scoped token, one chosen model, and durable submission receipts; there is no delivery controller or label-driven task execution.
 
-Quality and scanner jobs run only for PRs into develop or hotfix PRs into main. Ordinary promotion and release must prove the exact source tree already passed the required eligible PR checks. Publication uses trusted main code and artifact integrity checks without rerunning quality/security jobs. Do not bypass branch protections or accept an error comment as completed review. See [DevOps](docs/guides/DEVOPS.md).
+All five CI jobs run only for PRs into develop or hotfix PRs into main. Ordinary promotion skips them all; the coordinator preserves the validated source tree. Explicit release validation proves that tree passed eligible PR checks before allowing publication. Publication uses trusted main code and artifact integrity checks without rerunning quality/security jobs. Do not bypass branch protections or accept an error comment as completed review. See [DevOps](docs/guides/DEVOPS.md).
 
 Rotate a credential through its provider when exposure is confirmed, remove it from active configuration, and review access logs. Removing a value from the latest Git revision does not remove it from history.

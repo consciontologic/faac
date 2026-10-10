@@ -109,7 +109,7 @@ make package.test
 
 Tests using simulated providers are separate from opted-in authenticated tests. Actual OpenRouter coding, process restart/resume, and alternate-model inference after an injected interruption passed on 2026-10-10. Groq authenticated fallback and natural quota exhaustion remain unverified. See [the evidence and reproduction steps](docs/reports/VERIFICATION.md).
 
-Quality and security jobs run only for PRs into `develop` or hotfix PRs into `main`. Ordinary promotion reuses exact-tree PR evidence. Copilot delegation is explicit, and releases are manually dispatched; no delivery controller purchases tasks or merges PRs. See [GitFlow](docs/guides/GITFLOW.md) and [DevOps](docs/guides/DEVOPS.md).
+All five CI jobs run only for PRs into `develop` or hotfix PRs into `main`. Ordinary promotion skips every job; explicit release validation checks the exact tree against prior eligible PR evidence. Copilot delegation is explicit, and releases are manually dispatched; no delivery controller purchases tasks or merges PRs. See [GitFlow](docs/guides/GITFLOW.md) and [DevOps](docs/guides/DEVOPS.md).
 
 ## Source and license
 

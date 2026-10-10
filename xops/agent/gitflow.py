@@ -41,7 +41,7 @@ def valid_lane(head, base):
                                 ('hotfix/', 'codex/hotfix/', 'claude/hotfix/')))))
 
 
-def check_event(event, event_name, repository, client=None):
+def check_event(event, event_name, repository):
     if event_name != 'pull_request':
         raise ValueError('GitFlow checks run only for pull_request events')
     pr = event.get('pull_request') or {}
@@ -50,22 +50,7 @@ def check_event(event, event_name, repository, client=None):
     head, base = pr.get('head', {}).get('ref', ''), pr.get('base', {}).get('ref', '')
     if quality_pr(pr, repository):
         return f'GitFlow: {head} -> {base}; quality checks run on this PR.'
-    if base != 'main' or head != 'develop' or pr.get('head', {}).get('repo', {}).get('full_name') != repository:
-        raise ValueError('Main accepts a hotfix PR or a same-repository develop promotion')
-    from release_evidence import verify_promotion
-    if client is None:
-        from copilot_task import GitHub
-        client = GitHub(os.environ.get('GH_TOKEN', ''))
-    number = pr.get('number', event.get('number'))
-    if not isinstance(number, int) or number < 1:
-        raise ValueError('Expected a positive PR number')
-    fresh = client.request(f'repos/{repository}/pulls/{number}')
-    if (fresh.get('head', {}).get('sha') != pr.get('head', {}).get('sha')
-            or fresh.get('base', {}).get('sha') != pr.get('base', {}).get('sha')):
-        raise ValueError('PR head or base moved; use a fresh pull_request run')
-    evidence = verify_promotion(client, fresh)
-    return (f'GitFlow: reuse prior checks; no scans/builds/tests run. '
-            f'Develop PR #{evidence["source_pr"]} proved tree {evidence["tree_sha"]}.')
+    raise ValueError('GitFlow checks run only for develop PRs and main hotfix PRs')
 
 
 def main():

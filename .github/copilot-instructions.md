@@ -21,7 +21,7 @@ models. Development Copilot subscriptions are a separate cost boundary.
   `make git`; subagents return evidence to their parent. Never bypass checks,
   merge your own PR, push protected branches, alter secrets or change model policy.
 - No delivery controller is installed. Labels and completed checks do not submit tasks, repair, merge, or publish releases. Use explicit assigned work only.
-- Quality/package/security jobs run only for PRs into develop or hotfix PRs into main. Ordinary develop-to-main promotion reuses exact-tree source evidence through the lightweight GitFlow gate.
+- All five CI jobs run only for PRs into develop or hotfix PRs into main. Ordinary develop-to-main promotion skips all five, including GitFlow. Preserve the validated full tree; only explicit release validation enforces exact-tree prior PR evidence.
 - Load relevant skills from [the skill library](../.agents/skills/README.md).
   MCP is disabled; use local source/search tools without installing integrations.
 - Keep tracking concise, use Conventional Commits, and update the existing

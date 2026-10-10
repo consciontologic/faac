@@ -52,7 +52,7 @@
     "any -> develop",
     "hotfix -> main"
   ],
-  "promotion_validation": "GitFlow reuses successful merged develop PR evidence for the exact source and candidate merge tree",
+  "promotion_validation": "Explicit release authorization reuses successful merged develop PR evidence for the exact source and final main merge tree; all PR check jobs skip ordinary main promotions",
   "checks_app_id": 15368,
   "check_workflows": {
     "Quality": ".github/workflows/ci.yml",

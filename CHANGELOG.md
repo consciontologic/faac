@@ -5,8 +5,8 @@ Changes use semantic versions. Dated verification remains in [reports](docs/repo
 ## Unreleased
 
 - Remove the delivery workflow/controller and automatic label-driven tasks, repairs, merges, promotions, backmerges, and release dispatch at the owner's request.
-- Run quality/package/security jobs only for any PR into `develop` or a hotfix PR into `main`; remove push, merge, scheduled, and manual CI duplication.
-- Keep a lightweight PR-only GitFlow gate for exact-tree promotion evidence; explicit release publication reuses prior eligible PR results without rerunning tests, smokes, or scanners.
+- Run all five CI jobs only for any PR into `develop` or a hotfix PR into `main`; skip every job on ordinary main promotion and remove push, merge, scheduled, and manual CI duplication.
+- Validate exact-tree prior PR evidence only during explicit release publication, without rerunning tests, smokes, or scanners.
 - Retain explicit local MAI-Code-1.1-Flash delegation with one submission and a durable receipt.
 
 - Adopt the agentic-workspace scaffold with filled project, architecture, design, and contributor documentation.

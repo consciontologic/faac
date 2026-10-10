@@ -52,4 +52,4 @@ jobs:
           RESULT: ${{ job.status }}
           SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          printf '### 🛡️ Security\n\nStatus: **%s** · PR source: `%s`\n' "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+          printf "### 🛡️ Security\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"

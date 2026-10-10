@@ -37,4 +37,4 @@ jobs:
           RESULT: ${{ job.status }}
           SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          printf '### 🌿 GitFlow\n\nStatus: **%s** · PR source: `%s`\n' "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+          printf "### 🌿 GitFlow\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"

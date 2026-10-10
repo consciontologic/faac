@@ -169,7 +169,7 @@ jobs:
       - name: 🎉 Publish the release
         run: |
           bash xops/ci/step.sh '🎉 Make release available' node xops/package/release.mjs finish
-          printf '\n### 🎉 Published %s\n\nSource: `%s`\n\n📦 `%s.tgz` · 📋 `%s.cdx.json` · 🔐 `SHA256SUMS`\n\n🐳 `%s:%s`\n' "$RELEASE_VERSION" "$RELEASE_SHA" "$RELEASE_VERSION" "$RELEASE_VERSION" "$RELEASE_IMAGE" "$RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
+          printf "\n### 🎉 Published %s\n\nSource: \`%s\`\n\n📦 \`%s.tgz\` · 📋 \`%s.cdx.json\` · 🔐 \`SHA256SUMS\`\n\n🐳 \`%s:%s\`\n" "$RELEASE_VERSION" "$RELEASE_SHA" "$RELEASE_VERSION" "$RELEASE_VERSION" "$RELEASE_IMAGE" "$RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
       - name: 📝 Publication result
         if: always()
         env:

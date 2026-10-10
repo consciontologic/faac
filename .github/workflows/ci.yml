@@ -58,7 +58,7 @@ jobs:
           RESULT: ${{ job.status }}
           SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          printf '### 🧪 Quality and packages\n\nStatus: **%s** · PR source: `%s`\n' "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+          printf "### 🧪 Quality and packages\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
   package:
     if: >-
       github.event_name == 'pull_request' && (
@@ -103,4 +103,4 @@ jobs:
           RESULT: ${{ job.status }}
           SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          printf '### 🧪 Quality and packages\n\nStatus: **%s** · PR source: `%s`\n' "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+          printf "### 🧪 Quality and packages\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"

@@ -3,6 +3,7 @@
 **Ask for a code change. Keep your work when the model changes.**
 
 [![CI](https://github.com/consciontologic/faac/actions/workflows/ci.yml/badge.svg)](https://github.com/consciontologic/faac/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/consciontologic/faac)](https://github.com/consciontologic/faac/releases/latest)
 [![Node.js 22+](https://img.shields.io/badge/node-%3E%3D22-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -17,6 +18,19 @@ faac is a terminal coding assistant powered by hosted free models. It reads your
 - **Strict free routing:** official OpenRouter and Groq APIs; no silent paid fallback, local model, or running OmniRoute server.
 - **A usable terminal:** streaming Markdown and highlighted code, diffs, multiline editing, history, slash completion, cancellation, narrow layouts, and `NO_COLOR`.
 - **Reviewed upstream updates:** a dedicated Git cache, validated data extraction, atomic activation, quarantine, and rollback.
+
+## Install the release
+
+Requires Node.js 22+ and npm. The package is published as a GitHub release asset:
+
+```bash
+npm install --global --prefix "$HOME/.local" \
+  https://github.com/consciontologic/faac/releases/download/v0.1.0/faac-0.1.0.tgz
+export PATH="$HOME/.local/bin:$PATH"
+faac --version
+```
+
+[Release assets and checksums](https://github.com/consciontologic/faac/releases/tag/v0.1.0) · [Container instructions](docs/guides/DEVOPS.md#run-the-container)
 
 ## Install from source
 

@@ -52,12 +52,35 @@ def checks_green(checks):
                and latest[name].get('conclusion') == 'success' for name in REQUIRED_CHECKS)
 
 
+def review_performed(review):
+    """Native COMMENTED also reports quota errors; require completed-review evidence.
+
+    This intentionally accepts only the observed GitHub review summary format.
+    An unknown or changed format is not proof of review and must fail closed.
+    """
+    if review.get('user', {}).get('login') != REVIEWER: return False
+    if review.get('state') not in {'COMMENTED', 'APPROVED', 'CHANGES_REQUESTED'}: return False
+    body = review.get('body')
+    if not isinstance(body, str): return False
+    failure = (r"Copilot\s+(?:was\s+)?unable\s+to\s+review|"
+               r"Copilot\s+(?:could\s+not|couldn't)\s+review|"
+               r"quota\s+(?:limit|exceeded|exhausted)|"
+               r"review\s+(?:was\s+)?not\s+(?:performed|completed)|"
+               r"review\s+(?:was\s+)?skipped")
+    if re.search(failure, body, re.I): return False
+    completed = re.search(
+        r'^Copilot reviewed ([0-9]+) out of ([0-9]+) changed files in this pull request '
+        r'and generated (?:[0-9]+|no)(?: new)? comments?\.', body, re.M)
+    return bool(completed and 0 < int(completed[1]) <= int(completed[2]))
+
+
 def review_green(reviews, sha):
     latest = {}
     for review in reviews:
         if review.get('state') != 'PENDING': latest[review['user']['login']] = review
     return (latest.get(REVIEWER, {}).get('commit_id') == sha
             and latest.get(REVIEWER, {}).get('state') in {'COMMENTED','APPROVED'}
+            and review_performed(latest.get(REVIEWER, {}))
             and not any(r.get('state') == 'CHANGES_REQUESTED' for r in latest.values()))
 
 
@@ -209,7 +232,12 @@ class Controller:
         sha = pr['head']['sha']
         reviews = self.api.request(f'{PREFIX}/pulls/{number}/reviews?per_page=100')
         if len(reviews) >= 100: raise ValueError('Too many reviews to validate safely')
-        if not review_green(reviews, sha):
+        current_review = next((r for r in reversed(reviews)
+                               if r.get('commit_id') == sha and r.get('user', {}).get('login') == REVIEWER), None)
+        if current_review and not review_performed(current_review):
+            print(f'#{number}: native review unavailable or unrecognized for {sha[:12]}; no automatic rereview or repair.')
+            return
+        if not current_review:
             review_action = 'review:' + sha
             count = sum(r['action'].startswith('review:') for r in receipts)
             if (self.budget > 0 and count < LIMITS['max_reviews_per_pull_request']
@@ -222,7 +250,7 @@ class Controller:
         threads_clear = self.threads_clear(number)
         failed = any(c.get('name') in REQUIRED_CHECKS and c.get('status') == 'completed'
                      and c.get('conclusion') in {'failure','timed_out','cancelled','action_required'} for c in checks)
-        reviewed = any(r.get('commit_id') == sha and r['user']['login'] == REVIEWER for r in reviews)
+        reviewed = any(r.get('commit_id') == sha and review_performed(r) for r in reviews)
         if (failed or (reviewed and not threads_clear)) and not already_attempted(receipts, 'repair'):
             # The tasks API can edit a work branch, never protected main/develop.
             if pr['head']['ref'] in {'main','develop'}:

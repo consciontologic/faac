@@ -5,8 +5,15 @@ on:
     types: [opened, synchronize, reopened, edited, ready_for_review]
   push:
     branches: [main, develop]
+  workflow_dispatch:
+    inputs:
+      pull_request_number:
+        description: 'Open PR to validate; dispatch its current head branch. Blank is only valid on main/develop.'
+        required: false
+        type: string
 permissions:
   contents: read
+  pull-requests: read
 jobs:
   gitflow:
     name: GitFlow
@@ -15,4 +22,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - run: python3 xops/agent/gitflow.py --check-event
+      - name: Validate branch lane and optional exact PR head
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 xops/agent/gitflow.py --check-event

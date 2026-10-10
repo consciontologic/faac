@@ -44,7 +44,7 @@ class ControllerTests(unittest.TestCase):
         fake=Fake(); pr=pull(); c=self.controller(fake)
         fake.data[f'{delivery.PREFIX}/pulls/7'] = pr
         fake.data[f'{delivery.PREFIX}/pulls/7/reviews?per_page=100'] = [
-            {'user':{'login':delivery.REVIEWER},'commit_id':'new','state':'COMMENTED'}]
+            {'user':{'login':delivery.REVIEWER},'commit_id':'new','state':'COMMENTED','body':'Copilot reviewed 1 out of 1 changed files in this pull request and generated no new comments.'}]
         fake.data[f'{delivery.PREFIX}/pulls/7/merge','PUT']={'merged':True}
         c.checks=lambda pr:[{'name':name,'status':'completed','conclusion':'success',
                             'app':{'slug':'github-actions'}} for name in delivery.REQUIRED_CHECKS]
@@ -72,6 +72,18 @@ class ControllerTests(unittest.TestCase):
             fake.data[f'{delivery.PREFIX}/pulls/7']=pr
             c.pr(pr)
             self.assertFalse(any(call[0].endswith('/merge') for call in fake.calls), reason)
+
+    def test_quota_review_never_spends_on_rereview_or_repair(self):
+        fake,c,pr=self.ready();tasks=Fake();c.tasks=tasks
+        fake.data[f'{delivery.PREFIX}/pulls/7/reviews?per_page=100']=[{
+            'user':{'login':delivery.REVIEWER},'commit_id':'new','state':'COMMENTED',
+            'body':'Copilot was unable to review this pull request because the user who requested the review has reached their quota limit.'}]
+        c.checks=lambda pr:[{'name':'Quality','status':'completed','conclusion':'failure'}]
+        c.threads_clear=lambda number:False
+        c.pr(pr)
+        self.assertFalse(fake.writes())
+        self.assertFalse(tasks.calls)
+        self.assertEqual(c.budget,delivery.LIMITS['max_new_paid_actions_per_run'])
 
     def test_absent_protection_does_not_use_admin_bypass(self):
         fake,c,pr=self.ready();c.protection_valid=lambda branch:False

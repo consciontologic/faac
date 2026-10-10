@@ -31,6 +31,15 @@ def valid_lane(head, base):
     return base == ('main' if kind == 'hotfix' else 'develop')
 
 
+def validate_dispatch_pull(pr, repository, sha):
+    if pr.get('head', {}).get('repo', {}).get('full_name') != repository:
+        raise ValueError('Manual GitFlow requires a PR from this repository')
+    if pr.get('state') != 'open' or pr.get('head', {}).get('sha') != sha:
+        raise ValueError('Manual GitFlow must run at the current open PR head SHA')
+    if not valid_lane(pr['head']['ref'], pr['base']['ref']):
+        raise ValueError('Invalid GitFlow lane')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('kind', nargs='?', choices=['feature', 'bugfix', 'hotfix', 'release'])
@@ -42,6 +51,16 @@ def main():
     if args.check_event:
         event = json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
         pr = event.get('pull_request')
+        if os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch':
+            number = (event.get('inputs') or {}).get('pull_request_number', '').strip()
+            if number:
+                if not re.fullmatch(r'[1-9][0-9]*', number): raise SystemExit('Enter a positive PR number')
+                from copilot_task import GitHub, REPO
+                if os.environ.get('GITHUB_REPOSITORY') != REPO: raise SystemExit('Repository mismatch')
+                pr = GitHub(os.environ.get('GITHUB_TOKEN', '')).request(f'repos/{REPO}/pulls/{number}')
+                validate_dispatch_pull(pr, REPO, os.environ.get('GITHUB_SHA'))
+            elif os.environ.get('GITHUB_REF') not in {'refs/heads/main', 'refs/heads/develop'}:
+                raise SystemExit('Work-branch dispatch requires pull_request_number for exact-head validation')
         if not pr: print('GitFlow: not a pull request.'); return
         head, base = pr['head']['ref'], pr['base']['ref']
         if not valid_lane(head, base): raise SystemExit(f'Invalid GitFlow lane: {head} -> {base}')

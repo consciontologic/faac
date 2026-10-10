@@ -60,7 +60,7 @@ Scope: `live-validation`. These are explicit evidence gaps, not claims of missin
 - [ ] Verify Groq authenticated coding with a confirmed Free-plan account.
 - [ ] Verify authenticated fallback between providers while preserving tool state.
 - [ ] Observe a natural quota-triggered fallback and record the actual failure scope.
-- [ ] Verify a tagged GitHub release and published GHCR image from the installed workflow.
+- [x] Verify a versioned GitHub release and published GHCR image from the installed workflow.
 
 ## Completion discipline
 

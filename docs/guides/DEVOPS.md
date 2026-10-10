@@ -37,7 +37,7 @@ Store durable credentials in **GitHub repository Actions secrets**, not files or
 
 Administration read is used to inspect branch protection; Checks read retrieves check runs for the exact PR head. These are read permissions, not authorization to weaken repository policy.
 
-Use the narrowest repository access. A temporary setup token is not automatically installed as an Actions secret. The built-in `GITHUB_TOKEN` can perform some limited work, but is not a substitute for Agent Tasks access; PR workflows created through limited tokens can require approval. The controller reports missing credentials or permissions rather than fabricating progress.
+Use the narrowest repository access. A temporary setup token is not automatically installed as an Actions secret. The built-in `GITHUB_TOKEN` can perform some limited work, but is not a substitute for Agent Tasks access; PR workflows created through limited tokens can require approval. The controller reports missing credentials or permissions rather than fabricating progress. As of the setup verification, an explicit MAI task completed, but native review reported exhausted quota; durable secrets are not installed.
 
 Enable Actions and the required Copilot coding/review features for the repository/account. GitHub's Agent Tasks endpoint eligibility may depend on the plan or organization configuration. The review model itself is selected by GitHub, not pinned to the task model. Where available, select **Lite** native review effort in GitHub settings. See [model policy](MODEL_PROFILES.md) and [the checked-in policy](../../.github/copilot-model-policy.json).
 
@@ -122,10 +122,12 @@ docker run --rm -it \
   faac:local
 ```
 
-`OPENROUTER_API_KEY` must already be set securely if you use that option; otherwise connect through the hidden prompt and persist the encrypted vault in the mounted state directory. Replace `faac:local` with `ghcr.io/consciontologic/faac:0.1.0` only after that version has been published. Avoid putting a literal key on the command line.
+`OPENROUTER_API_KEY` must already be set securely if you use that option; otherwise connect through the hidden prompt and persist the encrypted vault in the mounted state directory. The published release image is `ghcr.io/consciontologic/faac:0.1.0`; replace `faac:local` with that image to use it without building. Avoid putting a literal key on the command line.
 
 The workspace mount allows edits to the host files you chose. The state mount preserves sessions across container exits. The container contains a shell but is not a security boundary for arbitrary mounted files or forwarded credentials. Do not mount the Docker socket into an agent workspace.
 
 ## Diagnose a stopped workflow
 
 Inspect Actions logs, the receipt, and the PR checks. Missing token/model access needs account configuration; a failed deterministic check needs a code fix; an uncertain submission needs reconciliation. Exhausted repair or review budgets stop automatically and need a deliberate new task. Keep the recorded evidence intact rather than repeatedly clicking retry.
+
+For a diagnostic manual GitFlow run, dispatch `gitflow.yml` on the PR head branch with `pull_request_number`. The workflow fetches the PR and requires its actual head SHA to match the run. Without a PR number, manual GitFlow dispatch is limited to `main` or `develop`. A manual check does not establish that automatic PR event delivery is working.

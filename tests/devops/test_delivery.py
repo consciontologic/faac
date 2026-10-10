@@ -38,6 +38,15 @@ class Policies(unittest.TestCase):
         with self.assertRaises(ValueError): gitflow.plan('release', '1.2')
         with self.assertRaises(ValueError): gitflow.plan('feature', '../bad')
 
+    def test_manual_gitflow_requires_the_actual_pr_head(self):
+        pr={'state':'open','head':{'sha':'a'*40,'ref':'codex/feature/test','repo':{'full_name':'consciontologic/faac'}},
+            'base':{'ref':'develop'}}
+        gitflow.validate_dispatch_pull(pr,'consciontologic/faac','a'*40)
+        with self.assertRaisesRegex(ValueError,'head'):gitflow.validate_dispatch_pull(pr,'consciontologic/faac','b'*40)
+        with self.assertRaisesRegex(ValueError,'repository'):gitflow.validate_dispatch_pull(pr,'someone/fork','a'*40)
+        pr['base']['ref']='main'
+        with self.assertRaisesRegex(ValueError,'lane'):gitflow.validate_dispatch_pull(pr,'consciontologic/faac','a'*40)
+
     def test_explicit_single_model(self):
         self.assertEqual(copilot_task.model_order(), ['mai-code-1.1-flash'])
         body = copilot_task.payload('feature', 'Add tests')
@@ -70,11 +79,27 @@ class Policies(unittest.TestCase):
         self.assertFalse(delivery.checks_green(checks))
 
     def test_review_must_match_head_and_no_change_request(self):
-        reviews = [{'user':{'login':delivery.REVIEWER}, 'commit_id':'new', 'state':'COMMENTED'}]
+        reviews = [{'user':{'login':delivery.REVIEWER}, 'commit_id':'new', 'state':'COMMENTED', 'body':'Copilot reviewed 1 out of 1 changed files in this pull request and generated no new comments.'}]
         self.assertTrue(delivery.review_green(reviews, 'new'))
         self.assertFalse(delivery.review_green(reviews, 'old'))
         reviews.append({'user':{'login':'maintainer'}, 'commit_id':'new', 'state':'CHANGES_REQUESTED'})
         self.assertFalse(delivery.review_green(reviews, 'new'))
+
+    def test_quota_and_unperformed_native_reviews_never_count_as_success(self):
+        # Real GitHub REST response observed on consciontologic/faac PR #1.
+        quota = ('Copilot was unable to review this pull request because the user '
+                 'who requested the review has reached their quota limit.')
+        positive = ('## Pull request overview\n\nCopilot reviewed 2 out of 2 changed files '
+                    'in this pull request and generated no new comments.')
+        review = {'user':{'login':delivery.REVIEWER}, 'commit_id':'new', 'state':'COMMENTED'}
+        for body in (quota, '', 'Review complete', 'Copilot could not review this pull request.',
+                     'Review was not performed.', positive + '\n' + quota,
+                     positive.replace('reviewed 2 out of 2', 'reviewed 0 out of 2')):
+            with self.subTest(body=body):
+                self.assertFalse(delivery.review_green([dict(review, body=body)], 'new'))
+        self.assertTrue(delivery.review_green([dict(review, body=positive)], 'new'))
+        self.assertTrue(delivery.review_green([dict(review, body=positive.replace('no new comments', '1 comment'))], 'new'))
+        self.assertFalse(delivery.review_green([dict(review, body=positive, state='DISMISSED')], 'new'))
 
     def test_issue_snapshot_changes_invalidate_authorization(self):
         issue = {'title':'Fix this','body':'Requirements','labels':[{'name':'kind:bugfix'}]}

@@ -3,3 +3,5 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T08:27:44Z,faac-bootstrap-20261010,codex,delivery,test,passed,"107 app, 18 publication and 20 controller tests; docs, PTY, package, container, actionlint and credential scan passed",docs/reports/VERIFICATION.md,
 2026-10-10T08:27:44Z,faac-bootstrap-20261010,codex,bootstrap,commit,completed,feat: publish faac with durable coding sessions and AI delivery pipelines,,pending
 2026-10-10T08:29:59Z,faac-hosted-20261010,codex,delivery,commit,completed,docs: record hosted CI and explicit MAI task verification,,pending
+2026-10-10T08:35:36Z,faac-review-quota-20261010,codex,delivery,review,passed,Independent AI review found no blockers; 23 controller tests validate quota stop and exact PR-head GitFlow dispatch,,
+2026-10-10T08:35:36Z,faac-review-quota-20261010,codex,delivery,commit,completed,fix(ci): reject unperformed Copilot reviews and verify manual PR checks,,pending

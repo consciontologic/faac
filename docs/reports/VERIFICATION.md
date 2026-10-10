@@ -80,4 +80,8 @@ A real Docker smoke test passed with a nonroot process, read-only container file
 
 The AI controller, GitFlow policy, receipts, and authorization rules have deterministic tests. The final controller suite passed **20 tests**, including actual GitHub comparison response shapes and safe API-path handling. These tests do not establish Copilot model entitlement, a successful hosted task, or live native review.
 
-At this point, the delivery files are configured and locally verified. This section does **not** claim passing remote CI, activated durable Actions secrets, a published GitHub release, or a published GHCR image. Those require observed hosted results. The remaining checks stay explicit in the [roadmap](../planning/ROADMAP.md).
+The initial hosted checks passed: [Quality and Package](https://github.com/consciontologic/faac/actions/runs/38038013850), [Container](https://github.com/consciontologic/faac/actions/runs/38038014958), and [Security](https://github.com/consciontologic/faac/actions/runs/38038016427). The first source commit was published to `main` and `develop`; both enforce PRs, current-branch checks, conversation resolution, and no force-push/deletion, including administrators.
+
+A real [Copilot read-only audit](https://github.com/consciontologic/faac/tasks/3863aaa6-1308-49f4-81cf-5265160c94d2) completed successfully. GitHub reported the actual session model as `sweagent-capi:mai-code-1.1-flash`; no model fallback was used. This proves task access for this account on the recorded date, not permanent entitlement or free usage. GitHub creates a task branch even for a task that does not request a PR.
+
+Durable Actions credentials remain a separate setup dependency. The temporary setup token was not saved as a repository secret. Release publication and native review results are recorded separately when observed. The remaining checks stay explicit in the [roadmap](../planning/ROADMAP.md).

@@ -49,8 +49,9 @@ Scope: `delivery`. Acceptance: repository checks, package/container smoke tests,
 - [x] Apply agentic-workspace and replace documentation templates with faac documents.
 - [x] Validate GitFlow checks, branch publication tooling, and AI task/review controllers.
 - [x] Validate package assets and container setup through their smoke tests.
-- [ ] Publish and verify protected main/develop branches and required workflow checks.
-- [ ] Configure durable automation credentials and verify an actual Copilot task/review run.
+- [ ] Verify all required checks on a PR against the protected main/develop branches.
+- [x] Complete a hosted Copilot task using the explicitly requested MAI-Code-1.1-Flash model.
+- [ ] Configure durable automation credentials and verify native Copilot review.
 
 ## Phase 5 — Additional live evidence
 

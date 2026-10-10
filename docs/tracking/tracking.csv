@@ -2,3 +2,4 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T08:17:02Z,faac-bootstrap-20261010,codex,bootstrap,plan,in_progress,"Scaffold existing CLI; configure public GitHub GitFlow, bounded AI delivery, releases and container packaging",docs/planning/ROADMAP.md;https://github.com/consciontologic/faac,
 2026-10-10T08:27:44Z,faac-bootstrap-20261010,codex,delivery,test,passed,"107 app, 18 publication and 20 controller tests; docs, PTY, package, container, actionlint and credential scan passed",docs/reports/VERIFICATION.md,
 2026-10-10T08:27:44Z,faac-bootstrap-20261010,codex,bootstrap,commit,completed,feat: publish faac with durable coding sessions and AI delivery pipelines,,pending
+2026-10-10T08:29:59Z,faac-hosted-20261010,codex,delivery,commit,completed,docs: record hosted CI and explicit MAI task verification,,pending

@@ -47,11 +47,11 @@ gh workflow run release.yml --ref main -f version=0.1.1
 
 Replace `0.1.1` with the new version actually committed on `main`. Existing `0.1.0` assets are immutable; this example is not an instruction to rebuild or replace them.
 
-Release dispatch is explicit. Neither a tag push, label, completed check, nor merge starts publication. The workflow checks current `main`, the committed version, and its merged main PR. A hotfix supplies its own successful checks; a develop promotion must match the full Git tree from a successful merged develop PR. It reads actual GitHub PR, check-run, job, and commit metadata, records the source PR and check runs, and blocks publication if the evidence is missing or inconsistent. A changed or unproven tree must return through the PR quality lane.
+Release dispatch is explicit. Neither a tag push, label, completed check, nor merge starts publication. The workflow checks current `main`, the committed version, and its merged main PR. A hotfix supplies its own successful checks; a develop promotion must match the full Git tree from a successful merged develop PR. It reads actual GitHub PR, check-run, job, and commit metadata, records the source PR and check runs, and blocks publication if the evidence is missing or inconsistent. This read-only validator pins the 2022-11-28 API contract because it uses `merge_commit_sha`; GitHub removed that field in 2026-03-10. Copilot task submission keeps the newer API version. A changed or unproven tree must return through the PR quality lane.
 
 Publication reuses that source evidence rather than rerunning application tests, PTY checks, dependency auditing, or scanners. It builds the npm package and container, validates archive contents and identity, verifies checksums, and publishes provenance. It does not rerun package/container smokes, tests, or scanners: those results come from the eligible PR. Archive and checksum validation protect publication integrity without repeating those jobs.
 
-Package publication uses no GitHub deployment environment: there is no server deployment. Release run names, release titles, Git tags, and image version tags use the bare semantic version. `make git` publishes the prepared work branch; the explicit workflow dispatch publishes the version after its protected PRs reach `main`.
+Package publication uses no GitHub deployment environment: there is no server deployment. If server deployment is added later, its deployment record uses the target environment's name. Release run names, release titles, Git tags, and image version tags use the bare semantic version. `make git` publishes the prepared work branch; the explicit workflow dispatch publishes the version after its protected PRs reach `main`.
 
 Assets use bare versions:
 

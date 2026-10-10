@@ -53,3 +53,7 @@ File edits require an expected hash. Missing or mismatched hashes prevent overwr
 ## Deployment and boundaries
 
 Development and installed use run the same Node CLI. The container bundles the CLI, Git, and a writable state location; mount a chosen workspace explicitly. There is no HTTP server or database service to deploy. Public provider APIs and the configured Git remote require network access. Groq live inference and natural quota exhaustion remain separate verification work, recorded in the [roadmap](../planning/ROADMAP.md).
+
+## Repository verification and publication
+
+Development CI is PR-only: any source branch into develop, or a hotfix into main, runs source quality, package/container verification, and security jobs. Ordinary develop-to-main promotion uses a lightweight exact-tree evidence gate. Release dispatch reuses those prior results and performs artifact build/integrity work without repeating executable tests or scans. There is no delivery controller; task delegation and publication are explicit actions. See [GitFlow](../guides/GITFLOW.md).

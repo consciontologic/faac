@@ -53,6 +53,53 @@ test("release validation accepts exact main and rejects mismatched version, bran
     assert.equal(valid.status, 0, valid.stderr);
     assert.match(valid.stdout, /tag=0\.1\.0/u);
     assert.match(valid.stdout, /image=ghcr\.io\/consciontologic\/faac/u);
+    const evidence = {
+      release_sha: sha,
+      tree_sha: tree,
+      source_pr: 12,
+      source_head_sha: sha,
+      run_ids: [41, 42, 41],
+      promotion_pr: 13,
+    };
+    const summary = path.join(fixture, "summary.md");
+    const summarize = (data: unknown) => {
+      fs.writeFileSync(
+        path.join(fixture, "evidence.json"),
+        JSON.stringify(data),
+      );
+      return spawnSync(
+        process.execPath,
+        ["xops/package/release.mjs", "summary-evidence", "evidence.json"],
+        {
+          cwd: fixture,
+          encoding: "utf8",
+          env: {
+            ...env,
+            GITHUB_SHA: sha,
+            GITHUB_REPOSITORY: "consciontologic/faac",
+            GITHUB_STEP_SUMMARY: summary,
+          },
+        },
+      );
+    };
+    const reused = summarize(evidence);
+    assert.equal(reused.status, 0, reused.stderr);
+    assert.match(reused.stdout, /consciontologic\/faac\/pull\/12/u);
+    assert.equal(reused.stdout.match(/actions\/runs\/41/gu)?.length, 1);
+    assert.equal(fs.readFileSync(summary, "utf8"), reused.stdout);
+    for (const invalid of [
+      { ...evidence, release_sha: "0".repeat(40) },
+      { ...evidence, run_ids: [] },
+      { ...evidence, run_ids: ["41"] },
+      { ...evidence, run_ids: { Quality: 41 } },
+    ]) {
+      assert.notEqual(summarize(invalid).status, 0);
+      assert.equal(
+        fs.readFileSync(summary, "utf8"),
+        reused.stdout,
+        "Invalid evidence must not be appended to the release summary",
+      );
+    }
     for (const [overrides, reason] of [
       [{ FAAC_RELEASE_VERSION: "0.2.0" }, /Dispatch version must match/u],
       [{ GITHUB_REF: "refs/heads/develop" }, /Only main/u],
@@ -66,7 +113,8 @@ test("release validation accepts exact main and rejects mismatched version, bran
     }
     git(["update-ref", "refs/tags/0.1.0", sha]);
     const tagged = validate({ GITHUB_REF: "refs/tags/0.1.0" });
-    assert.equal(tagged.status, 0, tagged.stderr);
+    assert.notEqual(tagged.status, 0);
+    assert.match(tagged.stderr, /Only main may dispatch/u);
     fs.writeFileSync(
       path.join(fixture, "package.json"),
       JSON.stringify({ name: "faac", version: "01.1.0", type: "module" }),

@@ -4,6 +4,11 @@ Changes use semantic versions. Dated verification remains in [reports](docs/repo
 
 ## Unreleased
 
+- Remove the delivery workflow/controller and automatic label-driven tasks, repairs, merges, promotions, backmerges, and release dispatch at the owner's request.
+- Run quality/package/security jobs only for any PR into `develop` or a hotfix PR into `main`; remove push, merge, scheduled, and manual CI duplication.
+- Keep a lightweight PR-only GitFlow gate for exact-tree promotion evidence; explicit release publication reuses prior eligible PR results without rerunning tests, smokes, or scanners.
+- Retain explicit local MAI-Code-1.1-Flash delegation with one submission and a durable receipt.
+
 - Adopt the agentic-workspace scaffold with filled project, architecture, design, and contributor documentation.
 - Add guarded GitFlow, cost-controlled Copilot delegation, review gates, and repository policy.
 - Add deterministic CI, package smoke checks, container builds, and GitHub release/GHCR publication workflows.
@@ -18,4 +23,4 @@ Changes use semantic versions. Dated verification remains in [reports](docs/repo
 - Validated Git synchronization of supported OmniRoute metadata with quarantine and rollback.
 - Deterministic, PTY, and separately authenticated OpenRouter coding/resume verification.
 
-This entry records the implemented package version; it does not claim that a GitHub release or npm registry publication already exists.
+Published artifact and naming-migration evidence is recorded in [verification](docs/reports/VERIFICATION.md). No npm registry publication is configured.

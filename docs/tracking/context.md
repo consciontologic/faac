@@ -24,11 +24,11 @@
 
 ## Current context
 
-The application has completed authenticated OpenRouter coding and resume checks. Alternate-model continuation was verified with a clearly labeled injected fault. Groq authenticated fallback and natural quota exhaustion remain unverified. The repository now adopts the agentic-workspace scaffold and GitHub delivery tooling; actual hosted automation depends on account eligibility and configured secrets.
+The application has completed authenticated OpenRouter coding and resume checks. Alternate-model continuation was verified with a clearly labeled injected fault. Groq authenticated fallback and natural quota exhaustion remain unverified. The repository uses agentic-workspace and wfform-style PR-only CI. Any PR into develop and hotfix PRs into main run quality/package/security jobs. Ordinary develop promotion reuses exact-tree prior PR evidence through a lightweight GitFlow gate. The delivery controller has been removed; Copilot tasks and releases require explicit local/maintainer action.
 
 ## Project conventions
 
-Preserve strict free-only inference and provider-neutral sessions. Persist tool intent before execution. Never execute partial streamed calls or silently replay uncertain external side effects. Validate expected file hashes for edits and undo. Never import or execute fetched upstream TypeScript. Keep runtime credentials separate from GitHub development automation credentials. Follow the full publication policy in `AGENTS.md`.
+Preserve strict free-only inference and provider-neutral sessions. Persist tool intent before execution. Never execute partial streamed calls or silently replay uncertain external side effects. Validate expected file hashes for edits and undo. Never import or execute fetched upstream TypeScript. Keep runtime credentials separate from GitHub task credentials. Follow the full publication policy in `AGENTS.md`.
 
 ## Read-only references
 
@@ -41,7 +41,6 @@ The original OmniRoute, agentic-workspace, and wfform checkouts are reference ma
 | OpenRouter                      | `OPENROUTER_API_KEY` or encrypted vault         | Hosted free-model inference                |
 | Groq                            | `GROQ_API_KEY` or vault; Free-plan confirmation | Hosted recurring-free inference            |
 | OmniRoute public Git repository | `sync.remote`, optional `sync.branch`           | Validated metadata and adapter monitoring  |
-| GitHub Copilot agent tasks      | `FAAC_COPILOT_TOKEN` in Actions secrets         | Explicit inexpensive-model repository work |
-| GitHub automation               | `FAAC_AUTOMATION_TOKEN` in Actions secrets      | PR/review/delivery permissions             |
+| GitHub Copilot agent tasks      | Process-scoped `FAAC_COPILOT_TOKEN`             | Explicit inexpensive-model repository work |
 
-No secret value belongs in this file. Use [DevOps](../guides/DEVOPS.md) for the distinction between installed workflow files and activated hosted automation.
+No secret value belongs in this file. Use [DevOps](../guides/DEVOPS.md) for explicit delegation, eligible PR checks, and release source evidence.

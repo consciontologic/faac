@@ -18,35 +18,54 @@ def plan(kind, name):
     return f'{kind}/{name}', 'origin/main' if kind == 'hotfix' else 'origin/develop'
 
 
+def hotfix_pr(pr, repository='consciontologic/faac'):
+    head = pr.get('head', {})
+    branch = head.get('ref', '')
+    prefixes = ('hotfix/', 'codex/hotfix/', 'claude/hotfix/')
+    return (any(branch.startswith(prefix) for prefix in prefixes)
+            or (branch.startswith('copilot/')
+                and head.get('repo', {}).get('full_name') == repository
+                and 'work:hotfix' in {label.get('name') for label in pr.get('labels', [])}))
+
+
+def quality_pr(pr, repository='consciontologic/faac'):
+    base = pr.get('base', {}).get('ref')
+    return base == 'develop' or (base == 'main' and hotfix_pr(pr, repository))
+
+
 def valid_lane(head, base):
-    if head == 'develop' and base == 'main': return True
-    if head == 'main' and base == 'develop': return True
-    for prefix in ('codex/', 'claude/'):
-        if head.startswith(prefix): head = head[len(prefix):]
-    if head.startswith('copilot/') or head.startswith('dependabot/'):
-        return base in {'develop', 'main'} if head.startswith('copilot/') else base == 'develop'
-    kind, _, name = head.partition('/')
-    try: plan(kind, name)
-    except ValueError: return False
-    return base == ('main' if kind == 'hotfix' else 'develop')
+    # Branch planning suggests conventions; intake intentionally accepts ANY
+    # source branch into develop, including forks and platform-owned branches.
+    return bool(head) and (base == 'develop' or (base == 'main' and (
+        head == 'develop' or any(head.startswith(prefix) for prefix in
+                                ('hotfix/', 'codex/hotfix/', 'claude/hotfix/')))))
 
 
-def validate_dispatch_pull(pr, repository, sha):
-    if pr.get('head', {}).get('repo', {}).get('full_name') != repository:
-        raise ValueError('Manual GitFlow requires a PR from this repository')
-    if pr.get('state') != 'open' or pr.get('head', {}).get('sha') != sha:
-        raise ValueError('Manual GitFlow must run at the current open PR head SHA')
-    if not valid_lane(pr['head']['ref'], pr['base']['ref']):
-        raise ValueError('Invalid GitFlow lane')
-
-
-def validate_push_pulls(prs, repository, branch, sha):
-    if not isinstance(prs, list) or not prs or len(prs) >= 100:
-        raise ValueError('Work-branch push requires an open same-repository PR')
-    for pr in prs:
-        validate_dispatch_pull(pr, repository, sha)
-        if pr['head']['ref'] != branch:
-            raise ValueError('Open PR does not match the pushed branch')
+def check_event(event, event_name, repository, client=None):
+    if event_name != 'pull_request':
+        raise ValueError('GitFlow checks run only for pull_request events')
+    pr = event.get('pull_request') or {}
+    if pr.get('base', {}).get('repo', {}).get('full_name') != repository:
+        raise ValueError('PR target repository differs from the workflow repository')
+    head, base = pr.get('head', {}).get('ref', ''), pr.get('base', {}).get('ref', '')
+    if quality_pr(pr, repository):
+        return f'GitFlow: {head} -> {base}; quality checks run on this PR.'
+    if base != 'main' or head != 'develop' or pr.get('head', {}).get('repo', {}).get('full_name') != repository:
+        raise ValueError('Main accepts a hotfix PR or a same-repository develop promotion')
+    from release_evidence import verify_promotion
+    if client is None:
+        from copilot_task import GitHub
+        client = GitHub(os.environ.get('GH_TOKEN', ''))
+    number = pr.get('number', event.get('number'))
+    if not isinstance(number, int) or number < 1:
+        raise ValueError('Expected a positive PR number')
+    fresh = client.request(f'repos/{repository}/pulls/{number}')
+    if (fresh.get('head', {}).get('sha') != pr.get('head', {}).get('sha')
+            or fresh.get('base', {}).get('sha') != pr.get('base', {}).get('sha')):
+        raise ValueError('PR head or base moved; use a fresh pull_request run')
+    evidence = verify_promotion(client, fresh)
+    return (f'GitFlow: reuse prior checks; no scans/builds/tests run. '
+            f'Develop PR #{evidence["source_pr"]} proved tree {evidence["tree_sha"]}.')
 
 
 def main():
@@ -59,35 +78,15 @@ def main():
     args = parser.parse_args()
     if args.check_event:
         event = json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
-        pr = event.get('pull_request')
-        if os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch':
-            number = (event.get('inputs') or {}).get('pull_request_number', '').strip()
-            if number:
-                if not re.fullmatch(r'[1-9][0-9]*', number): raise SystemExit('Enter a positive PR number')
-                from copilot_task import GitHub, REPO
-                if os.environ.get('GITHUB_REPOSITORY') != REPO: raise SystemExit('Repository mismatch')
-                pr = GitHub(os.environ.get('GITHUB_TOKEN', '')).request(f'repos/{REPO}/pulls/{number}')
-                validate_dispatch_pull(pr, REPO, os.environ.get('GITHUB_SHA'))
-            elif os.environ.get('GITHUB_REF') not in {'refs/heads/main', 'refs/heads/develop'}:
-                raise SystemExit('Work-branch dispatch requires pull_request_number for exact-head validation')
-        if os.environ.get('GITHUB_EVENT_NAME') == 'push':
-            ref = os.environ.get('GITHUB_REF', '')
-            if ref not in {'refs/heads/main', 'refs/heads/develop'}:
-                from copilot_task import GitHub, REPO
-                from urllib.parse import quote
-                if os.environ.get('GITHUB_REPOSITORY') != REPO or not ref.startswith('refs/heads/'):
-                    raise SystemExit('Repository or branch mismatch')
-                branch = ref[len('refs/heads/'):]
-                head = quote(REPO.split('/')[0] + ':' + branch, safe='')
-                prs = GitHub(os.environ.get('GITHUB_TOKEN', '')).request(
-                    f'repos/{REPO}/pulls?state=open&head={head}&per_page=100')
-                validate_push_pulls(prs, REPO, branch, os.environ.get('GITHUB_SHA'))
-                print(f'GitFlow: validated {len(prs)} open PR lane(s) at the pushed head')
-                return
-        if not pr: print('GitFlow: not a pull request.'); return
-        head, base = pr['head']['ref'], pr['base']['ref']
-        if not valid_lane(head, base): raise SystemExit(f'Invalid GitFlow lane: {head} -> {base}')
-        print(f'GitFlow: {head} -> {base}'); return
+        from copilot_task import REPO
+        if os.environ.get('GITHUB_REPOSITORY') != REPO:
+            raise SystemExit('Repository mismatch')
+        message = check_event(event, os.environ.get('GITHUB_EVENT_NAME'), REPO)
+        print(message)
+        if os.environ.get('GITHUB_STEP_SUMMARY'):
+            with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+                summary.write(message + '\n')
+        return
     if not args.kind or not args.name: parser.error('kind and name are required')
     branch, base = plan(args.kind, args.name)
     if args.agent: branch = args.agent + '/' + branch

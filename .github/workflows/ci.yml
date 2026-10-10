@@ -1,10 +1,8 @@
-name: CI
+name: 🧪 Quality and packages
 on:
-  push:
-    branches: [main, develop, 'codex/**', 'claude/**', 'copilot/**', 'dependabot/**', 'feature/**', 'bugfix/**', 'hotfix/**', 'release/**']
   pull_request:
-    branches: [main, develop]
-  workflow_dispatch:
+    branches: [develop, main]
+    types: [opened, synchronize, reopened, ready_for_review, edited, labeled, unlabeled]
 permissions:
   contents: read
 concurrency:
@@ -12,14 +10,27 @@ concurrency:
   cancel-in-progress: true
 jobs:
   quality:
+    if: >-
+      github.event_name == 'pull_request' && (
+        github.base_ref == 'develop' || (github.base_ref == 'main' && (
+          startsWith(github.head_ref, 'hotfix/') ||
+          startsWith(github.head_ref, 'codex/hotfix/') ||
+          startsWith(github.head_ref, 'claude/hotfix/') ||
+          (github.event.pull_request.head.repo.full_name == github.repository &&
+           startsWith(github.head_ref, 'copilot/') &&
+           contains(github.event.pull_request.labels.*.name, 'work:hotfix'))
+        )))
     name: Quality
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out exact PR source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      - name: Set up Node.js 22
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "22"
           cache: npm
@@ -29,33 +40,67 @@ jobs:
           curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz --output "$RUNNER_TEMP/actionlint/actionlint.tar.gz"
           printf '%s  %s\n' '8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8' "$RUNNER_TEMP/actionlint/actionlint.tar.gz" | sha256sum --check --strict
           tar -xzf "$RUNNER_TEMP/actionlint/actionlint.tar.gz" -C "$RUNNER_TEMP/actionlint" actionlint
-          "$RUNNER_TEMP/actionlint/actionlint"
-      - run: npm ci --ignore-scripts
-      - run: make verify
-      - run: npm run build
+          bash xops/ci/step.sh "Lint workflows" "$RUNNER_TEMP/actionlint/actionlint"
+      - name: Install locked dependencies
+        run: bash xops/ci/step.sh "Install locked dependencies" npm ci --ignore-scripts --no-audit
+      - name: Typecheck, tests and repository checks
+        run: bash xops/ci/step.sh "Typecheck, tests and repository checks" make verify
+      - name: Compile CLI
+        run: bash xops/ci/step.sh "Compile CLI" npm run build
       - name: Exercise actual terminal and CLI without credentials
         run: |
           python3 -m venv "$RUNNER_TEMP/terminal-venv"
           "$RUNNER_TEMP/terminal-venv/bin/pip" install pexpect==4.9.0 ptyprocess==0.7.0
-          "$RUNNER_TEMP/terminal-venv/bin/python" scripts/ad-hoc/pty-smoke.py
+          bash xops/ci/step.sh "Test terminal interaction" "$RUNNER_TEMP/terminal-venv/bin/python" scripts/ad-hoc/pty-smoke.py
+      - name: Job summary
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf '### 🧪 Quality and packages\n\nStatus: **%s** · PR source: `%s`\n' "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
   package:
+    if: >-
+      github.event_name == 'pull_request' && (
+        github.base_ref == 'develop' || (github.base_ref == 'main' && (
+          startsWith(github.head_ref, 'hotfix/') ||
+          startsWith(github.head_ref, 'codex/hotfix/') ||
+          startsWith(github.head_ref, 'claude/hotfix/') ||
+          (github.event.pull_request.head.repo.full_name == github.repository &&
+           startsWith(github.head_ref, 'copilot/') &&
+           contains(github.event.pull_request.labels.*.name, 'work:hotfix'))
+        )))
     name: Package
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out exact PR source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      - name: Set up Node.js 22
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "22"
           cache: npm
-      - run: npm ci --ignore-scripts
-      - run: npm run package
-      - run: npm run test:package
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      - name: Install locked dependencies
+        run: bash xops/ci/step.sh "Install locked dependencies" npm ci --ignore-scripts --no-audit
+      - name: Build package and inventory
+        run: bash xops/ci/step.sh "Build package and inventory" npm run package
+      - name: Install and test package
+        run: bash xops/ci/step.sh "Install and test package" npm run test:package
+      - name: Retain package, inventory and checksums
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: npm-package
           path: build/package/
           if-no-files-found: error
           retention-days: 14
+      - name: Job summary
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf '### 🧪 Quality and packages\n\nStatus: **%s** · PR source: `%s`\n' "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"

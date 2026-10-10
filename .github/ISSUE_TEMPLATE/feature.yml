@@ -23,4 +23,4 @@ body:
       description: Mention compatibility, workspace safety, provider cost, or scope limits.
   - type: markdown
     attributes:
-      value: A maintainer can apply `ai:task` after agreeing the scope. Only the explicitly configured MAI model is allowed; no automatic expensive fallback.
+      value: Opening or labeling an issue does not submit an AI task or spend Copilot credits. A maintainer can explicitly delegate the agreed scope using the local MAI task helper.

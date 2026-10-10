@@ -2,13 +2,13 @@
 
 This is the sequenced project plan. Checked items are implemented; remaining live or hosted verification stays explicit.
 
-| Phase                                 | State                                                         |
-| ------------------------------------- | ------------------------------------------------------------- |
-| 1. Terminal coding agent              | Implemented and tested                                        |
-| 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending             |
-| 3. Upstream synchronization           | Implemented and tested                                        |
-| 4. Repository delivery                | Local checks and release verified; eligible PR checks blocked |
-| 5. Additional live evidence           | Requires external accounts/quota conditions                   |
+| Phase                                 | State                                             |
+| ------------------------------------- | ------------------------------------------------- |
+| 1. Terminal coding agent              | Implemented and tested                            |
+| 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending |
+| 3. Upstream synchronization           | Implemented and tested                            |
+| 4. PR checks and explicit publication | Locally verified; hosted PR evidence pending        |
+| 5. Additional live evidence           | Requires external accounts/quota conditions       |
 
 ## Phase 1 — Terminal coding agent
 
@@ -41,20 +41,22 @@ Scope: `sync`. Acceptance: real Git fixture tests and a public upstream fetch.
 - [x] Quarantine unknown semantic changes; activate atomically and retain rollback state.
 - [x] Pin request snapshots and verify locking, corruption recovery, and failed-fetch handling.
 
-## Phase 4 — Repository delivery
+## Phase 4 — PR checks and explicit publication
 
-Scope: `delivery`. Acceptance: repository checks, package/container smoke tests, workflow checks, and verified GitHub settings.
+Scope: `pr-policy`. Acceptance: policy tests, workflow lint, eligible PR evidence, and exact-tree release authorization.
 
 - [x] Create the public repository and project metadata.
 - [x] Apply agentic-workspace and replace documentation templates with faac documents.
-- [x] Validate GitFlow checks, branch publication tooling, and AI task/review controllers.
-- [x] Validate package assets and container setup through their smoke tests.
-- [ ] Verify eligible required checks on a PR against the protected main/develop branches.
-- [ ] Confirm automatic push/PR workflow event delivery; manual dispatch passed only as a diagnostic.
-- [x] Complete a hosted Copilot task using the explicitly requested MAI-Code-1.1-Flash model.
-- [ ] Configure durable automation credentials and verify native Copilot review.
+- [x] Validate the guarded local publication tool and package/container setup.
+- [x] Complete an explicitly requested hosted MAI-Code-1.1-Flash task.
+- [x] Verify removal of the delivery controller and label-driven actions.
+- [x] Verify quality/package/security triggers run only for any PR into develop or hotfix PRs into main.
+- [x] Verify the lightweight promotion gate reuses the exact tree from successful merged develop PR evidence.
+- [x] Verify explicit release authorization reuses prior PR results without rerunning tests, smokes, or scanners.
+- [ ] Observe eligible PR jobs and promotion evidence on GitHub with the revised policy.
+- [ ] Obtain an actual completed native Copilot review when account quota permits.
 
-PR #1 remains blocked awaiting eligible workflow events. Checks from `workflow_dispatch` do not satisfy required PR checks, even at the exact head SHA; see [GitHub's rule](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks#checks-from-some-workflow-jobs-are-not-evaluated). The verified public release and container remain separate completed evidence.
+The earlier controller and manually dispatched diagnostics remain dated evidence in [verification](../reports/VERIFICATION.md). They do not establish the revised policy's hosted success. Automatic delivery and permanent controller credentials are no longer planned. The proven public release/container and explicit MAI task remain valid historical results.
 
 ## Phase 5 — Additional live evidence
 

@@ -10,3 +10,5 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T08:49:33Z,faac-required-checks-20261010,codex,delivery,commit,completed,fix(ci): validate eligible PR checks and work-branch events,,pending
 2026-10-10T09:02:24Z,faac-semver-20261010,codex,delivery,review,passed,Independent AI review passed for bare SemVer publishing; 109 app and packaging plus 51 operations tests passed; renamed public package installed with identical application hash,,
 2026-10-10T09:02:24Z,faac-semver-20261010,codex,delivery,commit,completed,fix(release): use bare semantic version names for releases and packages,,pending
+2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,review,passed,"Independent review passed; 147 tests, workflow lint, package install, PTY, Docker and security checks pass; PR-only policy and exact-tree evidence verified locally",,
+2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,commit,completed,ci: match wfform PR checks and remove delivery automation,,pending

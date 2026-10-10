@@ -11,12 +11,12 @@ const run = (command, args) =>
 const version = JSON.parse(fs.readFileSync("package.json", "utf8")).version;
 assert.match(
   version,
-  /^\d+\.\d+\.\d+$/u,
+  /^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u,
   "package.json must contain plain SemVer",
 );
 const sha = process.env.GITHUB_SHA || run("git", ["rev-parse", "HEAD"]);
 assert.match(sha, /^[a-f0-9]{40}$/u, "Release commit must be a complete SHA");
-const tag = `v${version}`;
+const tag = version;
 const repository = process.env.GITHUB_REPOSITORY || "consciontologic/faac";
 assert.match(repository, /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/u);
 const image = `ghcr.io/${repository.toLowerCase()}`;
@@ -94,8 +94,8 @@ if (process.argv[2] === "validate") {
     { encoding: "utf8" },
   );
   const assets = [
-    `build/package/faac-${version}.tgz`,
-    `build/package/faac-${version}.cdx.json`,
+    `build/package/${version}.tgz`,
+    `build/package/${version}.cdx.json`,
     "build/package/SHA256SUMS",
   ];
   if (existing.status === 0) {
@@ -168,7 +168,7 @@ if (process.argv[2] === "validate") {
       "--draft",
       "--generate-notes",
       "--title",
-      `faac ${version}`,
+      version,
     ]);
   }
   console.log(

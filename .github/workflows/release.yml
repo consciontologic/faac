@@ -1,7 +1,7 @@
 name: Release
 on:
   push:
-    tags: ["v*.*.*"]
+    tags: ["[0-9]*.[0-9]*.[0-9]*"]
   workflow_dispatch:
     inputs:
       version:
@@ -47,12 +47,14 @@ jobs:
           "$RUNNER_TEMP/terminal-venv/bin/pip" install pexpect==4.9.0 ptyprocess==0.7.0
           "$RUNNER_TEMP/terminal-venv/bin/python" scripts/ad-hoc/pty-smoke.py
       - name: Build and test the container that will be published
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
         run: |
           docker build --tag faac:release .
           node xops/package/container-smoke.mjs faac:release
           mkdir -p build/container
-          docker save --output build/container/faac.tar faac:release
-          sha256sum build/container/faac.tar > build/container/SHA256SUMS
+          docker save --output "build/container/$RELEASE_VERSION.tar" faac:release
+          sha256sum "build/container/$RELEASE_VERSION.tar" > build/container/SHA256SUMS
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: release-assets
@@ -106,19 +108,17 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.token }}
-      - name: Publish the tested container with version and commit tags
+      - name: Publish the tested container with its version tag
         id: container
         run: |
-          docker load --input build/container/faac.tar
+          docker load --input "build/container/$RELEASE_VERSION.tar"
           node xops/package/publish-container.mjs
       - uses: actions/attest-build-provenance@96278af6caaf10aea03fd8d33a09a777ca52d62f # v3.2.0
         with:
           subject-name: ${{ needs.prepare.outputs.image }}
           subject-digest: ${{ steps.container.outputs.digest }}
           push-to-registry: true
-      - name: Publish release and update latest container tag
+      - name: Publish release
         run: |
           node xops/package/release.mjs finish
-          docker tag faac:release "$RELEASE_IMAGE:latest"
-          docker push "$RELEASE_IMAGE:latest"
           printf 'Released faac %s at %s. npm tarball, SHA-256 checksums and CycloneDX inventory are GitHub release assets. Image: %s:%s\n' "$RELEASE_VERSION" "$RELEASE_SHA" "$RELEASE_IMAGE" "$RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"

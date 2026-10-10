@@ -57,7 +57,7 @@ package:
 	@npm run package
 
 ## package.test      Build and install-test the npm tarball
-package.test:
+package.test: package
 	@npm run test:package
 
 ## image             Build faac:local

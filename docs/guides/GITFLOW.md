@@ -43,6 +43,6 @@ Checks run on pull requests and supported work-branch pushes. GitFlow's work-bra
 
 ## Releases
 
-A release-preparation PR updates version metadata and the changelog on `develop`. After it merges, promotion moves `develop` to `main`. The release workflow checks the version against current `main`, builds and verifies artifacts, then publishes a GitHub release and GHCR image. A hotfix or release on `main` gets a backmerge PR so `develop` retains it.
+A release-preparation PR updates version metadata and the changelog on `develop`. After it merges, promotion moves `develop` to `main`. The release workflow checks the version against current `main`, builds and verifies artifacts, then publishes a GitHub release and GHCR image. Release names and Git tags are bare semantic versions, such as `0.1.0`. Assets use `0.1.0.tgz` and `0.1.0.cdx.json`; the image remains `ghcr.io/consciontologic/faac:0.1.0`. A hotfix or release on `main` gets a backmerge PR so `develop` retains it.
 
 Merging a PR does not automatically authorize a public release. Use the dedicated `ai:release` label on the exact PR head, or dispatch the release workflow explicitly as described in [DevOps](DEVOPS.md#release-a-version).

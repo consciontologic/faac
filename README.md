@@ -25,12 +25,12 @@ Requires Node.js 22+, npm, and Git. The package is published as a GitHub release
 
 ```bash
 npm install --global --prefix "$HOME/.local" \
-  https://github.com/consciontologic/faac/releases/download/v0.1.0/faac-0.1.0.tgz
+  https://github.com/consciontologic/faac/releases/download/0.1.0/0.1.0.tgz
 export PATH="$HOME/.local/bin:$PATH"
 faac --version
 ```
 
-[Release assets and checksums](https://github.com/consciontologic/faac/releases/tag/v0.1.0) · [Container instructions](docs/guides/DEVOPS.md#run-the-container)
+[Release assets and checksums](https://github.com/consciontologic/faac/releases/tag/0.1.0) · [Container instructions](docs/guides/DEVOPS.md#run-the-container)
 
 ## Install from source
 

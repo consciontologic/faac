@@ -8,7 +8,7 @@
     "release": {"from": "develop", "pull_request_into": "develop", "promote_from": "develop", "promote_into": "main", "back_merge_into": "develop"}
   },
   "agent_prefixes": ["codex", "claude", "copilot"],
-  "tag_prefix": "v",
+  "tag_prefix": "",
   "required_checks": ["Quality", "Package", "Container", "Security", "GitFlow"],
   "required_approving_review_count": 0,
   "require_conversation_resolution": true,

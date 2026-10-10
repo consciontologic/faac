@@ -343,7 +343,7 @@ class Controller:
             result = recorded_action(self.api, f'{PREFIX}/issues/{pr["number"]}', action,
                 {'version':managed['release_version']},
                 lambda:self.api.request(PREFIX + '/pulls', 'POST', {
-                    'title':'release: v' + managed['release_version'], 'head':'develop', 'base':'main',
+                    'title':'release: ' + managed['release_version'], 'head':'develop', 'base':'main',
                     'body':'Promote release preparation PR #' + str(pr['number']) + '. Required CI and Copilot review must pass.'}))
             self.receipt(result['number'], 'manage', source=pr['number'], release_version=managed['release_version'])
             self.api.request(f'{PREFIX}/issues/{result["number"]}/labels', 'POST', {'labels':['ai:merge']})
@@ -370,7 +370,7 @@ class Controller:
             recorded_action(self.api, f'{PREFIX}/issues/{pr["number"]}', action, {'version':version, 'source':main},
                 lambda:self.api.request(PREFIX + '/actions/workflows/release.yml/dispatches', 'POST',
                                        {'ref':'main', 'inputs':{'version':version}}))
-            print(f'Dispatched authorized release v{version}; publication still depends on the release workflow checks.')
+            print(f'Dispatched authorized release {version}; publication still depends on the release workflow checks.')
             return
 
     def backmerge(self):

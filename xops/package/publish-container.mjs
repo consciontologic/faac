@@ -7,7 +7,10 @@ const image = process.env.RELEASE_IMAGE;
 const version = process.env.RELEASE_VERSION;
 const sha = process.env.RELEASE_SHA;
 assert.match(image || "", /^ghcr\.io\/[a-z0-9_.-]+\/[a-z0-9_.-]+$/u);
-assert.match(version || "", /^\d+\.\d+\.\d+$/u);
+assert.match(
+  version || "",
+  /^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u,
+);
 assert.match(sha || "", /^[a-f0-9]{40}$/u);
 const run = (args) => execFileSync("docker", args, { encoding: "utf8" }).trim();
 const localConfig = run([
@@ -17,8 +20,8 @@ const localConfig = run([
   "{{.Id}}",
   "faac:release",
 ]);
-for (const tag of [version, `sha-${sha}`]) {
-  const target = `${image}:${tag}`;
+{
+  const target = `${image}:${version}`;
   const remote = spawnSync(
     "docker",
     ["manifest", "inspect", "--verbose", target],

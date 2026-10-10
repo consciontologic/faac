@@ -67,6 +67,15 @@ class Policies(unittest.TestCase):
         with self.assertRaises(ValueError): copilot_task.payload('release', 'Bump', release_version='next')
         self.assertEqual(copilot_task.payload('release', 'Bump', release_version='0.2.0')['base_ref'], 'develop')
 
+    def test_release_commands_require_unprefixed_semver(self):
+        for version in ('v0.1.0', 'faac-0.1.0', 'release-0.1.0'):
+            with self.subTest(version=version):
+                with self.assertRaises(ValueError):gitflow.plan('release',version)
+                with self.assertRaises(ValueError):copilot_task.payload('release','Prepare release',release_version=version)
+        branch,base=gitflow.plan('release','0.1.0')
+        self.assertEqual((branch,base),('release/0.1.0','origin/develop'))
+        self.assertIn('Prepare version 0.1.0',copilot_task.payload('release','Prepare release',release_version='0.1.0')['prompt'])
+
     def test_receipts_fail_closed(self):
         receipt = {'action':'initial', 'state':'intent', 'model':'mai-code-1.1-flash'}
         text = delivery.receipt_body(receipt)

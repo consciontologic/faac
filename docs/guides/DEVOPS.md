@@ -28,6 +28,8 @@ A changed issue prompt is not silently resubmitted under the old authorization. 
 
 ## Configure hosted automation
 
+Setup status on 2026-10-10: **Release** and **AI delivery** are temporarily disabled until the corrections in [PR #1](https://github.com/consciontologic/faac/pull/1) pass protected checks, merge into `develop`, and are promoted to `main`. This prevents the old default-branch publisher from recreating prefixed names. Keep branch protections enabled. After promotion, enable those two workflows in Actions, configure the credentials below, and confirm native review quota. CI, Container, Security, and GitFlow are enabled; automatic event delivery still needs verification.
+
 Store durable credentials in **GitHub repository Actions secrets**, not files or issue text:
 
 | Secret                  | Purpose                                                    | Required access                                                                                                  |
@@ -79,17 +81,17 @@ The receipt path must be new. For release preparation, add `KIND=release RELEASE
 First merge a reviewed version change to `main`. `package.json` and the lockfile must agree. Update the changelog and keep checks green. The requested version below must match the current package version.
 
 ```bash
-gh workflow run release.yml --ref main -f version=0.1.0
+gh workflow run release.yml --ref main -f version=0.1.1
 ```
 
-Alternatively, authorize the exact promotion/hotfix PR with `ai:release`. After merge, the controller dispatches `release.yml` only if that merge commit is still current `main`, using the committed package version. `ai:merge` alone does not publish a release. A matching `vMAJOR.MINOR.PATCH` tag also triggers the release workflow.
+Alternatively, authorize the exact promotion/hotfix PR with `ai:release`. After merge, the controller dispatches `release.yml` only if that merge commit is still current `main`, using the committed package version. `ai:merge` alone does not publish a release. A matching bare `MAJOR.MINOR.PATCH` tag also triggers the release workflow. Release names and Git tags use the version alone, such as `0.1.0`; the package version remains `0.1.0` for this naming change.
 
 The workflow validates the source revision, runs application/terminal/package/container checks, creates a draft release, publishes tested artifacts, and then makes the release public. Artifacts are:
 
-- `faac-VERSION.tgz`: installable npm tarball.
-- `faac-VERSION.cdx.json`: CycloneDX inventory of locked production npm dependencies.
+- `VERSION.tgz` (for example, `0.1.0.tgz`): installable npm tarball.
+- `VERSION.cdx.json` (for example, `0.1.0.cdx.json`): CycloneDX inventory of locked production npm dependencies.
 - `SHA256SUMS`: asset checksums.
-- `ghcr.io/consciontologic/faac:VERSION` and a commit-specific tag; `latest` updates after release completion.
+- `ghcr.io/consciontologic/faac:VERSION`: the stable image name with only a bare semantic-version tag, such as `0.1.0`. Future releases do not add `latest` or commit-SHA aliases.
 
 The workflow uses GitHub's release environment, package permission, and provenance attestations. Environment approval rules are controlled in GitHub settings. The hosted release builds Linux AMD64 images; local Docker builds use the host's architecture. No npm registry publication is configured. The npm inventory does not describe operating-system packages in the container.
 
@@ -102,7 +104,7 @@ make image
 make image.test
 ```
 
-Package assets land in `build/package/`. The image smoke test uses `faac:local`, so build it first. An installed tarball can be tested without a global registry publication. CI artifacts and a local image are not proof that a public release exists. If publication fails after artifacts exist, rerun the failed publication job so it reuses those same artifacts; do not rebuild different contents under an immutable version.
+Package assets land in `build/package/`, for example `build/package/0.1.0.tgz` and `build/package/0.1.0.cdx.json`. The image smoke test uses `faac:local`, so build it first. An installed tarball can be tested without a global registry publication. CI artifacts and a local image are not proof that a public release exists. If publication fails after artifacts exist, rerun the failed publication job so it reuses those same artifacts; do not rebuild different contents under an immutable version.
 
 ## Run the container
 

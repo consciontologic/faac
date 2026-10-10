@@ -204,6 +204,18 @@ class ControllerTests(unittest.TestCase):
         c.receipts=lambda n:[{'action':'authorize_release:authhead','state':'authorized'}]
         return fake,c,pr
 
+    def test_release_promotion_keeps_version_without_v_or_package_prefix(self):
+        fake=Fake();c=self.controller(fake)
+        fake.data[f'{delivery.PREFIX}/pulls?state=closed&base=develop&sort=updated&direction=desc&per_page=30']=[
+            {'number':4,'merged_at':'now'}]
+        fake.data[f'{delivery.PREFIX}/pulls?state=open&base=main&head=consciontologic:develop']=[]
+        fake.data[delivery.PREFIX+'/pulls','POST']={'number':8}
+        c.receipts=lambda number:[{'action':'manage','state':'authorized','release_version':'0.1.0'}]
+        c.promote()
+        created=next(body for path,method,body in fake.calls if path==delivery.PREFIX+'/pulls' and method=='POST')
+        self.assertEqual(created['title'],'release: 0.1.0')
+        self.assertEqual(delivery.parse_receipt(fake.comments[0])['version'],'0.1.0')
+
     def test_release_authorization_reads_exact_main_then_dispatches(self):
         fake,c,pr=self.release();c.publish_authorized()
         dispatch=[call for call in fake.calls if call[0].endswith('/dispatches')]

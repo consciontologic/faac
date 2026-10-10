@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main, develop]
   push:
-    branches: [main, develop]
+    branches: [main, develop, 'codex/**', 'claude/**', 'copilot/**', 'dependabot/**', 'feature/**', 'bugfix/**', 'hotfix/**', 'release/**']
   schedule:
     - cron: "24 7 * * 1"
   workflow_dispatch:

@@ -47,7 +47,7 @@ class ControllerTests(unittest.TestCase):
             {'user':{'login':delivery.REVIEWER},'commit_id':'new','state':'COMMENTED','body':'Copilot reviewed 1 out of 1 changed files in this pull request and generated no new comments.'}]
         fake.data[f'{delivery.PREFIX}/pulls/7/merge','PUT']={'merged':True}
         c.checks=lambda pr:[{'name':name,'status':'completed','conclusion':'success',
-                            'app':{'slug':'github-actions'}} for name in delivery.REQUIRED_CHECKS]
+                            'app':{'slug':'github-actions'},'_faac_event':'push'} for name in delivery.REQUIRED_CHECKS]
         return fake,c,pr
 
     def test_merge_uses_compared_head_sha(self):
@@ -84,6 +84,78 @@ class ControllerTests(unittest.TestCase):
         self.assertFalse(fake.writes())
         self.assertFalse(tasks.calls)
         self.assertEqual(c.budget,delivery.LIMITS['max_new_paid_actions_per_run'])
+
+    def check_source(self, merge_checks=None, merge_statuses=None, event='push'):
+        fake=Fake();c=delivery.Controller(fake);pr=pull()
+        for sha, checks in (('merge', merge_checks or []), ('new', [])):
+            fake.data[f'{delivery.PREFIX}/commits/{sha}/check-runs?per_page=100&filter=latest']={
+                'total_count':len(checks), 'check_runs':checks}
+            fake.data[f'{delivery.PREFIX}/commits/{sha}/status?per_page=100']={
+                'total_count':len(merge_statuses or []) if sha=='merge' else 0,
+                'statuses':merge_statuses or [] if sha=='merge' else []}
+        checks=[]
+        for i,name in enumerate(delivery.REQUIRED_CHECKS,1):
+            checks.append({'id':i,'name':name,'head_sha':'new','status':'completed','conclusion':'success',
+                           'app':{'slug':'github-actions'},'check_suite':{'id':90},
+                           'details_url':f'https://github.com/{delivery.REPO}/actions/runs/80/job/{i}'})
+        fake.data[f'{delivery.PREFIX}/commits/new/check-runs?per_page=100&filter=latest']={
+            'total_count':len(checks),'check_runs':checks}
+        fake.data[f'{delivery.PREFIX}/actions/runs/80']={'id':80,'event':event,'head_sha':'new',
+            'check_suite_id':90,'repository':{'full_name':delivery.REPO}}
+        return fake,c,pr
+
+    def test_empty_test_merge_uses_eligible_head_checks(self):
+        fake,c,pr=self.check_source()
+        self.assertTrue(delivery.checks_green(c.checks(pr)))
+        self.assertEqual(sum(call[0].endswith('/actions/runs/80') for call in fake.calls),1)
+
+    def test_populated_test_merge_uses_its_eligible_checks_not_head(self):
+        fake,c,pr=self.check_source(event='pull_request')
+        checks=fake.data[f'{delivery.PREFIX}/commits/new/check-runs?per_page=100&filter=latest']['check_runs']
+        for check in checks:check['head_sha']='merge'
+        fake.data[f'{delivery.PREFIX}/commits/merge/check-runs?per_page=100&filter=latest']={
+            'total_count':len(checks),'check_runs':checks}
+        fake.data[f'{delivery.PREFIX}/actions/runs/80']['head_sha']='merge'
+        self.assertTrue(delivery.checks_green(c.checks(pr)))
+        self.assertFalse(any('/commits/new/' in call[0] for call in fake.calls))
+
+    def test_pr_merge_check_can_link_to_its_current_head_workflow_run(self):
+        # GitHub's checkout SHA and run head SHA are distinct concepts. Keep
+        # the exact check-suite link and both current PR SHAs as the boundary.
+        fake,c,pr=self.check_source(event='pull_request')
+        checks=fake.data[f'{delivery.PREFIX}/commits/new/check-runs?per_page=100&filter=latest']['check_runs']
+        for check in checks:check['head_sha']='merge'
+        fake.data[f'{delivery.PREFIX}/commits/merge/check-runs?per_page=100&filter=latest']={
+            'total_count':len(checks),'check_runs':checks}
+        self.assertTrue(delivery.checks_green(c.checks(pr)))
+        fake.data[f'{delivery.PREFIX}/actions/runs/80']['event']='push'
+        self.assertFalse(delivery.checks_green(c.checks(pr)))
+        fake.data[f'{delivery.PREFIX}/actions/runs/80']['event']='pull_request'
+        fake.data[f'{delivery.PREFIX}/actions/runs/80']['head_sha']='old-head'
+        self.assertFalse(delivery.checks_green(c.checks(pr)))
+
+    def test_dispatch_or_unknown_event_never_authorizes_merge(self):
+        for event in ('workflow_dispatch','schedule','unknown',None):
+            fake,c,pr=self.check_source(event=event)
+            self.assertFalse(delivery.checks_green(c.checks(pr)),event)
+
+    def test_existing_merge_check_or_status_prevents_head_fallback(self):
+        for checks,statuses in (([{'name':'unrelated'}],[]),([],[{'context':'other','state':'pending'}])):
+            fake,c,pr=self.check_source(merge_checks=checks,merge_statuses=statuses)
+            self.assertFalse(delivery.checks_green(c.checks(pr)))
+            self.assertFalse(any('/commits/new/' in call[0] for call in fake.calls))
+
+    def test_workflow_run_must_match_commit_suite_and_repository(self):
+        for key,value in (('head_sha','old'),('check_suite_id',999),('repository',{'full_name':'other/repo'})):
+            fake,c,pr=self.check_source()
+            fake.data[f'{delivery.PREFIX}/actions/runs/80'][key]=value
+            self.assertFalse(delivery.checks_green(c.checks(pr)),key)
+
+    def test_unknown_merge_status_schema_does_not_fall_back_to_head(self):
+        fake,c,pr=self.check_source()
+        fake.data[f'{delivery.PREFIX}/commits/merge/status?per_page=100']={}
+        with self.assertRaises(ValueError):c.checks(pr)
+        self.assertFalse(any('/commits/new/' in call[0] for call in fake.calls))
 
     def test_absent_protection_does_not_use_admin_bypass(self):
         fake,c,pr=self.ready();c.protection_valid=lambda branch:False

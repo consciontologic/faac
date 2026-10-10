@@ -17,6 +17,9 @@ LIMITS = POLICY['automation']
 REVIEWER = 'copilot-pull-request-reviewer[bot]'
 MARKER = '<!-- faac-delivery:v1 -->'
 PREFIX = 'repos/' + REPO
+# GitHub excludes workflow_dispatch/schedule job checks from PR requirements.
+ELIGIBLE_CHECK_EVENTS = {'push', 'pull_request', 'pull_request_review',
+                         'pull_request_target', 'deployment', 'deployment_status'}
 
 
 def receipt_body(data):
@@ -47,7 +50,8 @@ def issue_digest(issue):
 def checks_green(checks):
     latest = {}
     for check in sorted(checks, key=lambda item:item.get('id', 0)):
-        if check.get('app', {}).get('slug') == 'github-actions': latest[check['name']] = check
+        if (check.get('app', {}).get('slug') == 'github-actions'
+                and check.get('_faac_event') in ELIGIBLE_CHECK_EVENTS): latest[check['name']] = check
     return all(latest.get(name, {}).get('status') == 'completed'
                and latest[name].get('conclusion') == 'success' for name in REQUIRED_CHECKS)
 
@@ -204,12 +208,59 @@ class Controller:
         threads = result['data']['repository']['pullRequest']['reviewThreads']
         return not threads['pageInfo']['hasNextPage'] and all(t['isResolved'] for t in threads['nodes'])
 
-    def checks(self, pr):
-        # pull_request jobs run against GitHub's test merge commit, not necessarily head.
-        sha = pr.get('merge_commit_sha') or pr['head']['sha']
+    def checks_at(self, sha):
         result = self.api.request(f'{PREFIX}/commits/{sha}/check-runs?per_page=100&filter=latest')
-        if result.get('total_count', 0) > 100: raise ValueError('Too many checks to validate safely')
-        return result.get('check_runs', [])
+        checks, total = result.get('check_runs'), result.get('total_count')
+        if (not isinstance(checks, list) or not isinstance(total, int)
+                or not 0 <= total <= 100 or len(checks) != total):
+            raise ValueError('Cannot establish the complete commit check state')
+        return checks
+
+    def commit_has_status(self, sha):
+        result = self.api.request(f'{PREFIX}/commits/{sha}/status?per_page=100')
+        statuses, total = result.get('statuses'), result.get('total_count')
+        if (not isinstance(statuses, list) or not isinstance(total, int) or total < 0
+                or (total == 0 and statuses) or (total > 0 and not statuses)):
+            raise ValueError('Cannot establish the commit status state')
+        return total > 0
+
+    def eligible_checks(self, checks, sha, pr_head=None, test_merge=None):
+        verified, runs = [], {}
+        details_pattern = (r'https://github\.com/' + re.escape(REPO)
+                           + r'/actions/runs/([1-9][0-9]*)(?:/job/[1-9][0-9]*)?')
+        for check in checks:
+            if (check.get('name') not in REQUIRED_CHECKS
+                    or check.get('app', {}).get('slug') != 'github-actions'
+                    or check.get('head_sha') != sha): continue
+            match = re.fullmatch(details_pattern, check.get('details_url') or '')
+            if not match: continue
+            run_id = int(match[1])
+            if run_id not in runs:
+                runs[run_id] = self.api.request(f'{PREFIX}/actions/runs/{run_id}')
+            run = runs[run_id]
+            suite = check.get('check_suite', {}).get('id')
+            # A PR run identifies its source head even when a linked check is
+            # attached to the test-merge commit. Both must be this PR snapshot;
+            # the exact suite link remains mandatory. Other events cannot map.
+            head_matches = run.get('head_sha') == sha or (
+                run.get('event') == 'pull_request' and sha == test_merge
+                and run.get('head_sha') == pr_head and pr_head is not None)
+            if (run.get('id') != run_id or not isinstance(suite, int)
+                    or run.get('check_suite_id') != suite or not head_matches
+                    or run.get('repository', {}).get('full_name') != REPO
+                    or run.get('event') not in ELIGIBLE_CHECK_EVENTS): continue
+            verified.append(dict(check, _faac_event=run['event']))
+        return verified
+
+    def checks(self, pr):
+        # Match GitHub's evidence selection: a test-merge commit with checks or
+        # statuses owns the gate. Only an empty test merge may fall back to head.
+        head, merge = pr['head']['sha'], pr.get('merge_commit_sha')
+        if merge and merge != head:
+            checks = self.checks_at(merge)
+            if checks or self.commit_has_status(merge):
+                return self.eligible_checks(checks, merge, pr_head=head, test_merge=merge)
+        return self.eligible_checks(self.checks_at(head), head, pr_head=head, test_merge=merge)
 
     def protection_valid(self, branch):
         protection = self.api.request(f'{PREFIX}/branches/{quote(branch, safe="")}/protection')

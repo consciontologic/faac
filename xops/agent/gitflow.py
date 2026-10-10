@@ -40,6 +40,15 @@ def validate_dispatch_pull(pr, repository, sha):
         raise ValueError('Invalid GitFlow lane')
 
 
+def validate_push_pulls(prs, repository, branch, sha):
+    if not isinstance(prs, list) or not prs or len(prs) >= 100:
+        raise ValueError('Work-branch push requires an open same-repository PR')
+    for pr in prs:
+        validate_dispatch_pull(pr, repository, sha)
+        if pr['head']['ref'] != branch:
+            raise ValueError('Open PR does not match the pushed branch')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('kind', nargs='?', choices=['feature', 'bugfix', 'hotfix', 'release'])
@@ -61,6 +70,20 @@ def main():
                 validate_dispatch_pull(pr, REPO, os.environ.get('GITHUB_SHA'))
             elif os.environ.get('GITHUB_REF') not in {'refs/heads/main', 'refs/heads/develop'}:
                 raise SystemExit('Work-branch dispatch requires pull_request_number for exact-head validation')
+        if os.environ.get('GITHUB_EVENT_NAME') == 'push':
+            ref = os.environ.get('GITHUB_REF', '')
+            if ref not in {'refs/heads/main', 'refs/heads/develop'}:
+                from copilot_task import GitHub, REPO
+                from urllib.parse import quote
+                if os.environ.get('GITHUB_REPOSITORY') != REPO or not ref.startswith('refs/heads/'):
+                    raise SystemExit('Repository or branch mismatch')
+                branch = ref[len('refs/heads/'):]
+                head = quote(REPO.split('/')[0] + ':' + branch, safe='')
+                prs = GitHub(os.environ.get('GITHUB_TOKEN', '')).request(
+                    f'repos/{REPO}/pulls?state=open&head={head}&per_page=100')
+                validate_push_pulls(prs, REPO, branch, os.environ.get('GITHUB_SHA'))
+                print(f'GitFlow: validated {len(prs)} open PR lane(s) at the pushed head')
+                return
         if not pr: print('GitFlow: not a pull request.'); return
         head, base = pr['head']['ref'], pr['base']['ref']
         if not valid_lane(head, base): raise SystemExit(f'Invalid GitFlow lane: {head} -> {base}')

@@ -47,6 +47,16 @@ class Policies(unittest.TestCase):
         pr['base']['ref']='main'
         with self.assertRaisesRegex(ValueError,'lane'):gitflow.validate_dispatch_pull(pr,'consciontologic/faac','a'*40)
 
+    def test_work_branch_push_requires_open_same_repo_pr_at_current_sha(self):
+        pr={'state':'open','head':{'sha':'a'*40,'ref':'codex/feature/test','repo':{'full_name':'consciontologic/faac'}},
+            'base':{'ref':'develop'}}
+        gitflow.validate_push_pulls([pr], 'consciontologic/faac', 'codex/feature/test', 'a'*40)
+        for prs in ([], [dict(pr, state='closed')]):
+            with self.assertRaises(ValueError):gitflow.validate_push_pulls(prs,'consciontologic/faac','codex/feature/test','a'*40)
+        with self.assertRaises(ValueError):gitflow.validate_push_pulls([pr],'consciontologic/faac','codex/feature/test','b'*40)
+        second=dict(pr, base={'ref':'main'})
+        with self.assertRaises(ValueError):gitflow.validate_push_pulls([pr,second],'consciontologic/faac','codex/feature/test','a'*40)
+
     def test_explicit_single_model(self):
         self.assertEqual(copilot_task.model_order(), ['mai-code-1.1-flash'])
         body = copilot_task.payload('feature', 'Add tests')
@@ -68,9 +78,11 @@ class Policies(unittest.TestCase):
         self.assertTrue(delivery.already_attempted([dict(receipt, state='rejected')], 'initial'))
 
     def test_checks_require_fresh_success_and_expected_application(self):
-        checks = [{'name':name, 'status':'completed', 'conclusion':'success', 'app':{'slug':'github-actions'}}
+        checks = [{'name':name, 'status':'completed', 'conclusion':'success', 'app':{'slug':'github-actions'},'_faac_event':'push'}
                   for name in delivery.REQUIRED_CHECKS]
         self.assertTrue(delivery.checks_green(checks))
+        self.assertFalse(delivery.checks_green([dict(c, _faac_event='workflow_dispatch') for c in checks]))
+        self.assertFalse(delivery.checks_green([dict(c, _faac_event=None) for c in checks]))
         self.assertFalse(delivery.checks_green(checks[:-1]))
         checks[0]['conclusion'] = 'skipped'
         self.assertFalse(delivery.checks_green(checks))

@@ -21,7 +21,7 @@ faac is a terminal coding assistant powered by hosted free models. It reads your
 
 ## Install the release
 
-Requires Node.js 22+ and npm. The package is published as a GitHub release asset:
+Requires Node.js 22+, npm, and Git. The package is published as a GitHub release asset:
 
 ```bash
 npm install --global --prefix "$HOME/.local" \

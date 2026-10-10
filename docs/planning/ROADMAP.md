@@ -2,13 +2,13 @@
 
 This is the sequenced project plan. Checked items are implemented; remaining live or hosted verification stays explicit.
 
-| Phase                                 | State                                                  |
-| ------------------------------------- | ------------------------------------------------------ |
-| 1. Terminal coding agent              | Implemented and tested                                 |
-| 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending      |
-| 3. Upstream synchronization           | Implemented and tested                                 |
-| 4. Repository delivery                | Configured and locally verified; hosted checks pending |
-| 5. Additional live evidence           | Requires external accounts/quota conditions            |
+| Phase                                 | State                                                         |
+| ------------------------------------- | ------------------------------------------------------------- |
+| 1. Terminal coding agent              | Implemented and tested                                        |
+| 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending             |
+| 3. Upstream synchronization           | Implemented and tested                                        |
+| 4. Repository delivery                | Local checks and release verified; eligible PR checks blocked |
+| 5. Additional live evidence           | Requires external accounts/quota conditions                   |
 
 ## Phase 1 — Terminal coding agent
 
@@ -49,10 +49,12 @@ Scope: `delivery`. Acceptance: repository checks, package/container smoke tests,
 - [x] Apply agentic-workspace and replace documentation templates with faac documents.
 - [x] Validate GitFlow checks, branch publication tooling, and AI task/review controllers.
 - [x] Validate package assets and container setup through their smoke tests.
-- [x] Verify all required checks on a PR against the protected main/develop branches.
-- [ ] Confirm automatic push/PR workflow event delivery; manual dispatch has passed.
+- [ ] Verify eligible required checks on a PR against the protected main/develop branches.
+- [ ] Confirm automatic push/PR workflow event delivery; manual dispatch passed only as a diagnostic.
 - [x] Complete a hosted Copilot task using the explicitly requested MAI-Code-1.1-Flash model.
 - [ ] Configure durable automation credentials and verify native Copilot review.
+
+PR #1 remains blocked awaiting eligible workflow events. Checks from `workflow_dispatch` do not satisfy required PR checks, even at the exact head SHA; see [GitHub's rule](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks#checks-from-some-workflow-jobs-are-not-evaluated). The verified public release and container remain separate completed evidence.
 
 ## Phase 5 — Additional live evidence
 

@@ -37,7 +37,9 @@ make git
 
 `make git.dry` is read-only. `make git` commits tracked staged work under the repository policy and pushes only an allowed work branch. Conflicts, detached state, unrelated work, or missing authorization must be resolved before publishing. Never force-push or overwrite a user's work to make a lane pass.
 
-Open a PR to the target in the table. The required checks are **Quality, Package, Container, Security, and GitFlow**. Branch protection requires them on the reviewed change. AI merge authorization is separate: [DevOps](DEVOPS.md) describes `ai:merge`, review gating, and the repair budget.
+Open a PR to the target in the table. The required checks are **Quality, Package, Container, Security, and GitFlow**. Branch protection requires eligible check runs on the reviewed change. A `workflow_dispatch` run is diagnostic and does not satisfy those requirements, even if its head SHA matches. See [GitHub's event eligibility rule](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks#checks-from-some-workflow-jobs-are-not-evaluated). AI merge authorization is separate: [DevOps](DEVOPS.md) describes `ai:merge`, review gating, and the repair budget.
+
+Checks run on pull requests and supported work-branch pushes. GitFlow's work-branch push check requires an open same-repository PR at that exact commit and validates every matching PR's target. Before the PR exists, that push check fails; opening the PR runs a fresh lane check. This keeps branch checks tied to a real proposed merge.
 
 ## Releases
 

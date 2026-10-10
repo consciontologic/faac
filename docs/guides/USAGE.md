@@ -29,7 +29,7 @@ faac
 
 Check the workspace shown at the top. That is where faac will work.
 
-The installation is the directory where you cloned faac. You do not need to launch from there. Launching from a project folder makes that folder the workspace.
+The installation is where faac's program files live, whether installed from a release or a source checkout. You do not need to launch from there. Launching from a project folder makes that folder the workspace.
 
 ### Connect OpenRouter
 

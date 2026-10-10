@@ -6,3 +6,5 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T08:35:36Z,faac-review-quota-20261010,codex,delivery,review,passed,Independent AI review found no blockers; 23 controller tests validate quota stop and exact PR-head GitFlow dispatch,,
 2026-10-10T08:35:36Z,faac-review-quota-20261010,codex,delivery,commit,completed,fix(ci): reject unperformed Copilot reviews and verify manual PR checks,,pending
 2026-10-10T08:37:16Z,faac-release-proof-20261010,codex,delivery,commit,completed,docs: retain public artifact and protected PR verification evidence,,pending
+2026-10-10T08:49:33Z,faac-required-checks-20261010,codex,delivery,review,passed,"Independent AI review passed; 107 app, 18 Git publication and 31 DevOps tests pass; manual workflow checks cannot authorize merge",,
+2026-10-10T08:49:33Z,faac-required-checks-20261010,codex,delivery,commit,completed,fix(ci): validate eligible PR checks and work-branch events,,pending

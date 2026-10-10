@@ -8,6 +8,7 @@ Changes use semantic versions. Dated verification remains in [reports](docs/repo
 - Run all five CI jobs only for any PR into `develop` or a hotfix PR into `main`; skip every job on ordinary main promotion and remove push, merge, scheduled, and manual CI duplication.
 - Validate exact-tree prior PR evidence only during explicit release publication, without rerunning tests, smokes, or scanners.
 - Publish package releases without a GitHub deployment environment and name each run by its semantic version.
+- Preserve readable Markdown summaries under hosted ShellCheck and pin release-evidence reads to the API contract that exposes merge commits.
 - Retain explicit local MAI-Code-1.1-Flash delegation with one submission and a durable receipt.
 
 - Adopt the agentic-workspace scaffold with filled project, architecture, design, and contributor documentation.

@@ -18,3 +18,5 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T09:40:42Z,faac-release-env-20261010,codex,release,commit,completed,fix(release): remove deployment environment and prepare 0.1.1,,pending
 2026-10-10T09:46:47Z,faac-shellcheck-20261010,codex,ci,review,passed,"Reproduced hosted SC2016; all six corrected summary formats render identical bytes; actionlint with ShellCheck 0.11.0, 19 policy tests and docs pass",,
 2026-10-10T09:46:47Z,faac-shellcheck-20261010,codex,ci,commit,completed,fix(ci): quote Markdown summaries for hosted ShellCheck,,pending
+2026-10-10T09:52:46Z,faac-release-contract-20261010,codex,release,review,passed,"Live merged PR evidence validates with pinned release API contract; 39 operations tests, actionlint with ShellCheck, docs and independent review pass; Copilot default API unchanged",,
+2026-10-10T09:52:46Z,faac-release-contract-20261010,codex,release,commit,completed,fix(release): pin the merge-evidence API contract,,pending

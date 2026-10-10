@@ -14,11 +14,20 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[2]
 REPO = 'consciontologic/faac'
+# The 2026-03-10 REST contract removes pull_request.merge_commit_sha.
+# Pin the supported schema required by immutable merge-tree verification.
+RELEASE_API_VERSION = '2022-11-28'
 PREFIX = 'repos/' + REPO
 SHA = re.compile(r'[a-f0-9]{40}')
 CHECK_WORKFLOWS = {'Quality': '.github/workflows/ci.yml', 'Package': '.github/workflows/ci.yml',
                    'Container': '.github/workflows/container.yml', 'Security': '.github/workflows/security.yml',
                    'GitFlow': '.github/workflows/gitflow.yml'}
+
+
+def release_client(token):
+    """Construct evidence reads with the supported immutable-merge contract."""
+    from copilot_task import GitHub
+    return GitHub(token, api_version=RELEASE_API_VERSION)
 
 
 def pages(api, path, key=None):
@@ -212,14 +221,13 @@ def verify_release(api, sha):
 
 
 def main():
-    from copilot_task import GitHub
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sha', required=True)
     parser.add_argument('--output', required=True)
     args = parser.parse_args()
     if os.environ.get('GITHUB_REPOSITORY', REPO) != REPO:
         raise ValueError('Repository mismatch')
-    evidence = verify_release(GitHub(os.environ.get('GH_TOKEN', '')), args.sha)
+    evidence = verify_release(release_client(os.environ.get('GH_TOKEN', '')), args.sha)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(evidence, indent=2) + '\n')

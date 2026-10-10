@@ -53,7 +53,8 @@ Scope: `pr-policy`. Acceptance: policy tests, workflow lint, eligible PR evidenc
 - [x] Verify all five CI jobs run only for any PR into develop or hotfix PRs into main, with no runners for ordinary promotion.
 - [x] Verify exact-tree prior PR evidence is enforced only during explicit release validation.
 - [x] Verify explicit release authorization reuses prior PR results without rerunning tests, smokes, or scanners.
-- [ ] Observe eligible PR jobs and all-five promotion skips on GitHub with the revised policy.
+- [x] Observe successful eligible PR jobs on GitHub with the revised policy.
+- [ ] Observe all-five promotion skips on GitHub with the revised policy.
 - [ ] Obtain an actual completed native Copilot review when account quota permits.
 
 The earlier controller and manually dispatched diagnostics remain dated evidence in [verification](../reports/VERIFICATION.md). They do not establish the revised policy's hosted success. Automatic delivery and permanent controller credentials are no longer planned. The proven public release/container and explicit MAI task remain valid historical results.

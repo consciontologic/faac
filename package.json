@@ -1,0 +1,72 @@
+{
+  "name": "faac",
+  "version": "0.1.0",
+  "description": "A durable, strictly free hosted-model terminal coding agent",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "faac": "dist/cli.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x dist/cli.js",
+    "dev": "tsx src/cli.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "test:live": "tsx tests/live/smoke.ts",
+    "test:e2e:live": "tsx tests/live/e2e.ts",
+    "test:resume:live": "tsx tests/live/resume-smoke.ts",
+    "test:fallback:live": "tsx tests/live/fallback.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test",
+    "format": "prettier --write src tests docs README.md package.json tsconfig.json",
+    "test:terminal": "python3 scripts/ad-hoc/pty-smoke.py",
+    "package": "node xops/package/pack.mjs",
+    "test:package": "node xops/package/install-smoke.mjs",
+    "test:container": "node xops/package/container-smoke.mjs",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "5.6.2",
+    "cli-highlight": "2.1.11",
+    "diff": "8.0.4",
+    "string-width": "7.2.0",
+    "typescript": "5.9.3",
+    "wrap-ansi": "9.0.2",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/consciontologic/faac.git"
+  },
+  "homepage": "https://github.com/consciontologic/faac#readme",
+  "bugs": {
+    "url": "https://github.com/consciontologic/faac/issues"
+  },
+  "keywords": [
+    "ai",
+    "coding-agent",
+    "cli",
+    "terminal",
+    "openrouter",
+    "groq",
+    "free-models",
+    "durable-sessions",
+    "fallback"
+  ],
+  "files": [
+    "dist",
+    "data",
+    "docs/guides/USAGE.md",
+    "docs/code/SYNC.md",
+    "docs/project/ATTRIBUTION.md",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE"
+  ]
+}

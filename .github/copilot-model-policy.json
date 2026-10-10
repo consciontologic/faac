@@ -1,0 +1,14 @@
+{
+  "checked_on": "2026-10-10",
+  "preferred_model": "mai-code-1.1-flash",
+  "allowed_models": ["mai-code-1.1-flash"],
+  "fallback_models": [],
+  "allow_auto": false,
+  "allow_unlisted_fallback": false,
+  "max_model_attempts": 1,
+  "native_review_model_selectable": false,
+  "recommended_native_review_effort": "Lite",
+  "availability_source": "https://docs.github.com/en/rest/agent-tasks/agent-tasks",
+  "review_source": "https://docs.github.com/en/copilot/concepts/agents/code-review",
+  "note": "Explicit owner preference for a low-cost model, not a promise of free Copilot usage or universal REST availability. GitHub may reject this model for the account; stop with the receipt rather than selecting an expensive model. Native Copilot code review uses GitHub's model mix and cannot be pinned to MAI."
+}

@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Agent: Session Bootstrap",
+      "type": "shell",
+      "command": "xops/agent/session-bootstrap.sh",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent: Track (append row)",
+      "type": "shell",
+      "command": "make",
+      "args": ["track.add", "ACTION=note", "SUMMARY=${input:summary}"],
+      "presentation": { "reveal": "always" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Git: Dry preview",
+      "type": "shell",
+      "command": "make",
+      "args": ["git.dry"],
+      "presentation": { "reveal": "always" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Git: Publish guarded work branch",
+      "type": "shell",
+      "command": "make",
+      "args": ["git"],
+      "presentation": { "reveal": "always" },
+      "problemMatcher": []
+    },
+  ],
+  "inputs": [
+    {
+      "id": "summary",
+      "type": "promptString",
+      "description": "Conventional-commit-style summary (e.g. 'chore: tidy README')"
+    }
+  ]
+}

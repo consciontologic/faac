@@ -1,0 +1,5689 @@
+{
+  "schema": 1,
+  "source": "https://github.com/diegosouzapw/OmniRoute.git",
+  "branch": "release/v3.8.52",
+  "snapshot": {
+    "version": "adapter-1-9567fa1bef7382b7",
+    "commit": "7510677f2f8f5317f1947284dab650d01333915d",
+    "createdAt": "2026-10-10T07:31:56.815Z",
+    "endpoints": {
+      "openrouter": {
+        "chat": "https://openrouter.ai/api/v1/chat/completions",
+        "models": "https://openrouter.ai/api/v1/models"
+      },
+      "groq": {
+        "chat": "https://api.groq.com/openai/v1/chat/completions",
+        "models": "https://api.groq.com/openai/v1/models"
+      }
+    },
+    "quarantined": {},
+    "curated": [
+      {
+        "provider": "agentrouter",
+        "modelId": "claude-opus-4-8",
+        "displayName": "Claude Opus 4.8",
+        "monthlyTokens": 0,
+        "creditTokens": 200000000,
+        "freeType": "one-time-initial",
+        "poolKey": "agentrouter",
+        "tos": "caution"
+      },
+      {
+        "provider": "agentrouter",
+        "modelId": "claude-opus-5",
+        "displayName": "Claude Opus 5",
+        "monthlyTokens": 0,
+        "creditTokens": 200000000,
+        "freeType": "one-time-initial",
+        "poolKey": "agentrouter",
+        "tos": "caution"
+      },
+      {
+        "provider": "agentrouter",
+        "modelId": "gpt-5.6-sol",
+        "displayName": "GPT-5.6 Sol",
+        "monthlyTokens": 0,
+        "creditTokens": 200000000,
+        "freeType": "one-time-initial",
+        "poolKey": "agentrouter",
+        "tos": "caution"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gemini-3.7-flash-high",
+        "displayName": "Gemini 3.7 Flash (High)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gemini-3.7-flash-medium",
+        "displayName": "Gemini 3.7 Flash (Medium)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gemini-3.7-flash-low",
+        "displayName": "Gemini 3.7 Flash (Low)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gemini-pro-agent",
+        "displayName": "Gemini 3.1 Pro (High)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gemini-3.1-pro-low",
+        "displayName": "Gemini 3.1 Pro (Low)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gemini-3.1-flash-lite",
+        "displayName": "Gemini 3.1 Flash Lite",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "claude-opus-4-6-thinking",
+        "displayName": "Claude Opus 4.6 (Thinking)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "claude-sonnet-4-6",
+        "displayName": "Claude Sonnet 4.6 (Thinking)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "agy",
+        "modelId": "gpt-oss-120b-medium",
+        "displayName": "GPT-OSS 120B (Medium)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "agy",
+        "tos": "avoid"
+      },
+      {
+        "provider": "ai21",
+        "modelId": "jamba-large-1.7",
+        "displayName": "jamba-large-1.7",
+        "monthlyTokens": 0,
+        "creditTokens": 10000000,
+        "freeType": "one-time-initial",
+        "poolKey": "ai21",
+        "tos": "avoid"
+      },
+      {
+        "provider": "ai21",
+        "modelId": "jamba-mini-2",
+        "displayName": "jamba-mini-2",
+        "monthlyTokens": 0,
+        "creditTokens": 10000000,
+        "freeType": "one-time-initial",
+        "poolKey": "ai21",
+        "tos": "avoid"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "x-ai/grok-3",
+        "displayName": "Grok-3 (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "x-ai/grok-2-1212",
+        "displayName": "Grok-2 1212 (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "anthropic/claude-3.7-sonnet",
+        "displayName": "Claude 3.7 Sonnet (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "qwen/qwen3-32b",
+        "displayName": "Qwen3 32B (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "moonshot/kimi-k2.6",
+        "displayName": "Kimi K2.6 (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "google/gemini-2.5-flash",
+        "displayName": "Gemini 2.5 Flash (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "api-airforce",
+        "modelId": "deepseek/deepseek-v3",
+        "displayName": "DeepSeek V3 (Free)",
+        "monthlyTokens": 24000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "api-airforce",
+        "tos": "caution"
+      },
+      {
+        "provider": "arcee-ai",
+        "modelId": "arcee-ai/trinity-large-preview:free",
+        "displayName": "Arcee Trinity Large Preview (free)",
+        "monthlyTokens": 4800000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "arcee-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "baichuan",
+        "modelId": "Baichuan4",
+        "displayName": "Baichuan 4",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "baichuan",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "baidu",
+        "modelId": "ernie-4.0-8k",
+        "displayName": "ERNIE 4.0 8K",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "baidu",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "auto:free",
+        "displayName": "Auto Free (Zero Cost)",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "claude-opus-4.7",
+        "displayName": "Claude Opus 4.7",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "claude-sonnet-4.6",
+        "displayName": "Claude Sonnet 4.6",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "claude-haiku-4.5",
+        "displayName": "Claude Haiku 4.5",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gpt-5.5",
+        "displayName": "GPT-5.5",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gpt-5.4",
+        "displayName": "GPT-5.4",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gpt-5.4-mini",
+        "displayName": "GPT-5.4 Mini",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gpt-5.4-nano",
+        "displayName": "GPT-5.4 Nano",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "grok-4.3",
+        "displayName": "Grok 4.3",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "grok-4.20",
+        "displayName": "Grok 4.20",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gemini-3.1-pro-preview",
+        "displayName": "Gemini 3.1 Pro",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gemini-3-flash-preview",
+        "displayName": "Gemini 3 Flash",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gemini-3.1-flash-lite-preview",
+        "displayName": "Gemini 3.1 Flash Lite",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gemma-4-31b-it",
+        "displayName": "Gemma 4 31B",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "gemma-4-26b-a4b-it",
+        "displayName": "Gemma 4 26B A4B",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "deepseek-v3.2",
+        "displayName": "DeepSeek V3.2",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "kimi-k2.6",
+        "displayName": "Kimi K2.6",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "kimi-k2.5",
+        "displayName": "Kimi K2.5",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "glm-5.1",
+        "displayName": "GLM 5.1",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "glm-5",
+        "displayName": "GLM 5",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "mimo-v2.5-pro",
+        "displayName": "MiMo-V2.5-Pro",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "mimo-v2.5",
+        "displayName": "MiMo-V2.5",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "minimax-m2.7",
+        "displayName": "MiniMax M2.7",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "minimax-m2.5",
+        "displayName": "MiniMax M2.5",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "llama-4-maverick",
+        "displayName": "Llama 4 Maverick",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "llama-4-scout",
+        "displayName": "Llama 4 Scout",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "llama-3.3-70b-instruct",
+        "displayName": "Llama 3.3 70B",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "qwen3.6-plus",
+        "displayName": "Qwen 3.6 Plus",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "mistral-large-2512",
+        "displayName": "Mistral Large 3",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "mistral-medium-3.1",
+        "displayName": "Mistral Medium 3.1",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "mistral-small-2603",
+        "displayName": "Mistral Small 4",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "bazaarlink",
+        "modelId": "nemotron-3-super-120b-a12b",
+        "displayName": "Nemotron 3 Super",
+        "monthlyTokens": 3600000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bazaarlink",
+        "tos": "caution"
+      },
+      {
+        "provider": "blackbox",
+        "modelId": "gpt-4o",
+        "displayName": "GPT-4o",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "blackbox",
+        "tos": "avoid"
+      },
+      {
+        "provider": "blackbox",
+        "modelId": "gemini-2.5-flash",
+        "displayName": "Gemini 2.5 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "blackbox",
+        "tos": "avoid"
+      },
+      {
+        "provider": "blackbox",
+        "modelId": "claude-sonnet-4",
+        "displayName": "Claude Sonnet 4",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "blackbox",
+        "tos": "avoid"
+      },
+      {
+        "provider": "blackbox",
+        "modelId": "deepseek-v3",
+        "displayName": "DeepSeek V3",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "blackbox",
+        "tos": "avoid"
+      },
+      {
+        "provider": "blackbox",
+        "modelId": "blackboxai",
+        "displayName": "Blackbox AI",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "blackbox",
+        "tos": "avoid"
+      },
+      {
+        "provider": "blackbox",
+        "modelId": "blackboxai-pro",
+        "displayName": "Blackbox AI Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "blackbox",
+        "tos": "avoid"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gpt-4o",
+        "displayName": "GPT-4o",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gpt-4o-mini",
+        "displayName": "GPT-4o Mini",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gpt-4.1",
+        "displayName": "GPT-4.1",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gpt-4.1-mini",
+        "displayName": "GPT-4.1 Mini",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gpt-4.1-nano",
+        "displayName": "GPT-4.1 Nano",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "claude-sonnet-4-5",
+        "displayName": "Claude Sonnet 4.5",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "claude-haiku-4-5",
+        "displayName": "Claude Haiku 4.5",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gemini-2.0-flash",
+        "displayName": "Gemini 2.0 Flash",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gemini-2.0-flash-exp",
+        "displayName": "Gemini 2.0 Flash (Exp)",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "deepseek-reasoner",
+        "displayName": "DeepSeek Reasoner",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "deepseek-chat",
+        "displayName": "DeepSeek Chat",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "qwen-plus",
+        "displayName": "Qwen Plus",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "qwen-turbo",
+        "displayName": "Qwen Turbo",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "kimi-k2",
+        "displayName": "Kimi K2",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "kimi-k2-thinking",
+        "displayName": "Kimi K2 Thinking",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "glm-4.7",
+        "displayName": "GLM 4.7",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "glm-4-flash",
+        "displayName": "GLM 4 Flash",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "minimax-m2.5",
+        "displayName": "MiniMax M2.5",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "claude-opus-4-5",
+        "displayName": "Claude Opus 4.5 (VIP)",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "gemini-2.5-pro",
+        "displayName": "Gemini 2.5 Pro (VIP)",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "grok-3",
+        "displayName": "Grok-3 (VIP)",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bluesminds",
+        "modelId": "qwen-max",
+        "displayName": "Qwen Max (VIP)",
+        "monthlyTokens": 7200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "bluesminds",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bytez",
+        "modelId": "meta-llama/Llama-3.3-70B-Instruct",
+        "displayName": "meta-llama/Llama-3.3-70B-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "recurring-credit",
+        "poolKey": "bytez",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bytez",
+        "modelId": "mistralai/Mistral-7B-Instruct-v0.3",
+        "displayName": "mistralai/Mistral-7B-Instruct-v0.3",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "recurring-credit",
+        "poolKey": "bytez",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "bytez",
+        "modelId": "Qwen/Qwen2.5-72B-Instruct",
+        "displayName": "Qwen/Qwen2.5-72B-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "recurring-credit",
+        "poolKey": "bytez",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "cerebras",
+        "modelId": "zai-glm-4.7",
+        "displayName": "GLM 4.7",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "cerebras",
+        "tos": "caution"
+      },
+      {
+        "provider": "cerebras",
+        "modelId": "gpt-oss-120b",
+        "displayName": "GPT OSS 120B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "cerebras",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/mistral/mistral-7b-instruct-v0.2-lora",
+        "displayName": "Mistral 7B (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/qwen/qwen2.5-coder-32b-instruct",
+        "displayName": "Qwen 2.5 Coder 32B (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+        "displayName": "DeepSeek R1 Distill 32B (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        "displayName": "Llama 3.3 70B (FP8 Fast 🆓 ~150 resp/day)",
+        "monthlyTokens": 30000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/meta/llama-3.2-3b-instruct",
+        "displayName": "Llama 3.2 3B (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/qwen/qwq-32b",
+        "displayName": "QwQ 32B (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/zai-org/glm-4.7-flash",
+        "displayName": "GLM 4.7 Flash (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/moonshotai/kimi-k2.6",
+        "displayName": "Kimi K2.6 (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cloudflare-ai",
+        "modelId": "@cf/google/gemma-4-26b-a4b-it",
+        "displayName": "Gemma 4 26B (🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "cloudflare-ai",
+        "tos": "caution"
+      },
+      {
+        "provider": "cohere",
+        "modelId": "command-a-reasoning-08-2025",
+        "displayName": "Command A Reasoning (Aug 2025)",
+        "monthlyTokens": 800000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "cohere",
+        "tos": "caution"
+      },
+      {
+        "provider": "cohere",
+        "modelId": "command-a-vision-07-2025",
+        "displayName": "Command A Vision (Jul 2025)",
+        "monthlyTokens": 800000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "cohere",
+        "tos": "caution"
+      },
+      {
+        "provider": "cohere",
+        "modelId": "command-a-03-2025",
+        "displayName": "Command A (Mar 2025)",
+        "monthlyTokens": 800000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "cohere",
+        "tos": "caution"
+      },
+      {
+        "provider": "cohere",
+        "modelId": "command-r7b-12-2024",
+        "displayName": "Command R7B (Dec 2024)",
+        "monthlyTokens": 800000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "cohere",
+        "tos": "caution"
+      },
+      {
+        "provider": "cohere",
+        "modelId": "command-r-plus-08-2024",
+        "displayName": "Command R Plus (Aug 2024)",
+        "monthlyTokens": 800000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "cohere",
+        "tos": "caution"
+      },
+      {
+        "provider": "cohere",
+        "modelId": "command-r-08-2024",
+        "displayName": "Command R (Aug 2024)",
+        "monthlyTokens": 800000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "cohere",
+        "tos": "caution"
+      },
+      {
+        "provider": "coze",
+        "modelId": "claude-3-7-sonnet-20250514",
+        "displayName": "Claude 3.7 Sonnet",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "coze",
+        "tos": "avoid"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "anthropic/claude-4-opus",
+        "displayName": "anthropic/claude-4-opus",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "anthropic/claude-4-sonnet",
+        "displayName": "anthropic/claude-4-sonnet",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "openai/gpt-oss-120b",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "openai/gpt-oss-20b",
+        "displayName": "openai/gpt-oss-20b",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "google/gemma-4-31B-it",
+        "displayName": "google/gemma-4-31B-it",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "google/gemma-4-26B-A4B-it",
+        "displayName": "google/gemma-4-26B-A4B-it",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+        "displayName": "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
+        "displayName": "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "displayName": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "displayName": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+        "displayName": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "NousResearch/Hermes-3-Llama-3.1-405B",
+        "displayName": "NousResearch/Hermes-3-Llama-3.1-405B",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "deepseek-ai/DeepSeek-V4-Pro",
+        "displayName": "deepseek-ai/DeepSeek-V4-Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+        "displayName": "deepseek-ai/DeepSeek-V4-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "zai-org/GLM-5.1",
+        "displayName": "zai-org/GLM-5.1",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "moonshotai/Kimi-K2.6",
+        "displayName": "moonshotai/Kimi-K2.6",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "MiniMaxAI/MiniMax-M2.5",
+        "displayName": "MiniMaxAI/MiniMax-M2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "Qwen/Qwen3.6-35B-A3B",
+        "displayName": "Qwen/Qwen3.6-35B-A3B",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "Qwen/Qwen3.5-397B-A17B",
+        "displayName": "Qwen/Qwen3.5-397B-A17B",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "Qwen/Qwen3.5-122B-A10B",
+        "displayName": "Qwen/Qwen3.5-122B-A10B",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "XiaomiMiMo/MiMo-V2.5-Pro",
+        "displayName": "XiaomiMiMo/MiMo-V2.5-Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepinfra",
+        "modelId": "XiaomiMiMo/MiMo-V2.5",
+        "displayName": "XiaomiMiMo/MiMo-V2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepinfra",
+        "tos": "caution"
+      },
+      {
+        "provider": "deepseek",
+        "modelId": "deepseek-v4-pro",
+        "displayName": "DeepSeek V4 Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepseek",
+        "tos": "ok"
+      },
+      {
+        "provider": "deepseek",
+        "modelId": "deepseek-v4-flash",
+        "displayName": "DeepSeek V4 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "deepseek",
+        "tos": "ok"
+      },
+      {
+        "provider": "doubao",
+        "modelId": "doubao-pro-32k",
+        "displayName": "Doubao Pro 32K",
+        "monthlyTokens": 0,
+        "creditTokens": 15000000,
+        "freeType": "one-time-initial",
+        "poolKey": "doubao",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "duckduckgo-web",
+        "modelId": "gpt-5.4-mini",
+        "displayName": "GPT-5.4 Mini",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "duckduckgo-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "duckduckgo-web",
+        "modelId": "gpt-5.6-luna",
+        "displayName": "GPT-5.6 Luna",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "duckduckgo-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "duckduckgo-web",
+        "modelId": "claude-haiku-4-5",
+        "displayName": "Claude Haiku 4.5",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "duckduckgo-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "duckduckgo-web",
+        "modelId": "mistral-small-2603",
+        "displayName": "Mistral Small 4",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "duckduckgo-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "duckduckgo-web",
+        "modelId": "tinfoil/gpt-oss-120b",
+        "displayName": "gpt-oss 120B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "duckduckgo-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "duckduckgo-web",
+        "modelId": "tinfoil/gemma4-31b",
+        "displayName": "Gemma 4 31B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "duckduckgo-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "deepseek-v4-flash",
+        "displayName": "DeepSeek V4 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "deepseek-v4-pro",
+        "displayName": "DeepSeek V4 Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "glm-5p1",
+        "displayName": "GLM 5.1",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "gpt-oss-120b",
+        "displayName": "OpenAI gpt-oss-120b",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "gpt-oss-20b",
+        "displayName": "OpenAI gpt-oss-20b",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "kimi-k2p5",
+        "displayName": "Kimi K2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "kimi-k2p6",
+        "displayName": "Kimi K2.6",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "minimax-m2p5",
+        "displayName": "MiniMax M2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "minimax-m2p7",
+        "displayName": "MiniMax M2.7",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "fireworks",
+        "modelId": "qwen3p6-plus",
+        "displayName": "Qwen3.6 Plus",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "fireworks",
+        "tos": "avoid"
+      },
+      {
+        "provider": "freemodel-dev",
+        "modelId": "gpt-5.5",
+        "displayName": "GPT-5.5",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "freemodel-dev",
+        "tos": "unknown"
+      },
+      {
+        "provider": "freemodel-dev",
+        "modelId": "gpt-5.4",
+        "displayName": "GPT-5.4",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "freemodel-dev",
+        "tos": "unknown"
+      },
+      {
+        "provider": "freemodel-dev",
+        "modelId": "gpt-5.4-mini",
+        "displayName": "GPT-5.4 Mini",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "freemodel-dev",
+        "tos": "unknown"
+      },
+      {
+        "provider": "freemodel-dev",
+        "modelId": "gpt-5.3-codex",
+        "displayName": "GPT-5.3 Codex",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "freemodel-dev",
+        "tos": "unknown"
+      },
+      {
+        "provider": "friendliai",
+        "modelId": "meta-llama-3.1-70b-instruct",
+        "displayName": "meta-llama-3.1-70b-instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "friendliai",
+        "tos": "avoid"
+      },
+      {
+        "provider": "friendliai",
+        "modelId": "meta-llama-3.1-8b-instruct",
+        "displayName": "meta-llama-3.1-8b-instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "friendliai",
+        "tos": "avoid"
+      },
+      {
+        "provider": "gemini",
+        "modelId": "gemini-2.5-flash",
+        "displayName": "Gemini 2.5 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "gemini-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "gemini",
+        "modelId": "gemini-2.5-flash-lite",
+        "displayName": "Gemini 2.5 Flash-Lite",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "gemini-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "gemini",
+        "modelId": "gemini-3-flash-preview",
+        "displayName": "Gemini 3 Flash Preview",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "gemini-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "gemini",
+        "modelId": "gemini-3.1-flash-lite",
+        "displayName": "Gemini 3.1 Flash-Lite",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "gemini-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "glm-cn",
+        "modelId": "glm-4-flash",
+        "displayName": "GLM-4-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "zhipu-flash-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "glm-cn",
+        "modelId": "glm-4.5-flash",
+        "displayName": "GLM-4.5-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "zhipu-flash-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "glm-cn",
+        "modelId": "glm-4.7-flash",
+        "displayName": "GLM-4.7-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "zhipu-flash-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "glm-cn",
+        "modelId": "glm-signup-bonus",
+        "displayName": "Z.AI — 20M signup bonus",
+        "monthlyTokens": 0,
+        "creditTokens": 20000000,
+        "freeType": "one-time-initial",
+        "poolKey": "zhipu-signup",
+        "tos": "ok"
+      },
+      {
+        "provider": "groq",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "GPT-OSS 120B",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "groq:openai/gpt-oss-120b",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "groq",
+        "modelId": "openai/gpt-oss-20b",
+        "displayName": "GPT-OSS 20B",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "groq:openai/gpt-oss-20b",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "groq",
+        "modelId": "openai/gpt-oss-safeguard-20b",
+        "displayName": "GPT-OSS Safeguard 20B",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "groq:openai/gpt-oss-safeguard-20b",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "groq",
+        "modelId": "qwen/qwen3.6-27b",
+        "displayName": "Qwen3.6 27B",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "groq:qwen/qwen3.6-27b",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "groq",
+        "modelId": "qwen/qwen3.8-27b",
+        "displayName": "Qwen3.8 27B",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "groq:qwen/qwen3.8-27b",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "baidu/ERNIE-4.5-VL-424B-A47B-Base-PT",
+        "displayName": "ERNIE 4.5 VL 424B A47B Base PT",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "CohereLabs/c4ai-command-r7b-12-2024",
+        "displayName": "Command R7B 12-2024",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "CohereLabs/command-a-reasoning-08-2025",
+        "displayName": "Command A Reasoning 08-2025",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "CohereLabs/command-a-vision-07-2025",
+        "displayName": "Command A Vision 07-2025",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "deepseek-ai/DeepSeek-V4-Pro",
+        "displayName": "DeepSeek V4 Pro",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "deepseek-ai/DeepSeek-V4-Flash",
+        "displayName": "DeepSeek V4 Flash",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "google/gemma-4-31B-it",
+        "displayName": "Gemma 4 31B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "google/gemma-4-26B-A4B-it",
+        "displayName": "Gemma 4 26B A4B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "inclusionAI/Ling-2.6-1T",
+        "displayName": "Ling 2.6 1T",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "displayName": "Llama 4 Scout 17B 16E Instruct",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "displayName": "Llama 4 Maverick 17B 128E Instruct FP8",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "MiniMaxAI/MiniMax-M3",
+        "displayName": "MiniMax M3",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "moonshotai/Kimi-K2.7-Code",
+        "displayName": "Kimi K2.7 Code",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "moonshotai/Kimi-K2.6",
+        "displayName": "Kimi K2.6",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4",
+        "displayName": "NVIDIA Nemotron 3 Ultra 550B A55B NVFP4",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "GPT-OSS 120B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "openai/gpt-oss-20b",
+        "displayName": "GPT-OSS 20B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "Qwen/Qwen3.5-122B-A10B",
+        "displayName": "Qwen3.5 122B A10B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "Qwen/Qwen3.5-397B-A17B",
+        "displayName": "Qwen3.5 397B A17B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "Qwen/Qwen3.6-27B",
+        "displayName": "Qwen3.6 27B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "Qwen/Qwen3.6-35B-A3B",
+        "displayName": "Qwen3.6 35B A3B",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "stepfun-ai/Step-3.7-Flash",
+        "displayName": "Step 3.7 Flash",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "XiaomiMiMo/MiMo-V2.5-Pro",
+        "displayName": "MiMo V2.5 Pro",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingchat",
+        "modelId": "zai-org/GLM-5.2",
+        "displayName": "GLM 5.2",
+        "monthlyTokens": 500000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingchat",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingface",
+        "modelId": "meta-llama/llama-3.1-8b-instruct",
+        "displayName": "Llama 3.1 8B",
+        "monthlyTokens": 200000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingface",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingface",
+        "modelId": "meta-llama/llama-3.2-11b-instruct",
+        "displayName": "Llama 3.2 11B",
+        "monthlyTokens": 200000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingface",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingface",
+        "modelId": "mistralai/mistral-7b-instruct",
+        "displayName": "Mistral 7B",
+        "monthlyTokens": 200000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingface",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingface",
+        "modelId": "google/gemma-2-9b-it",
+        "displayName": "Gemma 2 9B",
+        "monthlyTokens": 200000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingface",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingface",
+        "modelId": "Qwen/Qwen2.5-7B-Instruct",
+        "displayName": "Qwen 2.5 7B",
+        "monthlyTokens": 200000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingface",
+        "tos": "caution"
+      },
+      {
+        "provider": "huggingface",
+        "modelId": "deepseek-ai/DeepSeek-V3",
+        "displayName": "DeepSeek V3",
+        "monthlyTokens": 200000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "huggingface",
+        "tos": "caution"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "Qwen/QwQ-32B",
+        "displayName": "QwQ 32B",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "deepseek-ai/DeepSeek-R1",
+        "displayName": "DeepSeek R1",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "deepseek-ai/DeepSeek-V3",
+        "displayName": "DeepSeek V3",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "meta-llama/Llama-3.3-70B-Instruct",
+        "displayName": "Llama 3.3 70B",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "meta-llama/Llama-3.2-3B-Instruct",
+        "displayName": "Llama 3.2 3B",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "Qwen/Qwen2.5-72B-Instruct",
+        "displayName": "Qwen 2.5 72B",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "displayName": "Qwen 2.5 Coder 32B",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "hyperbolic",
+        "modelId": "NousResearch/Hermes-3-Llama-3.1-70B",
+        "displayName": "Hermes 3 70B",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "hyperbolic",
+        "tos": "ok"
+      },
+      {
+        "provider": "iflytek",
+        "modelId": "generalv3.5",
+        "displayName": "General V3.5",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "iflytek",
+        "tos": "avoid"
+      },
+      {
+        "provider": "inference-net",
+        "modelId": "meta-llama/Llama-3.3-70B-Instruct",
+        "displayName": "meta-llama/Llama-3.3-70B-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "inference-net",
+        "tos": "caution"
+      },
+      {
+        "provider": "inference-net",
+        "modelId": "deepseek-ai/DeepSeek-R1",
+        "displayName": "deepseek-ai/DeepSeek-R1",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "inference-net",
+        "tos": "caution"
+      },
+      {
+        "provider": "inference-net",
+        "modelId": "Qwen/Qwen2.5-72B-Instruct",
+        "displayName": "Qwen/Qwen2.5-72B-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "inference-net",
+        "tos": "caution"
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "kilo-auto/free",
+        "displayName": "Kilo Auto Free (auto-router)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "tencent/hy3:free",
+        "displayName": "Tencent Hy3 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "stepfun/step-3.7-flash:free",
+        "displayName": "StepFun Step 3.7 Flash (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "openrouter/auto-beta",
+        "displayName": "OpenRouter Auto Router (beta)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "openrouter/free",
+        "displayName": "OpenRouter Free Models Router",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "poolside/laguna-xs-2.1:free",
+        "displayName": "Poolside Laguna XS 2.1 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "poolside/laguna-m.1:free",
+        "displayName": "Poolside Laguna M.1 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "cohere/north-mini-code:free",
+        "displayName": "Cohere North Mini Code (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "nvidia/nemotron-3-ultra-550b-a55b:free",
+        "displayName": "NVIDIA Nemotron 3 Ultra (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "nvidia/nemotron-3-super-120b-a12b:free",
+        "displayName": "NVIDIA Nemotron 3 Super (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "displayName": "NVIDIA Nemotron 3 Nano Omni (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "nvidia/nemotron-3.5-content-safety:free",
+        "displayName": "NVIDIA Nemotron 3.5 Content Safety (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kilo-gateway",
+        "modelId": "kwaipilot/kat-coder-pro-v2.5:free",
+        "displayName": "Kwaipilot KAT-Coder-Pro V2.5 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "kilo-gateway-free",
+        "tos": "caution",
+        "trainsOnPrompts": true
+      },
+      {
+        "provider": "kiro",
+        "modelId": "claude-sonnet-4.5",
+        "displayName": "Claude Sonnet 4.5",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "kiro",
+        "modelId": "claude-haiku-4.5",
+        "displayName": "Claude Haiku 4.5",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "kiro",
+        "modelId": "deepseek-3.2",
+        "displayName": "DeepSeek V3.2",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "kiro",
+        "modelId": "minimax-m2.5",
+        "displayName": "MiniMax M2.5",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "kiro",
+        "modelId": "minimax-m2.1",
+        "displayName": "MiniMax M2.1",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "kiro",
+        "modelId": "glm-5",
+        "displayName": "GLM-5",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "kiro",
+        "modelId": "qwen3-coder-next",
+        "displayName": "Qwen3 Coder Next",
+        "monthlyTokens": 25000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "kiro",
+        "tos": "avoid"
+      },
+      {
+        "provider": "liquid",
+        "modelId": "liquid-lfm-40b",
+        "displayName": "Liquid LFM 40B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "liquid",
+        "tos": "unknown"
+      },
+      {
+        "provider": "llm7",
+        "modelId": "gpt-4o-mini-2024-07-18",
+        "displayName": "GPT-4o mini (LLM7)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "llm7-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "llm7",
+        "modelId": "gpt-4.1-nano-2025-04-14",
+        "displayName": "GPT-4.1 nano (LLM7)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "llm7-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "llm7",
+        "modelId": "deepseek-r1-0528",
+        "displayName": "DeepSeek R1 (LLM7)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "llm7-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "llm7",
+        "modelId": "qwen2.5-coder-32b-instruct",
+        "displayName": "Qwen2.5 Coder 32B (LLM7)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "llm7-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "longcat",
+        "modelId": "LongCat-2.0",
+        "displayName": "LongCat-2.0",
+        "monthlyTokens": 0,
+        "creditTokens": 10000000,
+        "freeType": "one-time-initial",
+        "poolKey": "longcat-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "mistral",
+        "modelId": "mistral-large-latest",
+        "displayName": "Mistral Large 3",
+        "monthlyTokens": 1000000000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "mistral",
+        "tos": "caution"
+      },
+      {
+        "provider": "mistral",
+        "modelId": "mistral-medium-3-5",
+        "displayName": "Mistral Medium 3.5",
+        "monthlyTokens": 1000000000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "mistral",
+        "tos": "caution"
+      },
+      {
+        "provider": "mistral",
+        "modelId": "mistral-small-latest",
+        "displayName": "Mistral Small 4",
+        "monthlyTokens": 1000000000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "mistral",
+        "tos": "caution"
+      },
+      {
+        "provider": "mistral",
+        "modelId": "devstral-latest",
+        "displayName": "Devstral 2",
+        "monthlyTokens": 1000000000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "mistral",
+        "tos": "caution"
+      },
+      {
+        "provider": "mistral",
+        "modelId": "codestral-latest",
+        "displayName": "Codestral",
+        "monthlyTokens": 1000000000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "mistral",
+        "tos": "caution"
+      },
+      {
+        "provider": "modelscope",
+        "modelId": "Qwen/Qwen3.5-397B-A17B",
+        "displayName": "Qwen3.5 397B A17B (ModelScope)",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "modelscope-free",
+        "tos": "caution",
+        "eligibilityGate": "regional-identity"
+      },
+      {
+        "provider": "modelscope",
+        "modelId": "deepseek-ai/DeepSeek-V4-Pro",
+        "displayName": "DeepSeek V4 Pro (ModelScope)",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "modelscope-free",
+        "tos": "caution",
+        "eligibilityGate": "regional-identity"
+      },
+      {
+        "provider": "monsterapi",
+        "modelId": "llama-3-8b-fuse",
+        "displayName": "Llama 3 8B Fuse",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "monsterapi",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "morph",
+        "modelId": "morph-v3-large",
+        "displayName": "morph-v3-large",
+        "monthlyTokens": 400000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "morph",
+        "tos": "ok"
+      },
+      {
+        "provider": "morph",
+        "modelId": "morph-v3-fast",
+        "displayName": "morph-v3-fast",
+        "monthlyTokens": 400000,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "morph",
+        "tos": "ok"
+      },
+      {
+        "provider": "muse-spark-web",
+        "modelId": "muse-spark",
+        "displayName": "Muse Spark",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "muse-spark-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "muse-spark-web",
+        "modelId": "muse-spark-thinking",
+        "displayName": "Muse Spark Thinking",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "muse-spark-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "muse-spark-web",
+        "modelId": "muse-spark-contemplating",
+        "displayName": "Muse Spark Contemplating",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "muse-spark-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "nebius",
+        "modelId": "meta-llama/Llama-3.3-70B-Instruct",
+        "displayName": "Llama 3.3 70B Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nebius",
+        "tos": "caution"
+      },
+      {
+        "provider": "nlpcloud",
+        "modelId": "llama-3-8b-instruct",
+        "displayName": "Llama 3 8B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "nlpcloud",
+        "tos": "avoid"
+      },
+      {
+        "provider": "nous-research",
+        "modelId": "Hermes-4-405B",
+        "displayName": "Hermes 4 405B (Nous Research)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-credit",
+        "poolKey": "nous-research",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "nous-research",
+        "modelId": "Hermes-4-70B",
+        "displayName": "Hermes 4 70B (Nous Research)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-credit",
+        "poolKey": "nous-research",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "novita",
+        "modelId": "ai-ai/llama-3.1-8b-instruct",
+        "displayName": "Llama 3.1 8B",
+        "monthlyTokens": 0,
+        "creditTokens": 500000,
+        "freeType": "one-time-initial",
+        "poolKey": "novita",
+        "tos": "caution"
+      },
+      {
+        "provider": "nscale",
+        "modelId": "moonshotai/Kimi-K2.5",
+        "displayName": "moonshotai/Kimi-K2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nscale",
+        "tos": "caution"
+      },
+      {
+        "provider": "nscale",
+        "modelId": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "displayName": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nscale",
+        "tos": "caution"
+      },
+      {
+        "provider": "nscale",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "openai/gpt-oss-120b",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nscale",
+        "tos": "caution"
+      },
+      {
+        "provider": "nscale",
+        "modelId": "openai/gpt-oss-20b",
+        "displayName": "openai/gpt-oss-20b",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nscale",
+        "tos": "caution"
+      },
+      {
+        "provider": "nscale",
+        "modelId": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "displayName": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nscale",
+        "tos": "caution"
+      },
+      {
+        "provider": "nscale",
+        "modelId": "meta-llama/Llama-3.3-70B-Instruct",
+        "displayName": "meta-llama/Llama-3.3-70B-Instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 5000000,
+        "freeType": "one-time-initial",
+        "poolKey": "nscale",
+        "tos": "caution"
+      },
+      {
+        "provider": "nvidia",
+        "modelId": "google/gemma-4-31b-it",
+        "displayName": "Gemma 4 31B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "nvidia",
+        "tos": "caution"
+      },
+      {
+        "provider": "nvidia",
+        "modelId": "nvidia/nemotron-3-super-120b-a12b",
+        "displayName": "Nemotron 3 Super 120B A12B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "nvidia",
+        "tos": "caution"
+      },
+      {
+        "provider": "nvidia",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "GPT OSS 120B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "nvidia",
+        "tos": "caution"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "deepseek-v4-pro",
+        "displayName": "DeepSeek V4 Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "deepseek-v4-flash",
+        "displayName": "DeepSeek V4 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "kimi-k2.6",
+        "displayName": "Kimi K2.6",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "glm-5.1",
+        "displayName": "GLM 5.1",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "minimax-m2.7",
+        "displayName": "MiniMax M2.7",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "gemma4:31b",
+        "displayName": "Gemma 4 31B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "nemotron-3-super",
+        "displayName": "NVIDIA Nemotron 3 Super",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "ollama-cloud",
+        "modelId": "qwen3.5:397b",
+        "displayName": "Qwen 3.5 397B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ollama-cloud",
+        "tos": "ambiguous"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "big-pickle",
+        "displayName": "Big Pickle",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "deepseek-v4-flash-free",
+        "displayName": "DeepSeek V4 Flash Free",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "minimax-m2.5-free",
+        "displayName": "MiniMax M2.5 Free",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "ling-2.6-1t-free",
+        "displayName": "Ling 2.6 Free",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "trinity-large-preview-free",
+        "displayName": "Trinity Large Preview Free",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "nemotron-3-super-free",
+        "displayName": "Nemotron 3 Super Free",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode",
+        "modelId": "qwen3.6-plus-free",
+        "displayName": "Qwen3.6 Plus Free",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "opencode",
+        "tos": "avoid"
+      },
+      {
+        "provider": "opencode-zen",
+        "modelId": "opencode/big-pickle",
+        "displayName": "Big Pickle (stealth)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "opencode-zen-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "opencode-zen",
+        "modelId": "opencode/deepseek-v4-flash-free",
+        "displayName": "DeepSeek V4 Flash (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "opencode-zen-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "opencode-zen",
+        "modelId": "opencode/nemotron-3-super-free",
+        "displayName": "Nemotron 3 Super (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "opencode-zen-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "opencode-zen",
+        "modelId": "opencode/mimo-v2.5-free",
+        "displayName": "MiMo V2.5 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "opencode-zen-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "opencode-zen",
+        "modelId": "opencode/north-mini-code-free",
+        "displayName": "North Mini Code (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "opencode-zen-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "opencode-zen",
+        "modelId": "opencode/nemotron-3-ultra-free",
+        "displayName": "Nemotron 3 Ultra (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "opencode-zen-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "openrouter",
+        "modelId": "auto",
+        "displayName": "Auto (Best Available)",
+        "monthlyTokens": 1200000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "openrouter-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "openrouter",
+        "modelId": "stealth/ox-alpha",
+        "displayName": "Stealth Ox Alpha (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "openrouter-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "openrouter",
+        "modelId": "liquid/lfm-2.5-2.6b:free",
+        "displayName": "LiquidAI: LFM2.5-2.6B (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "openrouter-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "openai",
+        "displayName": "OpenAI (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "openai-fast",
+        "displayName": "OpenAI Fast (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "openai-large",
+        "displayName": "OpenAI Large (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "qwen-coder",
+        "displayName": "Qwen Coder (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "mistral",
+        "displayName": "Mistral (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "gemini",
+        "displayName": "Gemini (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:gemini",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "gemini-flash-lite-3.1",
+        "displayName": "Gemini Flash Lite 3.1 (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "gemini-fast",
+        "displayName": "Gemini Fast (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:gemini-fast",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "deepseek",
+        "displayName": "DeepSeek (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "grok",
+        "displayName": "Grok (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "grok-large",
+        "displayName": "Grok Large (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "gemini-search",
+        "displayName": "Gemini Search (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "midijourney",
+        "displayName": "Midijourney (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:midijourney",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "midijourney-large",
+        "displayName": "Midijourney Large (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:midijourney-large",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "claude-fast",
+        "displayName": "Claude Fast (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:claude-fast",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "claude",
+        "displayName": "Claude (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:claude",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "claude-large",
+        "displayName": "Claude Large (Pollinations) — requires API key",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "discontinued",
+        "poolKey": "pollinations:claude-large",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "perplexity-fast",
+        "displayName": "Perplexity Fast (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "perplexity-reasoning",
+        "displayName": "Perplexity Reasoning (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "kimi",
+        "displayName": "Kimi (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "gemini-large",
+        "displayName": "Gemini Large (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "nova-fast",
+        "displayName": "Nova Fast (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "nova",
+        "displayName": "Nova (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "glm",
+        "displayName": "GLM (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "minimax",
+        "displayName": "MiniMax (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "mistral-large",
+        "displayName": "Mistral Large (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "polly",
+        "displayName": "Polly (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "qwen-coder-large",
+        "displayName": "Qwen Coder Large (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "qwen-large",
+        "displayName": "Qwen Large (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "qwen-vision",
+        "displayName": "Qwen Vision (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "pollinations",
+        "modelId": "qwen-safety",
+        "displayName": "Qwen Safety (Pollinations)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "pollinations",
+        "tos": "caution"
+      },
+      {
+        "provider": "predibase",
+        "modelId": "llama-3.3-70b",
+        "displayName": "llama-3.3-70b",
+        "monthlyTokens": 0,
+        "creditTokens": 25000000,
+        "freeType": "one-time-initial",
+        "poolKey": "predibase",
+        "tos": "caution"
+      },
+      {
+        "provider": "publicai",
+        "modelId": "swiss-ai/apertus-70b-instruct",
+        "displayName": "swiss-ai/apertus-70b-instruct",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "publicai",
+        "tos": "caution"
+      },
+      {
+        "provider": "publicai",
+        "modelId": "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+        "displayName": "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "publicai",
+        "tos": "caution"
+      },
+      {
+        "provider": "publicai",
+        "modelId": "allenai/Olmo-3-32B-Think",
+        "displayName": "allenai/Olmo-3-32B-Think",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "publicai",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "qwen3.8-max-preview",
+        "displayName": "Qwen3.8-Max-Preview",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "qwen3.7-max",
+        "displayName": "Qwen3.7-Max",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "qwen3.7-plus",
+        "displayName": "Qwen3.7-Plus",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "kimi-k3",
+        "displayName": "Kimi-K3",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "kimi-k2.7-code",
+        "displayName": "Kimi-K2.7-Code",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "glm-5.2",
+        "displayName": "GLM-5.2",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "deepseek-v4-pro",
+        "displayName": "DeepSeek-V4-Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "deepseek-v4-flash",
+        "displayName": "DeepSeek-V4-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "qoder",
+        "modelId": "minimax-m3",
+        "displayName": "MiniMax-M3",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "qoder",
+        "tos": "caution"
+      },
+      {
+        "provider": "reka",
+        "modelId": "reka-flash-3",
+        "displayName": "Reka Flash 3",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "reka",
+        "tos": "caution"
+      },
+      {
+        "provider": "reka",
+        "modelId": "reka-edge-2603",
+        "displayName": "Reka Edge 2603",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-monthly",
+        "poolKey": "reka",
+        "tos": "caution"
+      },
+      {
+        "provider": "sambanova",
+        "modelId": "MiniMax-M2.7",
+        "displayName": "MiniMax-M2.7",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "sambanova",
+        "tos": "caution"
+      },
+      {
+        "provider": "sambanova",
+        "modelId": "DeepSeek-V3.2",
+        "displayName": "DeepSeek-V3.2",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "sambanova",
+        "tos": "caution"
+      },
+      {
+        "provider": "sambanova",
+        "modelId": "Llama-4-Maverick-17B-128E-Instruct",
+        "displayName": "Llama-4-Maverick-17B-128E-Instruct",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "sambanova",
+        "tos": "caution"
+      },
+      {
+        "provider": "sambanova",
+        "modelId": "Meta-Llama-3.3-70B-Instruct",
+        "displayName": "Meta-Llama-3.3-70B-Instruct",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "sambanova",
+        "tos": "caution"
+      },
+      {
+        "provider": "sambanova",
+        "modelId": "gpt-oss-120b",
+        "displayName": "gpt-oss-120b",
+        "monthlyTokens": 6000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "sambanova",
+        "tos": "caution"
+      },
+      {
+        "provider": "scaleway",
+        "modelId": "qwen3-235b-a22b-instruct-2507",
+        "displayName": "Qwen3 235B A22B (1M free tok 🆓)",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "scaleway",
+        "tos": "ok"
+      },
+      {
+        "provider": "scaleway",
+        "modelId": "llama-3.1-70b-instruct",
+        "displayName": "Llama 3.1 70B (🆓 EU)",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "scaleway",
+        "tos": "ok"
+      },
+      {
+        "provider": "scaleway",
+        "modelId": "llama-3.1-8b-instruct",
+        "displayName": "Llama 3.1 8B (🆓 EU)",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "scaleway",
+        "tos": "ok"
+      },
+      {
+        "provider": "scaleway",
+        "modelId": "mistral-small-3.2-24b-instruct-2506",
+        "displayName": "Mistral Small 3.2 (🆓 EU)",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "scaleway",
+        "tos": "ok"
+      },
+      {
+        "provider": "scaleway",
+        "modelId": "deepseek-v3-0324",
+        "displayName": "DeepSeek V3 (🆓 EU)",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "scaleway",
+        "tos": "ok"
+      },
+      {
+        "provider": "scaleway",
+        "modelId": "gpt-oss-120b",
+        "displayName": "GPT-OSS 120B (🆓 EU)",
+        "monthlyTokens": 0,
+        "creditTokens": 1000000,
+        "freeType": "one-time-initial",
+        "poolKey": "scaleway",
+        "tos": "ok"
+      },
+      {
+        "provider": "sensenova",
+        "modelId": "sensechat",
+        "displayName": "SenseChat",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "sensenova",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "deepseek-ai/DeepSeek-V3.2",
+        "displayName": "DeepSeek V3.2",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "deepseek-ai/DeepSeek-V3.1",
+        "displayName": "DeepSeek V3.1",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "deepseek-ai/DeepSeek-R1",
+        "displayName": "DeepSeek R1",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "displayName": "Qwen3 235B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+        "displayName": "Qwen3 Coder 480B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "Qwen/Qwen3-32B",
+        "displayName": "Qwen3 32B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "moonshotai/Kimi-K2.5",
+        "displayName": "Kimi K2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "zai-org/GLM-4.7",
+        "displayName": "GLM 4.7",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "GPT OSS 120B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "siliconflow",
+        "modelId": "baidu/ERNIE-4.5-300B-A47B",
+        "displayName": "ERNIE 4.5 300B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "siliconflow",
+        "tos": "caution"
+      },
+      {
+        "provider": "sparkdesk",
+        "modelId": "lite",
+        "displayName": "Spark Lite",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "sparkdesk",
+        "tos": "caution"
+      },
+      {
+        "provider": "stepfun",
+        "modelId": "step-1v",
+        "displayName": "Step 1V",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "one-time-initial",
+        "poolKey": "stepfun",
+        "tos": "ok"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "claude-opus-4",
+        "displayName": "Claude Opus 4 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "claude-sonnet-4",
+        "displayName": "Claude Sonnet 4 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "claude-haiku-4",
+        "displayName": "Claude Haiku 4 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "claude-3.7",
+        "displayName": "Claude 3.7 Sonnet (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "gpt-5",
+        "displayName": "GPT-5 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "gpt-4o",
+        "displayName": "GPT-4o (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "gpt-4.1",
+        "displayName": "GPT-4.1 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "o3",
+        "displayName": "o3 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "o4-mini",
+        "displayName": "o4-mini (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "gemini-2.5-pro",
+        "displayName": "Gemini 2.5 Pro (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "gemini-2.5-flash",
+        "displayName": "Gemini 2.5 Flash (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "deepseek-r1",
+        "displayName": "DeepSeek R1 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "deepseek-v3",
+        "displayName": "DeepSeek V3 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "grok-3",
+        "displayName": "Grok 3 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "grok-3-mini",
+        "displayName": "Grok 3 Mini (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "llama-4-maverick",
+        "displayName": "Llama 4 Maverick (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "llama-4-scout",
+        "displayName": "Llama 4 Scout (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "llama-3.3-70b",
+        "displayName": "Llama 3.3 70B (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "devstral",
+        "displayName": "Devstral (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "mistral-large",
+        "displayName": "Mistral Large (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "qwen3-235b",
+        "displayName": "Qwen3 235B (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "qwen3-32b",
+        "displayName": "Qwen3 32B (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "t3-web",
+        "modelId": "kimi-k2",
+        "displayName": "Kimi K2 (via t3.chat)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "t3-web",
+        "tos": "avoid"
+      },
+      {
+        "provider": "tencent",
+        "modelId": "hunyuan-pro",
+        "displayName": "Hunyuan Pro",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "tencent",
+        "tos": "caution"
+      },
+      {
+        "provider": "uncloseai",
+        "modelId": "Lorbus/Qwen3.6-27B-int4-AutoRound",
+        "displayName": "Qwen3.6 27B int4 AutoRound (🆓 Free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "uncloseai",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3.1-pro-preview",
+        "displayName": "Gemini 3.1 Pro Preview (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3.1-flash-lite",
+        "displayName": "Gemini 3.1 Flash Lite (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3-flash-preview",
+        "displayName": "Gemini 3 Flash Preview (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3.7-flash",
+        "displayName": "Gemini 3.7 Flash (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3.6-flash",
+        "displayName": "Gemini 3.6 Flash (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3.5-flash",
+        "displayName": "Gemini 3.5 Flash (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-3.5-flash-lite",
+        "displayName": "Gemini 3.5 Flash-Lite (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-2.5-pro",
+        "displayName": "Gemini 2.5 Pro (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-2.5-flash",
+        "displayName": "Gemini 2.5 Flash (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "gemini-2.5-flash-lite",
+        "displayName": "Gemini 2.5 Flash-Lite (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "deepseek-ai/deepseek-v3.2-maas",
+        "displayName": "DeepSeek V3.2 (Vertex MaaS)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "deepseek-ai/deepseek-v3.1-maas",
+        "displayName": "DeepSeek V3.1 (Vertex MaaS)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "qwen/qwen3-next-80b-a3b-instruct-maas",
+        "displayName": "Qwen3 Next 80B Instruct (Vertex MaaS)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "zai-org/glm-5-maas",
+        "displayName": "GLM 5 (Vertex MaaS)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "claude-opus-4-7",
+        "displayName": "Claude Opus 4.7 (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "vertex",
+        "modelId": "claude-sonnet-4-6",
+        "displayName": "Claude Sonnet 4.6 (Vertex)",
+        "monthlyTokens": 0,
+        "creditTokens": 300000000,
+        "freeType": "one-time-initial",
+        "poolKey": "vertex",
+        "tos": "caution"
+      },
+      {
+        "provider": "requesty",
+        "modelId": "openai/gpt-oss-120b",
+        "displayName": "GPT-OSS 120B (Requesty free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "requesty-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "requesty",
+        "modelId": "mistral/leanstral-1-5",
+        "displayName": "Leanstral 1.5 (Requesty free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "requesty-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "requesty",
+        "modelId": "nvidia/nemotron-3-nano-30b-a3b",
+        "displayName": "Nemotron 3 Nano 30B (Requesty free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "requesty-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "ovhcloud",
+        "modelId": "gpt-oss-120b",
+        "displayName": "GPT-OSS 120B (OVH anonymous)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "ovhcloud-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "ovhcloud",
+        "modelId": "gpt-oss-20b",
+        "displayName": "GPT-OSS 20B (OVH anonymous)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "ovhcloud-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "ovhcloud",
+        "modelId": "Qwen3.6-27B",
+        "displayName": "Qwen3.6 27B (OVH anonymous)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "ovhcloud-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "ovhcloud",
+        "modelId": "Mistral-Small-3.2-24B-Instruct-2506",
+        "displayName": "Mistral Small 3.2 24B (OVH anonymous)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "ovhcloud-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "ovhcloud",
+        "modelId": "Qwen2.5-VL-72B-Instruct",
+        "displayName": "Qwen2.5 VL 72B (OVH anonymous)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "ovhcloud-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "agnes",
+        "modelId": "agnes-2.0-flash",
+        "displayName": "Agnes 2.0 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "agnes-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "agnes",
+        "modelId": "agnes-2.5-flash",
+        "displayName": "Agnes 2.5 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "agnes-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "agnes",
+        "modelId": "agnes-3.0-flash",
+        "displayName": "Agnes 3.0 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "agnes-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "agnes-cn",
+        "modelId": "agnes-2.0-flash",
+        "displayName": "Agnes 2.0 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "agnes-cn-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "agnes-cn",
+        "modelId": "agnes-2.5-flash",
+        "displayName": "Agnes 2.5 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "agnes-cn-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "agnes-cn",
+        "modelId": "agnes-3.0-flash",
+        "displayName": "Agnes 3.0 Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "agnes-cn-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "glm",
+        "modelId": "glm-4.7-flash",
+        "displayName": "GLM-4.7-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "zhipu-flash-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "glm",
+        "modelId": "glm-4.5-flash",
+        "displayName": "GLM-4.5-Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "zhipu-flash-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "navy",
+        "modelId": "shared-pool",
+        "displayName": "NavyAI free pool (150K tokens/day, shared)",
+        "monthlyTokens": 4500000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "navy-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "aihorde",
+        "modelId": "aphrodite/TheDrummer/Cydonia-24B-v4.3",
+        "displayName": "Cydonia 24B (AI Horde)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "aihorde-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "aihorde",
+        "modelId": "aphrodite/TheDrummer/Skyfall-31B-v4.2",
+        "displayName": "Skyfall 31B (AI Horde)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "aihorde-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "aihorde",
+        "modelId": "google/gemma-4-31b",
+        "displayName": "Gemma 4 31B (AI Horde)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "keyless",
+        "poolKey": "aihorde-anon",
+        "tos": "ok"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "qwen3-235b-cerebras",
+        "displayName": "Qwen3 235B (Cerebras)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "qwen3-32b",
+        "displayName": "Qwen3 32B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "qwen3-14b",
+        "displayName": "Qwen3 14B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "qwen3-8b",
+        "displayName": "Qwen3 8B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "llama-4-maverick",
+        "displayName": "Llama 4 Maverick",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "llama3.1-8b-cerebras",
+        "displayName": "Llama 3.1 8B (Cerebras)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "deepseek-r1",
+        "displayName": "DeepSeek R1",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "nous-coder",
+        "displayName": "Nous Coder",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "ainative",
+        "modelId": "gemini-flash",
+        "displayName": "Gemini Flash",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "ainative-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "aion",
+        "modelId": "aion-labs/aion-3.0",
+        "displayName": "Aion 3.0",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "aion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "aion",
+        "modelId": "aion-labs/aion-3.0-mini",
+        "displayName": "Aion 3.0 Mini",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "aion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "aion",
+        "modelId": "aion-labs/aion-2.5",
+        "displayName": "Aion 2.5",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "aion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "aion",
+        "modelId": "aion-labs/aion-2.0",
+        "displayName": "Aion 2.0",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "aion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "aion",
+        "modelId": "aion-labs/aion-rp-llama-3.1-8b",
+        "displayName": "Aion RP Llama 3.1 8B",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "aion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "sealion",
+        "modelId": "aisingapore/Llama-SEA-LION-v3.5-70B-R",
+        "displayName": "Llama SEA-LION v3.5 70B R",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "sealion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "sealion",
+        "modelId": "aisingapore/Llama-SEA-LION-v3-70B-IT",
+        "displayName": "Llama SEA-LION v3 70B IT",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "sealion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "sealion",
+        "modelId": "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+        "displayName": "Gemma SEA-LION v4 27B IT",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "sealion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "sealion",
+        "modelId": "aisingapore/Qwen-SEA-LION-v4.5-27B-IT",
+        "displayName": "Qwen SEA-LION v4.5 27B IT",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "sealion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "sealion",
+        "modelId": "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+        "displayName": "Qwen SEA-LION v4 32B IT",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "sealion-free",
+        "tos": "ok"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "llama-3.3-70b-instruct:free",
+        "displayName": "Llama 3.3 70B Instruct (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "nemotron-3-nano-30b-a3b:free",
+        "displayName": "Nemotron 3 Nano 30B (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "nemotron-nano-9b-v2:free",
+        "displayName": "Nemotron Nano 9B v2 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "step-3.7-flash:free",
+        "displayName": "Step 3.7 Flash (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "step-3.5-flash:free",
+        "displayName": "Step 3.5 Flash (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "laguna-m.1:free",
+        "displayName": "Laguna M.1 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "laguna-xs.2:free",
+        "displayName": "Laguna XS.2 (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "routeway",
+        "modelId": "llama-3.2-3b-instruct:free",
+        "displayName": "Llama 3.2 3B Instruct (free)",
+        "monthlyTokens": 0,
+        "creditTokens": 0,
+        "freeType": "recurring-uncapped",
+        "poolKey": "routeway-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "agnes-2.0-flash",
+        "displayName": "Agnes 2.0 Flash",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "agnes-2.5-flash",
+        "displayName": "Agnes 2.5 Flash",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "laguna-s-2.1",
+        "displayName": "Laguna S 2.1",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "minimax-m3-free",
+        "displayName": "MiniMax M3 Free",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "mistral-large",
+        "displayName": "Mistral Large",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "mistral-medium-3-5",
+        "displayName": "Mistral Medium 3.5",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "qwen3.8-27b",
+        "displayName": "Qwen3.8 27B",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "nara",
+        "modelId": "stepfun-3.7-flash",
+        "displayName": "StepFun 3.7 Flash",
+        "monthlyTokens": 210000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "nara-free",
+        "tos": "caution"
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3-vl-plus:free",
+        "displayName": "Qwen3 VL Plus (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "sensenova/sensenova-6.8-flash-lite",
+        "displayName": "SenseNova 6.8 Flash-Lite (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2.7:free",
+        "displayName": "MiniMax M2.7 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2.7-highspeed:free",
+        "displayName": "MiniMax M2.7 Highspeed (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2.5:free",
+        "displayName": "MiniMax M2.5 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m3:free",
+        "displayName": "MiniMax M3 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2.1-highspeed:free",
+        "displayName": "MiniMax M2.1 Highspeed (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2.5-highspeed:free",
+        "displayName": "MiniMax M2.5 Highspeed (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2.1:free",
+        "displayName": "MiniMax M2.1 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "minimax/minimax-m2:free",
+        "displayName": "MiniMax M2 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.5-flash:free",
+        "displayName": "Qwen3.5 Flash (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.6-plus:free",
+        "displayName": "Qwen3.6 Plus (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.5-397b-a17b:free",
+        "displayName": "Qwen3.5 397B A17B (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.5-omni-flash:free",
+        "displayName": "Qwen3.5 Omni Flash (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/mistral-large-2512",
+        "displayName": "Mistral Large 3 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/mistral-medium-3.5",
+        "displayName": "Mistral Medium 3.5 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/mistral-small-2603",
+        "displayName": "Mistral Small 4 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/codestral-2508",
+        "displayName": "Codestral (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/devstral-medium",
+        "displayName": "Devstral 2 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/ministral-8b",
+        "displayName": "Ministral 3 8B (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/ministral-3b",
+        "displayName": "Ministral 3 3B (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "deepseek/deepseek-v4-pro",
+        "displayName": "DeepSeek V4 Pro (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "deepseek/deepseek-v3.2",
+        "displayName": "DeepSeek V3.2 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "deepseek/deepseek-chat-v3.1",
+        "displayName": "DeepSeek V3.1 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.7-plus:free",
+        "displayName": "Qwen3.7 Plus (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "mistralai/ministral-14b",
+        "displayName": "Ministral 3 14B (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.6-max-preview:free",
+        "displayName": "Qwen3.6 Max Preview (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.5-plus:free",
+        "displayName": "Qwen3.5 Plus (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.5-omni-plus:free",
+        "displayName": "Qwen3.5 Omni Plus (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "deepseek/deepseek-v4-flash",
+        "displayName": "DeepSeek V4 Flash (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "sensenova/sensenova-6.7-flash-lite",
+        "displayName": "SenseNova 6.7 Flash-Lite (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.8-max:free",
+        "displayName": "Qwen3.8 Max (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.7-max:free",
+        "displayName": "Qwen3.7 Max (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.6-27b:free",
+        "displayName": "Qwen3.6 27B (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3.6-35b-a3b:free",
+        "displayName": "Qwen3.6 35B A3B (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3-max:free",
+        "displayName": "Qwen3 Max (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3-coder-plus:free",
+        "displayName": "Qwen3 Coder Plus (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen-plus-2025-07-28:free",
+        "displayName": "Qwen Plus 0728 (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      },
+      {
+        "provider": "xkiro",
+        "modelId": "qwen/qwen3-omni-flash:free",
+        "displayName": "Qwen3 Omni Flash (xKiro)",
+        "monthlyTokens": 150000000,
+        "creditTokens": 0,
+        "freeType": "recurring-daily",
+        "poolKey": "xkiro-free",
+        "tos": "caution",
+        "hardStopGuaranteed": true
+      }
+    ],
+    "curatedAt": "2026-09-12",
+    "fileHashes": {
+      "open-sse/config/freeModelCatalog.data.ts": "5d0f95e554b2d0a14bfcc54af1ef96d8aba19166317043ffddbca9d0817f6ad2",
+      "open-sse/config/freeModelCatalog.ts": "5ae337ca05be1a17428a8784143142ef46a272308dad299d6db47cbfc4c1411d",
+      "open-sse/config/freeTierCatalog.ts": "d8ef31484f322ec93e5c07f8e399c81b9ede7fd4b0d1c02ed6ac48ed99e288d8",
+      "src/lib/catalog/openrouterCatalog.ts": "5eddd80686ea3c9c041c67b9bda6ebb38169f554f1ef6543289963dafcd4db54",
+      "src/shared/utils/freeModels.ts": "c6a5a9b83ae0c37bcca8d2baa12c923744164565672d8214700535aeebd28634",
+      "src/shared/utils/globPattern.ts": "b3497afce7ab3cf13e497d387157128b57bb8882db441b78ca0adbc4d19f108e",
+      "src/shared/utils/payloadFreeEvidence.ts": "c9361fd4240ffbaa1bfed19d75e7cee3548c61d3b916a25005559fad3d837602",
+      "open-sse/config/providerRegistry.ts": "9689eefca93be006a00dfb395352d11f65c74e31d5474b0aea313822aefbf5bb",
+      "open-sse/config/providers/shared.ts": "53b1c4956b8118e40f359d18049fa63ef37fd08cf6ec37e2b453fec985a3fbb0",
+      "open-sse/services/providerRequestDefaults.ts": "b4421e66079db8120086e6bc0491980eaabdef225454e11587d9882b7a95cf2e",
+      "src/shared/network/privateHost.ts": "6f47a2b617863d343e5359226d8fa58d028aa2c4f1e7e24a94bcac8f7226cfa1",
+      "open-sse/config/providers/index.ts": "6921c4ae1d01c9b9a5bc5bce2632874cb0133f5d48380e2688ded3395cec025c",
+      "open-sse/config/providers/registry/groq/index.ts": "f1bf1aa41d0cd0b5f142e41270e823e84a79179a367662cc256b4645b678ad8a",
+      "open-sse/config/providers/registry/openrouter/index.ts": "077d7b073ab6f56d3a94261e8501cbb593f7c13684fa806f822a80284b61be72",
+      "open-sse/executors/base.ts": "4766a5d803b303b8fa3b2541d59aa20d4f2b22894a20ea9d1f0ec5bff7024808",
+      "open-sse/config/constants.ts": "e4ef0f695ab2f70e36a847af5c80e410dd01b4e4674548ca52b6c5f2a042763a",
+      "open-sse/utils/fetchStartTimeoutPolicy.ts": "e86eb6b0df52f72ffbeca4a4e90bb8aeb60a55ddfa4792dc881d9e4283e78499",
+      "open-sse/config/providerFieldStrips.ts": "63917d0faaea5c6994fe2c139f309034da8c64c567c5ea8319eb9a949e6d517d",
+      "open-sse/services/openrouterFreeWindow.ts": "4f8ef414dad8d86d1a32ecb660dfc0865eaab851332878e9b5326702d48abb72",
+      "open-sse/services/apiKeyRotator.ts": "8b312bf4d4b11d73e4b6ed490f84a99bfddd9db00025e025dca9294ce9e62e81",
+      "open-sse/services/provider.ts": "a61cf2e7c2228f5f45e6fb2d60e39c193ea041fd92cf29eff18f1557519f4501",
+      "open-sse/services/tokenRefresh.ts": "85378844f848d40303bd4b9463f707f1e3f68314f649100889324708917441c0",
+      "open-sse/services/tokenRefresh/shared.ts": "92a2ee2351f72d710c74b80a17ca6708565874f86ae45e5f3da04a52364bfb41",
+      "open-sse/services/tokenRefresh/rotationMap.ts": "279e1f85231d3e2ceebfcb2cca853ca43deb071428fa23acd07941e26b7e0d40",
+      "open-sse/services/tokenRefresh/casGuard.ts": "0dd639859a81d3ec4f13d11c7d9e53e5eb48c0f8d29db30cdaf8b286ca7c33b8",
+      "open-sse/services/tokenRefresh/circuitBreaker.ts": "80dc2e5b7573a65b6225c557ca1044da117e47eaa2519134eb5e32988cf1ca2a",
+      "open-sse/services/tokenRefresh/providers/codebuddyCn.ts": "d6d376b929de25eac17ca7aad2e928a7c977ba3b34c0c815bc5875091645e8f3",
+      "open-sse/services/tokenRefresh/providers/codebuddyShared.ts": "08c13e1e6e31cb33b4fa20b726c8edf23c97ad1a86c4aba248d6c82c343dc366",
+      "open-sse/services/tokenRefresh/providers/codebuddyIntl.ts": "5d678b6ec8aebac38bdfc3ad341d1c5d92599e9f193e36e50f9d9213fbb5aba4",
+      "open-sse/services/tokenRefresh/providers/workbuddy.ts": "3dd33720767007a39fff97a8d20aa1853b2b54762af2a24ffc268e9cff250ccc",
+      "open-sse/services/tokenRefresh/providers/cline.ts": "717e96145713c8c8ba008c34ae0a75861dd654e18053d95a10368d8da06d3576",
+      "open-sse/services/tokenRefresh/providers/kimiCoding.ts": "95626697ec7df4b5ca0c60383ef3e9800ad3f2f5ba349f81487f2f5ee0e08961",
+      "open-sse/services/tokenRefresh/providers/museCode.ts": "6ddc6b3713bfd4048908a4ad3e284928e728d7459ed38646731475c7c5185e21",
+      "open-sse/services/tokenRefresh/providers/gitlabDuo.ts": "ae4dc907dbf73a17e110bed3d0b4bd4b7201c4e03fae25ee6a2fb743bd02c28e",
+      "open-sse/services/tokenRefresh/providers/claudeOAuth.ts": "6ab1c60154cc40775ed98763cb58966de1a6c1c4fbf49cb52321044474c272d4",
+      "open-sse/services/tokenRefresh/providers/google.ts": "2b7085c51d68513998e81419e79050e9cac9eb58249220c4bcc4513276befc95",
+      "open-sse/services/tokenRefresh/googleClientBinding.ts": "a01da71d79e28a37f6a8d09ef66489138ac8e6bcbce697bbb65b02746b30ab4b",
+      "open-sse/services/tokenRefresh/providers/codex.ts": "6d6f0414d91e3eb54a28e402300ae18225b8e6424dd8a1810a6a26e09f7bb801",
+      "open-sse/services/tokenRefresh/providers/cursor.ts": "e66162d588dbcdb5555885a1dd3ebe5de2ff6f09f4e305705cfca740e1b5b418",
+      "open-sse/services/tokenRefresh/providers/openference.ts": "995c67166908001ae06aaf6b61c5e936a70b4aac820eedf5cdf2ed5dfdf36a75",
+      "open-sse/services/tokenRefresh/providers/kiro.ts": "6ecbcbd3b25b1b7130ab19a5a8197726ffd5618753bd9adefaa04290c0a4e407",
+      "open-sse/services/tokenRefresh/providers/qoder.ts": "09361b8e81f7a1ef2495c9a02c47c9c1236e9ed9d1af4734a838341a376b120c",
+      "open-sse/services/tokenRefresh/providers/github.ts": "e4a1a2c2252be18f85f9811588ae326a2e7997761d6393a3ee0b9b583de4a5f5",
+      "open-sse/services/tokenRefresh/providers/copilot.ts": "0f1ea1ed9eddf71fb074400eee1d70bb941dd617f43464ad32a33203f7dd4044",
+      "open-sse/utils/error.ts": "e1ecc47cdac4ba9f98470db0194de93506d60570a635b6029dce2e2edf755925",
+      "open-sse/utils/errorSanitization.ts": "6e5480c3d542c9e0db8c7162d5e326d069721ccdd4ac6340e20e8c4e046ce52b",
+      "open-sse/utils/errorPathRedaction.ts": "c65e0689b5d05e7093f65d34e2b6f5b13045dbfaa8f0b70f878a8fc582273bfb",
+      "open-sse/utils/retryAfterInstant.ts": "66308414b0474d8d1e8db1285b9e5a84b847a42a241d99bc656abe034aca638e",
+      "open-sse/services/contextManager.ts": "7cc3022afaeaaab1324ea22d9e0a1e0663c8ba56ed6386bfdd0fc495d0fd8051",
+      "open-sse/executors/base/headers.ts": "a785fdd86974e818e9f8316d6cad6af6267cf3bd73284a75a2d781f6839576b6",
+      "src/shared/resilience/peerRouting.ts": "f986ac6340cd0b1bb743599aa683e6baa10907d514e83936a4ad5460f70a8c5f",
+      "open-sse/executors/base/reasoningEffort.ts": "2ef049c15122a1b4fecc8317792308ac5eaf24b363ce17d4c1fef9f1eb864233",
+      "open-sse/executors/base/mergeAbortSignals.ts": "17ec41154cf134fc4d246cd18c11a3ed31dd2520532fdc5ac6071d6dbb4d90b5",
+      "open-sse/executors/base/validationDispatch.ts": "ed08bfc7cd1cd5e1930dcbdce3372a6c5933298de794ee33b8b7da154686b117",
+      "open-sse/executors/base/reasoningEffortRecovery.ts": "d8641b50273d5fca5d8d355708aa7a21c25e3f1deaf81e36cde15f652d363828",
+      "open-sse/executors/base/fieldDowngradeRecovery.ts": "65ae9460af9779494133a9263bca602633ec5433e659029216883d46a33abec4",
+      "open-sse/executors/base/advisorRecovery.ts": "6a1d20937b253cf89f2fa3599c69366efe7e496873bbefe2f3d23aac635f17bf",
+      "open-sse/services/accountFallback.ts": "f297bdbb2853dc90c12ec248a4482729d7cce52a707618d53da646e19bf23bcd",
+      "src/lib/resilience/settings.ts": "e9bd0c3860d6440968cce62fc5336a2081318f2b14eb97b6ae9f51c895c18467",
+      "src/lib/resilience/settings/types.ts": "d586e612dd11cf997617371ca8aace34e161addc223f386f81c756ff6ba6679e",
+      "src/lib/resilience/settings/normalize.ts": "4ae9d3ee7bcb052bd8e05b5afbd4fbc552a19f164029b747bead371798007584",
+      "src/lib/resilience/modelLockoutSettings.ts": "323fc480198297777f2f6c8746c8ee51fb351bc96a1c3fbda108716820a5f369",
+      "open-sse/services/accountFallback/lockoutEviction.ts": "b6d603470ec582c04e9bf72979b372d68c92cdd1bf21bc1e6ec7456cf51a8974",
+      "open-sse/services/accountFallback/perModelFailureScope.ts": "a5e06b5ffd190a492f43841040c7888bb35aea9fdea2698047708475ad8b4088",
+      "open-sse/services/accountFallback/cooldownCap.ts": "1a023591cc9cfb5e6ada8922bc9d80f112d03e94387618153751bb88d95c4eef",
+      "open-sse/services/accountFallback/nonRetryableUpstream.ts": "bdba65026d011737828f9b14b7b2dae0fb810d662ff4322eb472fe628a9377b7",
+      "open-sse/services/accountFallback/exactModelLock.ts": "199352b0b0d93623f0acb23c5bd9a529ab57a027e9a7999ed446f1147ec13b2d",
+      "open-sse/services/accountFallback/sharedWalletCredits.ts": "955a0d742c94a4486be12cde39f633fbf8cdd9f402a889b75e54cf52d6331cde",
+      "open-sse/services/accountFallback/mistralAmbiguousAuth.ts": "85f934897f7df845821d6c102a8ea7e8d3bfcebea6ce8ff5ca4cb131945794b3",
+      "open-sse/services/autoCombo/strictZeroCostFilter.ts": "e1a56942c536b3091e499bb6b0764fc1e73a22ccea3478569143621d8c3a08cb",
+      "src/sse/services/auth.ts": "95c0dfe5b129c082c789fceaf50fda837f5118db56ee66a1d4452d12592083af",
+      "src/sse/services/credentialSelectionOptions.ts": "ef4aeb02f57a774f4c9cc1a49cd111bb6f6f81c6f041c5653fbdf85f24a0e1de",
+      "src/sse/services/compatibleNodeBaseUrl.ts": "c519a58acc80d2d40015c8c924ae24dd0b821a3ad662239e87f4a995d3968efd",
+      "src/sse/services/noAuthProxyResolution.ts": "471d135ac0ddbe56baa391519b1966aa8aa4758c160485e900fbdf7d61a51564",
+      "src/shared/utils/upstreamError.ts": "54a9f151e3dcdd4c1ad8c94ff4e75f17ce120819da54719a3a2ac7f71ee38a9a",
+      "src/sse/services/authExpiredCredentials.ts": "bb743bf3bcaf5227aea8bc538b29d8c6962e971aec6c013fb6f5c21e3c818fa3",
+      "src/sse/services/expiryFirstAccountSelection.ts": "7f22e095682c03b0f1baf7262a1f0ccdac57b5952ce72fa685202cde46b70098",
+      "src/shared/utils/numeric.ts": "554efe9262e4f02ed9557f5d2762d2e6565f2fb3011e6e3118e701ff4c7fc368",
+      "src/sse/services/modelScopedQuotaFailure.ts": "70f1b48a415a0108d997df52ce32a9103133463c8f3b1b63e11735c78a9039b3",
+      "src/shared/utils/timingSafeCompare.ts": "a73a58e178349c659f044b3539c52ce2d7e4e573925707be70cb6609757a193f",
+      "src/sse/services/noAuthAllowlist.ts": "df31f36f9b831fc4fd4e344a71556193060c784670e04a2d41d2835d758bf541",
+      "src/sse/services/connectionConcurrencyFields.ts": "25eb940a3d6cafb402079df47262e0c92721694fca05038cafc3f366b94cd91e",
+      "src/sse/services/quotaPreflightUnavailable.ts": "d6b514523c4abb0e573bb08c9a35aa436ed3c31ef0036b3d6b192753dc17d4cd",
+      "src/sse/services/noAuthModelCooldown.ts": "9a2962fe76c59a0d594fce0f2bdd77946cee1b4cde3e1a6343de9b3d1abc8813",
+      "open-sse/services/accountFallback/postOutputFailureStreak.ts": "2e04f5b22b4e3e10015aed820a57edc9dc4bbd0608ffe1c3e0e2340e2e37ced0",
+      "src/sse/services/authTerminalStatus.ts": "e82b9086d2b1e335bae44acca46d31c4799a3b236209beda4c635304959a23cd",
+      "src/sse/services/noAuthProviderSettings.ts": "d68d7df509f99770b2d8d834b998912e5acb9f5a9b757031f416ea8e5872bf86",
+      "src/sse/services/noAuthProviderSiblings.ts": "75104900f1b1ccc132aaca7109ac945494483beb67f6f4f068766ef21b6aa155",
+      "src/sse/services/noAuthOptionalApiKey.ts": "ec8adabad56c3cb9174cb48160ffd31ac823cd28661c947a610f26e318c0854f"
+    }
+  },
+  "guards": {
+    "open-sse/config/freeModelCatalog.data.ts": {
+      "hash": "308facc1168cf81a34bb72f8b96fb9e92e9794e1c969a48e5df9f2e362fc56f0",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/freeModelCatalog.ts": {
+      "hash": "417a6ca36acc919a8cef606f53c8179d479e9a7b78210679418f25618627f47d",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/freeTierCatalog.ts": {
+      "hash": "7ab2b06e32ec71c568fc497baa9a8b9709dfa50d7a680db2c33c25f51b028ffe",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/lib/catalog/openrouterCatalog.ts": {
+      "hash": "b7f3522192f2bf575ea0d56212121cb8bf38fbf93e9ab1f81300b5f01e7fa612",
+      "providers": [
+        "openrouter"
+      ]
+    },
+    "src/shared/utils/freeModels.ts": {
+      "hash": "f2644ef23b62e3c3da62b34dc8bf44944a147dda81d4d778085797be90ec14cc",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/utils/globPattern.ts": {
+      "hash": "db2a2a94606eb6c953630aaf17b4d342fa8b5769b4d921de1ae8cf48b10c500b",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/utils/payloadFreeEvidence.ts": {
+      "hash": "3690d409a340285314a3e753d77a2e7bc3ed76e033dbd55d5ef605c5c5eaa88e",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/providerRegistry.ts": {
+      "hash": "11bb8d68854416663b8d78a8187ca4a61bb225d6ac7548c657146e384265fa92",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/providers/shared.ts": {
+      "hash": "065c814ce267551226fe03f26547a15abc4fbdc340b3b714245ced4cca36c76f",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/providerRequestDefaults.ts": {
+      "hash": "9b949dd4fc1f73af9682224af315e9a52a494684972d0e07e18c3e5c171d6661",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/network/privateHost.ts": {
+      "hash": "bef4fe21c01b9cca961fea21cd5dfa17dc852b490ffd0b5a245c945bf1e21f2c",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/providers/index.ts": {
+      "hash": "1baa84db61a964f3793db6e2621a97c173a92b30f22b13b44684d0db14bd00f9",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/providers/registry/groq/index.ts": {
+      "hash": "14faac9dc6d30f0d1aff3e8bd213e583eee8c9f7e72417afdecdcfb5e6619f0f",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/providers/registry/openrouter/index.ts": {
+      "hash": "c5f00bdb2f0b5fdebbd9e299334691aea0eababb26cbbd88b102960a10674141",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base.ts": {
+      "hash": "899e8f5bc5a47bc10a6b520de9e083877859ed77d77de0e1e6629abfb9656286",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/constants.ts": {
+      "hash": "72756dabf9205d6544d6119b61013164c0eee006204c18e6a3e5d8ae9109b878",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/utils/fetchStartTimeoutPolicy.ts": {
+      "hash": "59cd6ca70755a324781de50fb53df340341736017e8b179a2a3a88cf13cc2c8d",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/config/providerFieldStrips.ts": {
+      "hash": "ea3880e400bd77dd818ba2dd41f06bcfc6eda448430864ea941e3e5024524547",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/openrouterFreeWindow.ts": {
+      "hash": "1cf8762fe4c20faad5e45fbc578a4a274cafc31e98e45e0466166998d8c73080",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/apiKeyRotator.ts": {
+      "hash": "c42be78eafb6433ee67b521e1d0231cf0387d88218321b243f0fdd73d277bd8b",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/provider.ts": {
+      "hash": "d007948c86c409d378b3059917ffd9ed9d479b32c13d5e807c7e943090f97b22",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh.ts": {
+      "hash": "8a6011d558844c12e973952e300bb4d2d83760797a9b61533ff4debc31d8101e",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/shared.ts": {
+      "hash": "7572b231577608c879f367775a8e74dff71cf609046d1e1119c47420884c9b78",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/rotationMap.ts": {
+      "hash": "be5bd07b80cd248e35dae5e5626fbc7ebe7292402c4ac8f30e5f97a70a59da37",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/casGuard.ts": {
+      "hash": "93f6f747bb2a140918c7d52dc6c740ce162955dcf78b9be3099c44ccb6d744c1",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/circuitBreaker.ts": {
+      "hash": "a469fd9074e78600dc4e3036bf0e900eef2d15e72c5e13c31bb3efd94a062a0f",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/codebuddyCn.ts": {
+      "hash": "76440fef32a42e744fb18de4a651a30b76c02979a1ca60b3cf7d5cacbbd71a11",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/codebuddyShared.ts": {
+      "hash": "214936aa7c650ea8cd592e1ccf2fec3e3213d58d5df833748a2c7303e298ca69",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/codebuddyIntl.ts": {
+      "hash": "256532c14e7dd57c36a554aba36d1b0c715f795272170113c12afc8afa231606",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/workbuddy.ts": {
+      "hash": "d0d9e2ea9e27bb7ded71eeb2dd0ca733f198af357c8b069c5eaa9c15d06d7ddc",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/cline.ts": {
+      "hash": "058ac5ac5a89bd44d88fa6ef519b268a56756a07420f94d9500e6dc9f1ca3fac",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/kimiCoding.ts": {
+      "hash": "c117bc1d50baa809249f2639361e8bdbaa0bfb9ebe5b0b2f9cca37e6ed2d73b8",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/museCode.ts": {
+      "hash": "18808c66f09024ec38b54118341aabe5614b4dc448fcadb53efab77700e6ebad",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/gitlabDuo.ts": {
+      "hash": "a392bcfaea0d189eb19af95f2ec6033a91f957f882b072b2d70ed91171409b6e",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/claudeOAuth.ts": {
+      "hash": "77b6b78d5bfef6858fff0ede679999d2d946a460b9c3c114dde8bf8471390562",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/google.ts": {
+      "hash": "5b2b803cf5722173daaedfcc6e4a6950646578a1dc7c1aeb8586551914b4afd5",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/googleClientBinding.ts": {
+      "hash": "cb1fc72f616f5901e304e5dc3991622c38e63bc8a2a59d00a71bf5233bf3aa75",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/codex.ts": {
+      "hash": "cfb192f5fc83309adb9dc2b4dc083adcdf96239f912fafa4b4ce267ce11d662f",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/cursor.ts": {
+      "hash": "e0148110157b04df29ee7af9b2851eb2b6c3584ae9f8d8ba6c3d2014c5d5a7df",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/openference.ts": {
+      "hash": "0ff3b3267de6fa901d658bf15ec901cd914ec45a481f88628fd0d8e66c0b5a88",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/kiro.ts": {
+      "hash": "69dbdedf1cf16e258f08dedf38c0096c513bbc161f268662b8e571addb56ebf6",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/qoder.ts": {
+      "hash": "c8a33d464fab4d85a639213458f9a28c07c641d5e2cbc5f08b5fdd57d1e4f033",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/github.ts": {
+      "hash": "cf12be297fade49aa6af22beac866e465ff246427cfb3cc80fd2ae876d8dfdf7",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/tokenRefresh/providers/copilot.ts": {
+      "hash": "16b5d31116024f15ddb598350c7614d25d467e0738a78726ac7d77635603dfc3",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/utils/error.ts": {
+      "hash": "834d3d436557304a4f12a10a5b24635da49ed80e2db89743236bac41ce64a3ed",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/utils/errorSanitization.ts": {
+      "hash": "7a3410f4ee38b67c646676627a76fda589773c69e016d8b8fd6389ae0b2eeb65",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/utils/errorPathRedaction.ts": {
+      "hash": "fc3a43673a4ba6e213aefe5f146b227953f73dc583b1d8c9733decbed7d8314e",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/utils/retryAfterInstant.ts": {
+      "hash": "5e90a4b87ee112189b0c65f3b8421e5e41f72743f9bd9d9ccfb6eea839d6e84b",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/contextManager.ts": {
+      "hash": "b0091a4c6c7d41b51a59cd56d730e51dc46794fe0cb307f2d44e1f5ea7ee3406",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/headers.ts": {
+      "hash": "e75678c247e1adddc83ccbfe276e18e212c6814b582afd66f3fcd87117810a65",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/resilience/peerRouting.ts": {
+      "hash": "a48eebef494f08586d0a1de6a7b83652a1b2e8c4cd2f0026cd485b01a3db5591",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/reasoningEffort.ts": {
+      "hash": "3d72c420ee440051fd5c2d9b453aabf0df17f9741003bc7deaa78eb046402c42",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/mergeAbortSignals.ts": {
+      "hash": "7508871b75eee6df66680c462fd945c50f7573fdf562b556951d840c8f21e10d",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/validationDispatch.ts": {
+      "hash": "a8d30e27c3678ef2fd989a9f4107eeb6b789ba6491a6a31aa6ae2be4d298655a",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/reasoningEffortRecovery.ts": {
+      "hash": "e218459dfbe00d03f690fb6befb05aa25b3bf59763ec7c10a54e931862db5863",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/fieldDowngradeRecovery.ts": {
+      "hash": "305d7f36f9f9ff82f2c2489cb3484e99d265fdefb0abc845a4e00345d9485f2a",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/executors/base/advisorRecovery.ts": {
+      "hash": "eb430c44253a14f81e83a3de27db1cbb6beb2a64185942394d340d84c4dae9ae",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback.ts": {
+      "hash": "579244645048bd2bc5b929a80e9d186dfb0c223ec2c3ba01ff5dd0d12d79f684",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/lib/resilience/settings.ts": {
+      "hash": "f08dba21ff4de3b28d6b3f4ce8559699fd83feb60792d6fdbb95334b5af71965",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/lib/resilience/settings/types.ts": {
+      "hash": "1cbd522444227a1469fc986f5ae0df10bbcc5dc65e68e32d06742a5db2ce3575",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/lib/resilience/settings/normalize.ts": {
+      "hash": "8202ad421fdf6903f64dfe368393584d16909e6ab99809e426fa5adb9c800b02",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/lib/resilience/modelLockoutSettings.ts": {
+      "hash": "028280461d4d1de9f290eb65b74b649e8d6435eec0f98dd652e038cc25e64716",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/lockoutEviction.ts": {
+      "hash": "f2e9ac56f58aa277b6f2fd82c3ea31eec71071aafc125677058a65298d038ba3",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/perModelFailureScope.ts": {
+      "hash": "380caa2a118e7a0083744852fe0941737e0445bbfec6ecb6c8f6834b78905e35",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/cooldownCap.ts": {
+      "hash": "b3cdd12b9904ff42b7c8f6a5dd46a93223a283304fc2b309de22e2278a176fc6",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/nonRetryableUpstream.ts": {
+      "hash": "94cc207266b81b3f5d2b2242e93f9dfc335b9a8d20de832fed1095b3648a5300",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/exactModelLock.ts": {
+      "hash": "0ac5236ca782796b3f1ac6ac20bc6a6d693535c583f1d5eda0ca2b4fae10e0c2",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/sharedWalletCredits.ts": {
+      "hash": "9fd1d41887563c35d1820bf6dd9e89eba9ca1b874ac1a85c6fb7d5496b8a4d15",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/mistralAmbiguousAuth.ts": {
+      "hash": "2a43653f8bb9b949bb0711414ae497dffcc575a8f82246ff044665d7ec805b28",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/autoCombo/strictZeroCostFilter.ts": {
+      "hash": "c98f94649d111089f687470f4b0d8e4d860d9599928c16c0a244cf38f6820584",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/auth.ts": {
+      "hash": "374b02961f8fdee46b9b2b32f9263f4f5f61c25e23011111ae337dbc073bc32b",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/credentialSelectionOptions.ts": {
+      "hash": "6e6bde6a98dc2f11b14c7caddd4fb8d6bdd78a0562d73a6f31d79ab29d6fa312",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/compatibleNodeBaseUrl.ts": {
+      "hash": "104b56088b61bcb001ea0a8284c6ea6d0858ef5433a2e7be6c358844229ba8ac",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/noAuthProxyResolution.ts": {
+      "hash": "0714a360cba4f260ff981aa4a94b28d441bef061f05763033785bd7159eea48b",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/utils/upstreamError.ts": {
+      "hash": "46a7802ed4aeb7620d5e040b2205e8c33ed88dedaae60041b8d17dd09453597f",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/authExpiredCredentials.ts": {
+      "hash": "5e7b1ba6fd57f0b1ec6374f0d090497001d721e684ac99ab950e55d9c0a47c23",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/expiryFirstAccountSelection.ts": {
+      "hash": "519803ab5edc0ddbfa3ce6a19ed21256ff71f9d2a030a2a27c22e0af8e551828",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/utils/numeric.ts": {
+      "hash": "088ae1b0c4878cbd3f603385208dd901f8a637c4b6e93595ef4f724c6dd929cb",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/modelScopedQuotaFailure.ts": {
+      "hash": "6156653e572745c3938d7b847e091818837fde6ffb91104af7e74eebcce1bd7d",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/shared/utils/timingSafeCompare.ts": {
+      "hash": "89f4b7d0aaaf0169207583112577a29352dc424503909cd5890c6a646ec2c976",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/noAuthAllowlist.ts": {
+      "hash": "8fc6d32cdab34b345d8d1937c635dde9894f3a29184785520125cd87f686ba0c",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/connectionConcurrencyFields.ts": {
+      "hash": "c161c696689bb4965b2228d4ed02150f312ebc74b7ad5402228f640c05d3dcaf",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/quotaPreflightUnavailable.ts": {
+      "hash": "fc5f3a2a9c30f496a727c9b626db09ab446a2d03a3e725af4a7ef40a0d6c7721",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/noAuthModelCooldown.ts": {
+      "hash": "cb4a9b8801c40dede81fbf611350bd289c39d91078be9944abbb54e48c7b1b6e",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "open-sse/services/accountFallback/postOutputFailureStreak.ts": {
+      "hash": "64a9327ab385a60b52f02d49c8c71f035cf715050d0fe5f00f32d2e816d28405",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/authTerminalStatus.ts": {
+      "hash": "fa5b0c4dd0d904ebc91dabfe8c2064e9bc899f6c7d0aafdf29abd1cd5c1205b3",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/noAuthProviderSettings.ts": {
+      "hash": "a8d3dd2f871133009eac1f85fda40653cc23b3ea8def5852570c63680ec0176a",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/noAuthProviderSiblings.ts": {
+      "hash": "4c78af82b1f50c004334afc5eecee26ed7fc9b26eeda71945fc278959a006ca9",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    },
+    "src/sse/services/noAuthOptionalApiKey.ts": {
+      "hash": "6c9b92821918699dc250761cf3f889d1ba61a51cf0f3a3a863b4c633769703ef",
+      "providers": [
+        "openrouter",
+        "groq"
+      ]
+    }
+  },
+  "referenceCheckoutCommit": "9362ed1973124cc207e77f5cbcf3e617562a9d39"
+}

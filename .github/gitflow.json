@@ -1,0 +1,34 @@
+{
+  "production": "main",
+  "integration": "develop",
+  "branches": {
+    "feature": {"from": "develop", "pull_request_into": "develop"},
+    "bugfix": {"from": "develop", "pull_request_into": "develop"},
+    "hotfix": {"from": "main", "pull_request_into": "main", "back_merge_into": "develop"},
+    "release": {"from": "develop", "pull_request_into": "develop", "promote_from": "develop", "promote_into": "main", "back_merge_into": "develop"}
+  },
+  "agent_prefixes": ["codex", "claude", "copilot"],
+  "tag_prefix": "v",
+  "required_checks": ["Quality", "Package", "Container", "Security", "GitFlow"],
+  "required_approving_review_count": 0,
+  "require_conversation_resolution": true,
+  "require_pull_request": true,
+  "force_push": false,
+  "automation": {
+    "enabled": true,
+    "trusted_branch": "main",
+    "issue_label": "ai:task",
+    "merge_label": "ai:merge",
+    "release_label": "ai:release",
+    "pause_label": "ai:pause",
+    "max_initial_tasks_per_issue": 1,
+    "max_repairs_per_pull_request": 1,
+    "max_reviews_per_pull_request": 3,
+    "max_new_paid_actions_per_run": 2,
+    "max_open_items_per_scan": 30,
+    "model_policy": ".github/copilot-model-policy.json",
+    "workflow": ".github/workflows/delivery.yml",
+    "back_merge": "automatic_pull_request",
+    "note": "Repository policy; installation requires separate durable tokens and GitHub Copilot entitlement. Native branch protections remain authoritative. Uncertain task submissions never retry."
+  }
+}

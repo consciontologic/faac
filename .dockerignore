@@ -1,0 +1,21 @@
+# Deny by default. Only build inputs below can enter any image layer.
+**
+!Dockerfile
+!.dockerignore
+!package.json
+!package-lock.json
+!tsconfig.json
+!src/
+!src/**
+!data/
+!data/baseline.json
+!LICENSE
+!THIRD_PARTY_NOTICES.md
+!docs/
+!docs/project/
+!docs/project/ATTRIBUTION.md
+**/.env*
+**/*.key
+**/*.pem
+**/credentials*
+**/vault*

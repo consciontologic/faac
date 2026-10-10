@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible faac problem
+labels: ["kind:bugfix"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the command, expected behavior, and actual behavior. Remove credentials and private prompts.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Use a temporary workspace when possible.
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime and terminal
+      description: Node version, operating system, terminal, and faac version
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted evidence
+      description: Relevant error, session state, and whether a hosted provider was involved
+  - type: markdown
+    attributes:
+      value: A maintainer can apply `ai:task` to delegate this issue. Opening an issue does not spend Copilot credits.

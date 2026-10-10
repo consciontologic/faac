@@ -1,0 +1,124 @@
+name: Release
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Plain SemVer already committed in package.json on current main
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: faac-release
+  cancel-in-progress: false
+jobs:
+  prepare:
+    name: Verify release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      tag: ${{ steps.release.outputs.tag }}
+      sha: ${{ steps.release.outputs.sha }}
+      image: ${{ steps.release.outputs.image }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Validate version, tag and current main
+        id: release
+        env:
+          FAAC_RELEASE_VERSION: ${{ inputs.version }}
+        run: node xops/package/release.mjs validate
+      - run: npm ci --ignore-scripts
+      - run: make verify
+      - run: npm run package
+      - run: npm run test:package
+      - name: Verify real terminal behavior
+        run: |
+          python3 -m venv "$RUNNER_TEMP/terminal-venv"
+          "$RUNNER_TEMP/terminal-venv/bin/pip" install pexpect==4.9.0 ptyprocess==0.7.0
+          "$RUNNER_TEMP/terminal-venv/bin/python" scripts/ad-hoc/pty-smoke.py
+      - name: Build and test the container that will be published
+        run: |
+          docker build --tag faac:release .
+          node xops/package/container-smoke.mjs faac:release
+          mkdir -p build/container
+          docker save --output build/container/faac.tar faac:release
+          sha256sum build/container/faac.tar > build/container/SHA256SUMS
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-assets
+          path: build/package/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-container
+          path: build/container/
+          if-no-files-found: error
+  publish:
+    name: Publish package and container
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: release
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      attestations: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_IMAGE: ${{ needs.prepare.outputs.image }}
+      RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+      RELEASE_SHA: ${{ needs.prepare.outputs.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-assets
+          path: build/package
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-container
+          path: build/container
+      - name: Verify same-run artifact checksums
+        run: |
+          (cd build/package && sha256sum --check SHA256SUMS)
+          sha256sum --check build/container/SHA256SUMS
+      - name: Prepare immutable tag and draft release
+        run: node xops/package/release.mjs publish
+      - uses: actions/attest-build-provenance@96278af6caaf10aea03fd8d33a09a777ca52d62f # v3.2.0
+        with:
+          subject-path: build/package/*
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - name: Publish the tested container with version and commit tags
+        id: container
+        run: |
+          docker load --input build/container/faac.tar
+          node xops/package/publish-container.mjs
+      - uses: actions/attest-build-provenance@96278af6caaf10aea03fd8d33a09a777ca52d62f # v3.2.0
+        with:
+          subject-name: ${{ needs.prepare.outputs.image }}
+          subject-digest: ${{ steps.container.outputs.digest }}
+          push-to-registry: true
+      - name: Publish release and update latest container tag
+        run: |
+          node xops/package/release.mjs finish
+          docker tag faac:release "$RELEASE_IMAGE:latest"
+          docker push "$RELEASE_IMAGE:latest"
+          printf 'Released faac %s at %s. npm tarball, SHA-256 checksums and CycloneDX inventory are GitHub release assets. Image: %s:%s\n' "$RELEASE_VERSION" "$RELEASE_SHA" "$RELEASE_IMAGE" "$RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""Plan/create isolated GitFlow branches; validate PR lanes without running PR code."""
+import argparse
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+
+ROOT = Path(__file__).resolve().parents[2]
+SEMVER = r'(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)'
+
+
+def plan(kind, name):
+    pattern = SEMVER if kind == 'release' else r'[a-z0-9]+(?:-[a-z0-9]+)*'
+    if kind not in {'feature', 'bugfix', 'hotfix', 'release'} or len(name) > 80 or not re.fullmatch(pattern, name):
+        raise ValueError('Use feature/bugfix/hotfix plus a lowercase slug, or release plus MAJOR.MINOR.PATCH.')
+    return f'{kind}/{name}', 'origin/main' if kind == 'hotfix' else 'origin/develop'
+
+
+def valid_lane(head, base):
+    if head == 'develop' and base == 'main': return True
+    if head == 'main' and base == 'develop': return True
+    for prefix in ('codex/', 'claude/'):
+        if head.startswith(prefix): head = head[len(prefix):]
+    if head.startswith('copilot/') or head.startswith('dependabot/'):
+        return base in {'develop', 'main'} if head.startswith('copilot/') else base == 'develop'
+    kind, _, name = head.partition('/')
+    try: plan(kind, name)
+    except ValueError: return False
+    return base == ('main' if kind == 'hotfix' else 'develop')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('kind', nargs='?', choices=['feature', 'bugfix', 'hotfix', 'release'])
+    parser.add_argument('name', nargs='?')
+    parser.add_argument('--agent', choices=['codex', 'claude'])
+    parser.add_argument('--apply', action='store_true')
+    parser.add_argument('--check-event', action='store_true')
+    args = parser.parse_args()
+    if args.check_event:
+        event = json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+        pr = event.get('pull_request')
+        if not pr: print('GitFlow: not a pull request.'); return
+        head, base = pr['head']['ref'], pr['base']['ref']
+        if not valid_lane(head, base): raise SystemExit(f'Invalid GitFlow lane: {head} -> {base}')
+        print(f'GitFlow: {head} -> {base}'); return
+    if not args.kind or not args.name: parser.error('kind and name are required')
+    branch, base = plan(args.kind, args.name)
+    if args.agent: branch = args.agent + '/' + branch
+    target = ROOT / '.local/worktrees' / branch.replace('/', '-')
+    print(f'{branch} <- {base}\n{target}')
+    if args.apply:
+        subprocess.run(['git', 'fetch', 'origin'], cwd=ROOT, check=True)
+        subprocess.run(['git', 'rev-parse', '--verify', base + '^{commit}'], cwd=ROOT, check=True)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(['git', 'worktree', 'add', '-b', branch, str(target), base], cwd=ROOT, check=True)
+
+if __name__ == '__main__': main()

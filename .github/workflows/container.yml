@@ -1,0 +1,28 @@
+name: Container
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: container-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  container:
+    name: Container
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "22"
+      - name: Build without registry credentials
+        run: docker build --tag faac:ci .
+      - name: Test mounts, edits, non-root runtime and resume without network
+        run: node xops/package/container-smoke.mjs faac:ci

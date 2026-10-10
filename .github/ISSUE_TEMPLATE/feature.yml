@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose a bounded, testable improvement
+labels: ["kind:feature"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Explain what a faac user should be able to do.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance checks
+      description: State concrete behavior and how it can be verified.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: Mention compatibility, workspace safety, provider cost, or scope limits.
+  - type: markdown
+    attributes:
+      value: A maintainer can apply `ai:task` after agreeing the scope. Only the explicitly configured MAI model is allowed; no automatic expensive fallback.

@@ -1,0 +1,27 @@
+{
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.rulers": [100],
+  "editor.formatOnSave": false,
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "search.exclude": {
+    "**/docs/tracking/state/log.jsonl": true,
+    "**/tmp/agent-runs": true
+  },
+  "chat.useAgentSkills": true,
+  "github.copilot.chat.promptFileContextProvider.enabled": true,
+  // codeGeneration/testGeneration instructions settings are deprecated (VS Code 1.102).
+  // AGENTS.md + .github/copilot-instructions.md load automatically; test rules live in
+  // .github/instructions/tests.instructions.md so they only apply to test files.
+  "github.copilot.chat.reviewSelection.instructions": [
+    { "file": ".agents/skills/code-review/SKILL.md" }
+  ]
+}

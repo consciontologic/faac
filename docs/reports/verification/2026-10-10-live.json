@@ -1,0 +1,120 @@
+{
+  "resume": {
+    "type": "live_resume_verification",
+    "result": "passed",
+    "home": "/tmp/faac-live-coding-iTthEq/state",
+    "session": "6ce03c5e-fa15-493a-b9b0-0c9d56a058da",
+    "startedAt": "2026-10-10T07:51:49.452Z",
+    "evidence": "Actual CLI process resumes the retained objective with actual authenticated hosted inference; no new user prompt or provider response injection.",
+    "workspace": "/tmp/faac-live-coding-iTthEq/workspace",
+    "previousState": "blocked",
+    "exitCode": 0,
+    "timedOut": false,
+    "resumedState": "complete",
+    "newAttempts": [
+      {
+        "at": "2026-10-10T07:51:50.361Z",
+        "provider": "openrouter",
+        "model": "apodex/apodex-1.1-mini:free",
+        "version": "adapter-1-ed906f097b2ef9e3",
+        "outcome": "success"
+      },
+      {
+        "at": "2026-10-10T07:51:52.183Z",
+        "provider": "openrouter",
+        "model": "apodex/apodex-1.1-mini:free",
+        "version": "adapter-1-ed906f097b2ef9e3",
+        "outcome": "success"
+      },
+      {
+        "at": "2026-10-10T07:51:53.784Z",
+        "provider": "openrouter",
+        "model": "apodex/apodex-1.1-mini:free",
+        "version": "adapter-1-ed906f097b2ef9e3",
+        "outcome": "success"
+      }
+    ],
+    "independentAssertions": "Independent retained sum assertions passed\n",
+    "agentSuccessfulTests": 1,
+    "finishedAt": "2026-10-10T07:51:55.738Z"
+  },
+  "cli_e2e": {
+    "type": "live_e2e_verification",
+    "result": "passed",
+    "startedAt": "2026-10-10T07:52:35.159Z",
+    "workspace": "/tmp/faac-live-e2e-JC2OQu/workspace",
+    "home": "/tmp/faac-live-e2e-JC2OQu/state",
+    "processes": [
+      {
+        "name": "coding",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdout": "/tmp/faac-live-e2e-JC2OQu/coding.stdout.ndjson",
+        "stderr": "/tmp/faac-live-e2e-JC2OQu/coding.stderr.txt"
+      },
+      {
+        "name": "resumed",
+        "exitCode": 0,
+        "signal": null,
+        "timedOut": false,
+        "stdout": "/tmp/faac-live-e2e-JC2OQu/resumed.stdout.ndjson",
+        "stderr": "/tmp/faac-live-e2e-JC2OQu/resumed.stderr.txt"
+      }
+    ],
+    "evidence": "Real CLI subprocesses and real authenticated hosted inference; no provider responses are mocked or injected in this test.",
+    "limitation": "Natural quota-triggered fallback is not required by this coding/resume test.",
+    "gitBefore": " M existing.txt\n?? user-note.txt\n",
+    "session": "50038c05-667b-4dfd-a124-630d0611ba02",
+    "firstState": "complete",
+    "gitAfter": " M existing.txt\n?? product.cjs\n?? sum.cjs\n?? sum.test.cjs\n?? user-note.txt\n",
+    "firstIndependentAssertions": "Independent sum assertions passed\n",
+    "resumedState": "complete",
+    "resumedIndependentAssertions": "Independent sum and product assertions passed\n",
+    "models": ["openrouter/apodex/apodex-1.1-mini:free"],
+    "successfulResponses": 18,
+    "successfulShellTests": 2,
+    "completedEdits": 6,
+    "checkpoints": 4,
+    "finishedAt": "2026-10-10T07:53:17.681Z"
+  },
+  "live_inference_injected_failure": {
+    "type": "live_fallback_verification",
+    "result": "passed",
+    "session": "6ce03c5e-fa15-493a-b9b0-0c9d56a058da",
+    "home": "/tmp/faac-live-coding-iTthEq/state",
+    "startedAt": "2026-10-10T07:53:41.143Z",
+    "evidence": "All successful inference is real authenticated hosted inference. One test-injected model-scoped 429 interrupts a real response before tool acceptance; this is NOT evidence of a naturally occurring quota event or cross-provider fallback.",
+    "workspace": "/tmp/faac-live-coding-iTthEq/workspace",
+    "eligibleModelCount": 14,
+    "injected": true,
+    "injectedFailureModel": "apodex/apodex-1.1-mini:free",
+    "interruptedEventType": "text",
+    "contextAndWorkspaceTransferVerified": true,
+    "realRequests": [
+      "apodex/apodex-1.1-mini:free",
+      "dots-studio/dots-3-note-preview:free"
+    ],
+    "newAttempts": [
+      {
+        "at": "2026-10-10T07:53:41.569Z",
+        "provider": "openrouter",
+        "model": "apodex/apodex-1.1-mini:free",
+        "version": "adapter-1-ed906f097b2ef9e3",
+        "outcome": "failed",
+        "reason": "TEST-INJECTED model interruption after real provider output"
+      },
+      {
+        "at": "2026-10-10T07:53:42.955Z",
+        "provider": "openrouter",
+        "model": "dots-studio/dots-3-note-preview:free",
+        "version": "adapter-1-ed906f097b2ef9e3",
+        "outcome": "success"
+      }
+    ],
+    "state": "complete",
+    "newToolActions": [],
+    "independentAssertions": "Independent preserved sum assertions passed\n",
+    "finishedAt": "2026-10-10T07:53:54.604Z"
+  }
+}

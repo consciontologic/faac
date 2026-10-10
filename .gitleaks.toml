@@ -1,0 +1,12 @@
+title = "faac credential scanning"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Reviewed upstream source file SHA-256 digests, not credentials"
+targetRules = ["generic-api-key"]
+condition = "AND"
+paths = ['''(^|/)data/baseline\.json$''']
+regexTarget = "line"
+regexes = ['''^\s*"(?:open-sse|src)/[A-Za-z0-9_./-]+\.ts": "[a-f0-9]{64}",?\s*$''']

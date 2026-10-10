@@ -5,6 +5,32 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+const curatedChangelog = `# Changelog
+
+## [Unreleased]
+
+### Added
+
+- This unreleased change must stay out of release notes.
+
+## [0.1.0] - 2026-10-10
+
+### Added
+
+- Keep completed work when switching free models. (#12)
+  Resume from the saved workspace after interruption.
+
+### Fixed
+
+- Preserve concurrent file edits.
+
+## [0.0.9] - 2026-10-09
+
+### Added
+
+- This older change must stay out of release notes.
+`;
+
 test("release validation accepts exact main and rejects mismatched version, branch and commit", () => {
   const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "faac-release-"));
   try {
@@ -32,7 +58,8 @@ test("release validation accepts exact main and rejects mismatched version, bran
         encoding: "utf8",
       }).trim();
     git(["init", "--quiet", "--initial-branch=main"]);
-    const tree = git(["mktree"], "");
+    const blob = git(["hash-object", "-w", "--stdin"], curatedChangelog);
+    const tree = git(["mktree"], `100644 blob ${blob}\tCHANGELOG.md\n`);
     const sha = git(["commit-tree", tree], "release fixture\n");
     git(["update-ref", "refs/heads/main", sha]);
     git(["update-ref", "refs/remotes/origin/main", sha]);
@@ -231,8 +258,13 @@ test("release publication uses bare SemVer for its tag, title and asset filename
     );
     fs.writeFileSync(
       path.join(fixture, "bin/git"),
-      `#!${process.execPath}\nconsole.log(process.env.GITHUB_SHA);\n`,
+      `#!${process.execPath}\nimport fs from 'node:fs';
+console.log(process.argv[2]==='show'?fs.readFileSync('committed-changelog.md','utf8'):process.env.GITHUB_SHA);\n`,
       { mode: 0o755 },
+    );
+    fs.writeFileSync(
+      path.join(fixture, "committed-changelog.md"),
+      curatedChangelog,
     );
     const recorder = path.join(fixture, "calls.jsonl");
     fs.writeFileSync(
@@ -241,6 +273,7 @@ test("release publication uses bare SemVer for its tag, title and asset filename
 const args=process.argv.slice(2);fs.appendFileSync(process.env.RECORD,JSON.stringify(args)+'\\n');
 if(args[0]==='api' && args[1].endsWith('/git/ref/heads/main'))console.log(process.env.GITHUB_SHA);
 else if((args[0]==='api' && args[1].includes('/git/ref/tags/')) || (args[0]==='release' && args[1]==='view')) {console.error('HTTP 404: not found');process.exitCode=1;}
+else if(args[0]==='release' && args[1]==='create'){fs.writeFileSync('captured-notes.md',fs.readFileSync(args[args.indexOf('--notes-file')+1]));console.log('{}');}
 else console.log('{}');
 `,
       { mode: 0o755 },
@@ -283,6 +316,191 @@ else console.log('{}');
       "build/package/SHA256SUMS",
     ]);
     assert.equal(release[release.indexOf("--title") + 1], "0.1.0");
+    assert(!release.includes("--generate-notes"));
+    assert(release.includes("--notes-file"));
+    const notes = fs.readFileSync(
+      path.join(fixture, "captured-notes.md"),
+      "utf8",
+    );
+    assert(notes.startsWith("## [0.1.0] - 2026-10-10\n"));
+    assert.match(
+      notes,
+      /Keep completed work[\s\S]+Resume from the saved workspace/u,
+    );
+    assert.match(notes, /### Fixed\n\n- Preserve concurrent file edits\./u);
+    assert(!notes.includes("This unreleased change"));
+    assert(!notes.includes("This older change"));
+    assert.match(
+      notes,
+      /npm install -g https:\/\/github.com\/consciontologic\/faac\/releases\/download\/0.1.0\/0.1.0.tgz/u,
+    );
+    assert.match(notes, /ghcr.io\/consciontologic\/faac:0.1.0/u);
+    assert(
+      notes.includes(
+        `https://github.com/consciontologic/faac/commit/${"d".repeat(40)}`,
+      ),
+    );
+    assert(
+      !fs.existsSync(release[release.indexOf("--notes-file") + 1]),
+      "Temporary notes must be removed after publication",
+    );
+  } finally {
+    fs.rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+test("release notes use committed curated changes and reject invalid sections before GitHub calls", () => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "faac-changelog-"));
+  try {
+    fs.mkdirSync(path.join(fixture, "xops/package"), { recursive: true });
+    fs.mkdirSync(path.join(fixture, "bin"));
+    fs.copyFileSync(
+      "xops/package/release.mjs",
+      path.join(fixture, "xops/package/release.mjs"),
+    );
+    fs.writeFileSync(
+      path.join(fixture, "package.json"),
+      JSON.stringify({ version: "0.1.0", type: "module" }),
+    );
+    const recorder = path.join(fixture, "calls.jsonl");
+    const env = {
+      ...process.env,
+      PATH: path.join(fixture, "bin") + path.delimiter + process.env.PATH,
+      RECORD: recorder,
+      GIT_AUTHOR_NAME: "faac test",
+      GIT_AUTHOR_EMAIL: "test@example.invalid",
+      GIT_COMMITTER_NAME: "faac test",
+      GIT_COMMITTER_EMAIL: "test@example.invalid",
+      GITHUB_REF: "refs/heads/main",
+      GITHUB_REPOSITORY: "consciontologic/faac",
+      FAAC_RELEASE_VERSION: "0.1.0",
+    };
+    const git = (args: string[], input?: string) =>
+      execFileSync("git", args, {
+        cwd: fixture,
+        env,
+        input,
+        encoding: "utf8",
+      }).trim();
+    git(["init", "--quiet", "--initial-branch=main"]);
+    const commit = (changelog: string | undefined) => {
+      const blob =
+        changelog === undefined
+          ? undefined
+          : git(["hash-object", "-w", "--stdin"], changelog);
+      const tree = git(
+        ["mktree"],
+        blob ? `100644 blob ${blob}\tCHANGELOG.md\n` : "",
+      );
+      const sha = git(["commit-tree", tree], "changelog fixture\n");
+      git(["update-ref", "refs/heads/main", sha]);
+      git(["update-ref", "refs/remotes/origin/main", sha]);
+      return sha;
+    };
+    fs.writeFileSync(
+      path.join(fixture, "bin/gh"),
+      `#!${process.execPath}\nimport fs from 'node:fs';
+const args=process.argv.slice(2);fs.appendFileSync(process.env.RECORD,JSON.stringify(args)+'\\n');
+if(args[0]==='api' && args[1].endsWith('/git/ref/heads/main'))console.log(process.env.GITHUB_SHA);
+else if(args[0]==='api' && args[1].includes('/git/ref/tags/') && process.env.EXISTING) console.log(JSON.stringify({object:{type:'commit',sha:process.env.GITHUB_SHA}}));
+else if(args[0]==='release' && args[1]==='view' && process.env.EXISTING) console.log(JSON.stringify({isDraft:true,body:process.env.EXISTING==='match'?fs.readFileSync('captured-notes.md','utf8'):'unreviewed generated notes'}));
+else if((args[0]==='api' && args[1].includes('/git/ref/tags/')) || (args[0]==='release' && args[1]==='view')) {console.error('HTTP 404: not found');process.exitCode=1;}
+else if(args[0]==='release' && args[1]==='create'){fs.writeFileSync('captured-notes.md',fs.readFileSync(args[args.indexOf('--notes-file')+1]));console.log('{}');}
+else console.log('{}');\n`,
+      { mode: 0o755 },
+    );
+    const invoke = (
+      mode: string,
+      sha: string,
+      extra: Record<string, string> = {},
+    ) =>
+      spawnSync(process.execPath, ["xops/package/release.mjs", mode], {
+        cwd: fixture,
+        encoding: "utf8",
+        env: { ...env, GITHUB_SHA: sha, ...extra },
+      });
+    const validSha = commit(curatedChangelog);
+    fs.writeFileSync(
+      path.join(fixture, "CHANGELOG.md"),
+      "Uncommitted content must never appear in release notes.",
+    );
+    const published = invoke("publish", validSha);
+    assert.equal(published.status, 0, published.stderr);
+    const notes = fs.readFileSync(
+      path.join(fixture, "captured-notes.md"),
+      "utf8",
+    );
+    assert.match(notes, /Keep completed work when switching free models/u);
+    assert(!notes.includes("Uncommitted content"));
+    assert(notes.includes(`/commit/${validSha}`));
+    for (const mode of ["publish", "finish"]) {
+      fs.writeFileSync(recorder, "");
+      const mismatch = invoke(mode, validSha, { EXISTING: "mismatch" });
+      assert.notEqual(mismatch.status, 0);
+      assert.match(mismatch.stderr, /Existing release notes differ/u);
+      const calls = fs
+        .readFileSync(recorder, "utf8")
+        .trim()
+        .split("\n")
+        .map((line) => JSON.parse(line) as string[]);
+      assert(
+        !calls.some(
+          (args) =>
+            args.includes("POST") ||
+            ["create", "edit", "upload"].includes(args[1]),
+        ),
+        "Mismatched notes must not mutate a release",
+      );
+    }
+    const finished = invoke("finish", validSha, { EXISTING: "match" });
+    assert.equal(finished.status, 0, finished.stderr);
+    const sections: [string | undefined, RegExp][] = [
+      [undefined, /CHANGELOG.md/u],
+      [
+        "## [Unreleased]\n\n### Added\n\n- Not released.\n",
+        /exactly one section/u,
+      ],
+      ["## [0.1.0] - 2026-10-10\n", /is empty/u],
+      ["## [0.1.0] - 2026-10-10\n\n### Added\n\n", /needs a curated entry/u],
+      [
+        curatedChangelog +
+          "\n## [0.1.0] - 2026-10-10\n\n### Fixed\n\n- Duplicate.\n",
+        /exactly one section/u,
+      ],
+      [
+        curatedChangelog.replace("[0.1.0] - 2026-10-10", "[0.1.0]"),
+        /valid YYYY-MM-DD/u,
+      ],
+      [
+        curatedChangelog.replace(
+          "[0.1.0] - 2026-10-10",
+          "[0.1.0] - 2026-02-30",
+        ),
+        /valid YYYY-MM-DD/u,
+      ],
+      [
+        curatedChangelog.replace("### Fixed", "### Commit subjects"),
+        /unsupported or duplicate category/u,
+      ],
+      [
+        curatedChangelog.replace("### Fixed", "### Added"),
+        /unsupported or duplicate category/u,
+      ],
+    ];
+    for (const [section, reason] of sections) {
+      const sha = commit(section);
+      for (const mode of ["validate", "publish", "finish"]) {
+        fs.writeFileSync(recorder, "");
+        const result = invoke(mode, sha);
+        assert.notEqual(result.status, 0, `${mode} accepted invalid changelog`);
+        assert.match(result.stderr, reason);
+        assert.equal(
+          fs.readFileSync(recorder, "utf8"),
+          "",
+          "Invalid release notes must fail before any GitHub call",
+        );
+      }
+    }
   } finally {
     fs.rmSync(fixture, { recursive: true, force: true });
   }

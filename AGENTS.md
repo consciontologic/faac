@@ -39,7 +39,7 @@ The owner authorizes AI-assisted implementation, review, and PR preparation. The
 
 **PR checks:** All five jobs—Quality, Package, Container, Security, and GitFlow—run only on PRs into `develop` (any source branch) or hotfix PRs into `main`. Hotfix names are `hotfix/*`, `codex/hotfix/*`, `claude/hotfix/*`, or same-repository `copilot/*` with `work:hotfix`. Ordinary `develop` → `main` promotion skips all five jobs without allocating their runners. Required check names remain configured; skipped jobs are not new test evidence. No push, merge, scheduled, or manual CI duplicates run. The coordinator preserves the validated full Git tree during promotion; changed content must return through `develop` checks. Only the explicit release workflow validates exact-tree prior PR evidence from actual GitHub metadata, then builds artifacts and validates archive contents, checksums, identity, and provenance. Missing or mismatched evidence blocks publication. Release does not rerun tests, smokes, or scanners; those remain in eligible PR CI.
 
-Never force-push, delete protected branches, rewrite published history, use `--no-verify`, or change global Git/credential settings. Reconcile failed or uncertain publication before retrying. The coordinator owns tracking/staging/publication; delegates return changes and evidence without competing commits. Package publication has no deployment environment. Create deployment records only for an actual target environment, using that environment's name. Do not import approval rules from a reference project.
+Never force-push, delete protected branches, rewrite published history, use `--no-verify`, or change global Git/credential settings. Reconcile failed or uncertain publication before retrying. The coordinator owns tracking/staging/publication; delegates return changes and evidence without competing commits. Package publication uses the `release` environment so GitHub shows its deployment history and links to the published version. This records package availability; it does not deploy a server. Deployment names follow their environments; release titles, Git tags, and container version tags remain bare SemVer. Do not import approval rules from a reference project.
 
 ## AI cost and trust boundaries
 
@@ -59,6 +59,8 @@ The installation directory is not the user's workspace. Test file modifications 
 ## Tracking and documentation
 
 Keep planning in `docs/planning/ROADMAP.md` and append meaningful rows using `xops/agent/tracking_append.sh`. Fill project documents with concrete current facts; remove completed scaffold `.template.md` files. Keep examples that teach actual usage. Record blockers precisely instead of inventing successful remote activation.
+
+Follow Knowoff's changelog discipline: keep consumer-facing changes in root `CHANGELOG.md`, under `[Unreleased]` and the standard Keep a Changelog categories, in the same commit as the change. Use tracking summaries as source material, then curate the wording. Release preparation moves those entries into `[VERSION] - YYYY-MM-DD` and opens a fresh `[Unreleased]`. GitHub release notes use that exact version section, not an automatic commit list. Preserve released history.
 
 Completed work ends as published, staged (if requested), no-op, or blocked with a recoverable checkpoint. Do not abandon independent work because a credential-dependent step is blocked. Summaries state what changed, what passed, and the exact remaining dependency.
 

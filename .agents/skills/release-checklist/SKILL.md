@@ -10,7 +10,7 @@ Use before publishing a faac version. Read [the release guide](../../../docs/gui
 ## Source evidence
 
 - Confirm the committed `package.json` and lockfile version is a new bare SemVer.
-- Confirm changelog and user documentation match the actual release.
+- Curate consumer-facing changelog entries from `[Unreleased]` and tracking summaries. Follow Knowoff's Keep a Changelog procedure: move them into `[VERSION] - YYYY-MM-DD`, open a fresh `[Unreleased]`, and preserve released history. Confirm user documentation matches the actual release. The publisher requires a nonempty, unique dated section and uses it for GitHub release notes.
 - Verify current main came through a merged main PR: a hotfix with successful eligible checks, or a develop promotion preserving the full tree from a successful merged develop PR.
 - Preserve the exact source tree. Changed source needs fresh checks through develop before publication.
 - Review the recorded source PR and check-run evidence. Do not substitute old manual-dispatch diagnostics or a skipped promotion job for actual source validation.
@@ -19,10 +19,10 @@ All five CI jobs, including GitFlow, run only in the eligible PR lanes. Ordinary
 
 ## Publication
 
-Explicitly dispatch `release.yml` on main with the committed version. No tag push, label, merge, completed check, or delivery controller starts publication. Package publication does not use a deployment environment or create deployment records. Keep branch protections and source-evidence checks intact.
+Explicitly dispatch `release.yml` on main with the committed version. No tag push, label, merge, completed check, or delivery controller starts publication. The publication job uses the `release` environment and its deployment URL points to the version's GitHub Release. It records package publication, not a server rollout. Keep branch protections and source-evidence checks intact.
 
 The workflow builds package/container artifacts, checks allowed archive contents, identity, checksums and provenance, then publishes the immutable bare-version tag and assets. Existing tags/assets must not be moved or replaced. After a failure, inspect remote state before rerunning the failed job with its original artifacts.
 
 ## Results
 
-Confirm the release tag, asset names, checksums, and versioned GHCR reference. Preserve dated evidence. Do not report publication merely because a local build succeeded. Update the roadmap and tracking through the coordinating agent.
+Confirm the release tag, curated release notes, asset names, checksums, versioned GHCR reference, and successful `release` deployment with the correct version URL. Preserve dated evidence. Do not report publication merely because a local build succeeded. Update the roadmap and tracking through the coordinating agent.

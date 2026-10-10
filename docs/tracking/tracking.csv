@@ -2,3 +2,19 @@ ts_utc,run_id,agent,scope,action,status,summary,refs,commit_sha
 2026-10-10T08:17:02Z,faac-bootstrap-20261010,codex,bootstrap,plan,in_progress,"Scaffold existing CLI; configure public GitHub GitFlow, bounded AI delivery, releases and container packaging",docs/planning/ROADMAP.md;https://github.com/consciontologic/faac,
 2026-10-10T08:27:44Z,faac-bootstrap-20261010,codex,delivery,test,passed,"107 app, 18 publication and 20 controller tests; docs, PTY, package, container, actionlint and credential scan passed",docs/reports/VERIFICATION.md,
 2026-10-10T08:27:44Z,faac-bootstrap-20261010,codex,bootstrap,commit,completed,feat: publish faac with durable coding sessions and AI delivery pipelines,,pending
+2026-10-10T08:29:59Z,faac-hosted-20261010,codex,delivery,commit,completed,docs: record hosted CI and explicit MAI task verification,,pending
+2026-10-10T08:35:36Z,faac-review-quota-20261010,codex,delivery,review,passed,Independent AI review found no blockers; 23 controller tests validate quota stop and exact PR-head GitFlow dispatch,,
+2026-10-10T08:35:36Z,faac-review-quota-20261010,codex,delivery,commit,completed,fix(ci): reject unperformed Copilot reviews and verify manual PR checks,,pending
+2026-10-10T08:37:16Z,faac-release-proof-20261010,codex,delivery,commit,completed,docs: retain public artifact and protected PR verification evidence,,pending
+2026-10-10T08:49:33Z,faac-required-checks-20261010,codex,delivery,review,passed,"Independent AI review passed; 107 app, 18 Git publication and 31 DevOps tests pass; manual workflow checks cannot authorize merge",,
+2026-10-10T08:49:33Z,faac-required-checks-20261010,codex,delivery,commit,completed,fix(ci): validate eligible PR checks and work-branch events,,pending
+2026-10-10T09:02:24Z,faac-semver-20261010,codex,delivery,review,passed,Independent AI review passed for bare SemVer publishing; 109 app and packaging plus 51 operations tests passed; renamed public package installed with identical application hash,,
+2026-10-10T09:02:24Z,faac-semver-20261010,codex,delivery,commit,completed,fix(release): use bare semantic version names for releases and packages,,pending
+2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,review,passed,"Independent review passed; 147 tests, workflow lint, package install, PTY, Docker and security checks pass; PR-only policy and exact-tree evidence verified locally",,
+2026-10-10T09:21:26Z,faac-pr-policy-20261010,codex,ci,commit,completed,ci: match wfform PR checks and remove delivery automation,,pending
+2026-10-10T09:25:22Z,faac-main-skip-20261010,codex,ci,review,passed,"Independent review and 19 policy tests pass; all five jobs skip ordinary main PRs, and explicit release alone verifies prior source evidence; actionlint and docs pass",,
+2026-10-10T09:25:22Z,faac-main-skip-20261010,codex,ci,commit,completed,ci: skip every check job on ordinary main promotions,,pending
+2026-10-10T09:40:42Z,faac-release-env-20261010,codex,release,review,passed,"Independent review, 147 tests, typecheck, docs, actionlint and installed 0.1.1 package pass; misleading deployment and empty release environment deleted on GitHub",,
+2026-10-10T09:40:42Z,faac-release-env-20261010,codex,release,commit,completed,fix(release): remove deployment environment and prepare 0.1.1,,pending
+2026-10-10T09:46:47Z,faac-shellcheck-20261010,codex,ci,review,passed,"Reproduced hosted SC2016; all six corrected summary formats render identical bytes; actionlint with ShellCheck 0.11.0, 19 policy tests and docs pass",,
+2026-10-10T09:46:47Z,faac-shellcheck-20261010,codex,ci,commit,completed,fix(ci): quote Markdown summaries for hosted ShellCheck,,pending

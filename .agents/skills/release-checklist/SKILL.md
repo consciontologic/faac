@@ -1,56 +1,28 @@
 ---
 name: release-checklist
-description: "Release Checklist. You are about to tag a version, publish a package, or deploy to production."
+description: "Verify source evidence and artifact integrity before an explicitly requested faac release."
 ---
 
-# Release Checklist
+# Release checklist
 
-## When to use
+Use before publishing a faac version. Read [the release guide](../../../docs/guides/DEVOPS.md) and [AGENTS.md](../../../AGENTS.md).
 
-- You are about to tag a version, publish a package, or deploy to production.
-- The definition of "release" for this project = the moment external users can
-  be affected by the change.
+## Source evidence
 
-## Procedure
+- Confirm the committed `package.json` and lockfile version is a new bare SemVer.
+- Confirm changelog and user documentation match the actual release.
+- Verify current main came through a merged main PR: a hotfix with successful eligible checks, or a develop promotion preserving the full tree from a successful merged develop PR.
+- Preserve the exact source tree. Changed source needs fresh checks through develop before publication.
+- Review the recorded source PR and check-run evidence. Do not substitute old manual-dispatch diagnostics or a skipped promotion job for actual source validation.
 
-### Pre-release (gate check)
+All five CI jobs, including GitFlow, run only in the eligible PR lanes. Ordinary main promotion skips all five; the coordinator must preserve the validated full tree. Exact-tree prior PR evidence is enforced only during explicit release validation. Do not trigger duplicate tests, smokes, or scans during promotion or release. The release workflow validates earlier evidence and performs artifact-build/integrity work.
 
-- [ ] All tests pass on CI or the project's equivalent test runner.
-- [ ] The project's verification checks pass cleanly.
-- [ ] All `tracking.csv` rows with `commit_sha=pending` have been committed
-      (`make git`).
-- [ ] `CHANGELOG.md` (or equivalent) updated with user-visible changes.
-      Use the tracking CSV's `summary` column as the raw material.
-- [ ] Version number bumped in the one authoritative place
-      (`.agentic-workspace-version`, `package.json`, `pyproject.toml`, etc.).
-- [ ] Security scan ran and found nothing new (`npm audit`, `pip-audit`,
-      `cargo audit`, `trivy`, …).
-- [ ] README and docs still accurate for the new version.
-- [ ] Breaking changes (if any) documented in CHANGELOG with migration notes.
+## Publication
 
-### Tagging
+Explicitly dispatch `release.yml` on main with the committed version. No tag push, label, merge, completed check, or delivery controller starts publication. Package publication does not use a deployment environment or create deployment records. Keep branch protections and source-evidence checks intact.
 
-Follow [the release guide](../../../docs/guides/DEVOPS.md). Prepare the version
-on a work branch and publish its PR with guarded `make git`. Promote through
-the protected develop-to-main PR. Dispatch the validated Release workflow, or
-authorize `ai:release` on the exact promotion head. The workflow creates the
-immutable tag, verifies artifacts, and publishes the container. Do not push
-all local tags or move an existing release tag.
+The workflow builds package/container artifacts, checks allowed archive contents, identity, checksums and provenance, then publishes the immutable bare-version tag and assets. Existing tags/assets must not be moved or replaced. After a failure, inspect remote state before rerunning the failed job with its original artifacts.
 
+## Results
 
-### Post-release
-
-- [ ] Verify the published artefact (install from registry, smoke-test).
-- [ ] GitHub Release / release notes published.
-- [ ] Internal announcement (Slack, email) if applicable.
-- [ ] Next milestone / ROADMAP.md updated.
-
-## Anti-patterns
-
-- ❌ Tagging a commit with uncommitted changes in the working tree.
-- ❌ Releasing without running the full test suite.
-- ❌ Bumping version in multiple files manually — automate with a single
-  source of truth.
-- ❌ Skipping CHANGELOG because "we can do it later" — later never comes.
-- ❌ Publishing a `0.x` version without noting its stability guarantee
-  in the README.
+Confirm the release tag, asset names, checksums, and versioned GHCR reference. Preserve dated evidence. Do not report publication merely because a local build succeeded. Update the roadmap and tracking through the coordinating agent.

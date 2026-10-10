@@ -1,46 +1,55 @@
 # Branches and pull requests
 
-`main` is the release branch. `develop` collects the next release. Routine work goes through pull requests; protected branches are not direct-push destinations.
+**Work branch → PR → eligible checks → merge → explicit release.**
 
-| Work                | Start from | PR target                                  |
-| ------------------- | ---------- | ------------------------------------------ |
-| Feature             | `develop`  | `develop`                                  |
-| Bug fix             | `develop`  | `develop`                                  |
-| Release preparation | `develop`  | `develop`, followed by promotion to `main` |
-| Urgent hotfix       | `main`     | `main`, followed by backmerge to `develop` |
-| Release promotion   | `develop`  | `main`                                     |
-| Backmerge           | `main`     | `develop`                                  |
+`develop` collects work; `main` holds releases. Maintainers or explicitly authorized agents coordinate the steps. Labels and completed checks do not dispatch tasks, merge PRs, or start releases.
 
-## Start work
+## Choose a lane
 
-These commands first show the planned branch and worktree. Add `APPLY=1` only when ready to create it.
+| Work                | Start from                       | PR target                           |
+| ------------------- | -------------------------------- | ----------------------------------- |
+| Feature or bug fix  | `develop`                        | `develop`                           |
+| Release preparation | `develop`                        | `develop`                           |
+| Hotfix              | `main`                           | `main`, then backmerge to `develop` |
+| Promotion           | Validated `develop`              | `main`                              |
+| Backmerge           | `main` or a suitable work branch | `develop`                           |
+
+Any source branch may open a PR into `develop`. Conventional work names keep intent clear. The helper previews without changing Git; `APPLY=1` creates the branch and worktree:
 
 ```bash
 make gitflow KIND=feature NAME=clearer-errors AGENT=codex
 make gitflow KIND=feature NAME=clearer-errors AGENT=codex APPLY=1
-make gitflow KIND=bugfix NAME=resume-conflict AGENT=codex
 make gitflow KIND=hotfix NAME=credential-redaction AGENT=codex
 make gitflow KIND=release NAME=0.1.1 AGENT=codex
 ```
 
-The applied feature example creates `codex/feature/clearer-errors` from `origin/develop` in `.local/worktrees/codex-feature-clearer-errors`. It fetches before creation and preserves the original checkout. Release names require plain `MAJOR.MINOR.PATCH`. Copilot and Dependabot use their service-generated branch names; the GitFlow check handles their permitted targets.
+The applied feature example creates `codex/feature/clearer-errors` from `origin/develop` under `.local/worktrees/`. Preserve existing work and reuse a suitable checkout when possible.
 
-## Publish a branch
-
-Follow [AGENTS.md](../../AGENTS.md): inspect the current diff, run checks, obtain review, record tracking, then use the guarded publisher. Do not use it to bypass protected branches.
+## Check, review, and publish
 
 ```bash
-make check
+make verify
 make git.dry
 make git
 ```
 
-`make git.dry` is read-only. `make git` commits tracked staged work under the repository policy and pushes only an allowed work branch. Conflicts, detached state, unrelated work, or missing authorization must be resolved before publishing. Never force-push or overwrite a user's work to make a lane pass.
+Follow [AGENTS.md](../../AGENTS.md): record tracking, inspect the staged set, and publish through the guarded wrapper. Do not commit or push directly to protected branches or bypass unavailable checks. Open the PR to the target above. A separate local AI review can help; native Copilot review still has its own account/model limits.
 
-Open a PR to the target in the table. The required checks are **Quality, Package, Container, Security, and GitFlow**. Branch protection requires them on the reviewed change. AI merge authorization is separate: [DevOps](DEVOPS.md) describes `ai:merge`, review gating, and the repair budget.
+## Exactly when checks run
 
-## Releases
+The five required check names remain **Quality, Package, Container, Security, and GitFlow**.
 
-A release-preparation PR updates version metadata and the changelog on `develop`. After it merges, promotion moves `develop` to `main`. The release workflow checks the version against current `main`, builds and verifies artifacts, then publishes a GitHub release and GHCR image. A hotfix or release on `main` gets a backmerge PR so `develop` retains it.
+- **Any PR into `develop`:** runs the four quality/package/security jobs and the GitFlow gate.
+- **Hotfix PR into `main`:** runs the same checks. Recognized branches are `hotfix/*`, `codex/hotfix/*`, `claude/hotfix/*`, and same-repository `copilot/*` with `work:hotfix`.
+- **Ordinary same-repository `develop` → `main` promotion:** skips all five jobs, including GitFlow, without allocating their runners. A skipped check does not mean a test ran.
+- **Pushes, merges, schedules, and manual CI dispatch:** do not start CI jobs.
 
-Merging a PR does not automatically authorize a public release. Use the dedicated `ai:release` label on the exact PR head, or dispatch the release workflow explicitly as described in [DevOps](DEVOPS.md#release-a-version).
+PR changes and hotfix-label changes update the applicable lane. The coordinating maintainer or authorized agent must preserve the validated full Git tree during promotion. If conflict resolution or another edit changes that tree, validate the changed source through `develop` before promotion. The skipped promotion checks supply no new test evidence. Exact-tree validation runs only in the explicitly dispatched release workflow, which refuses publication when actual GitHub PR, check, or tree metadata cannot prove the source.
+
+Earlier manual CI runs were diagnostic only. GitHub does not count `workflow_dispatch` job checks as required PR evidence; see [the official rule](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks#checks-from-some-workflow-jobs-are-not-evaluated).
+
+## Publish a release
+
+After the coordinated promotion or verified hotfix merges, explicitly dispatch `release.yml` on `main` for the committed version. The publisher validates previous PR evidence, builds the artifacts, and checks archive integrity, checksums, and provenance. It does not rerun tests, smokes, or security scans.
+
+Release names and tags are bare semantic versions, such as `0.1.0`. Assets are `0.1.0.tgz`, `0.1.0.cdx.json`, and `SHA256SUMS`; the image is `ghcr.io/consciontologic/faac:0.1.0`. No `latest` or commit-SHA image aliases are published by future releases. See [DevOps](DEVOPS.md#release-a-version) for the command and recovery.

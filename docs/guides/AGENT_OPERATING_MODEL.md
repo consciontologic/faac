@@ -18,7 +18,9 @@ Children return evidence and do not stage another agent's files. A failed gate s
 
 ## Delegation and limits
 
-Routine issue implementation, repair, review requests, and eligible PR merging can use the controlled GitHub automation in [DevOps](DEVOPS.md). Labels and workflow triggers provide explicit scope. Model selection and budgets are constrained by [model policy](MODEL_PROFILES.md). Account permissions and installed secrets determine what actually runs.
+A maintainer or authorized local coordinator explicitly delegates a bounded task, requests review, and coordinates PR merging. Labels and finished checks do not trigger tasks, repairs, merges, promotions, or releases. The local request helper uses [model policy](MODEL_PROFILES.md) and a receipt; account entitlement still applies. See [DevOps](DEVOPS.md).
+
+All five CI jobs run only on PRs into develop or hotfix PRs into main. Ordinary main promotion skips all five jobs; the coordinator preserves the validated full tree. Explicit release dispatch enforces exact-tree prior PR evidence before building artifacts, without rerunning tests or scanners.
 
 AI review does not replace tests or branch protection. Do not claim approval, a live request, an image publication, or a release unless its actual result was observed. Never fabricate human review or bypass unavailable checks.
 

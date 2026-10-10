@@ -10,7 +10,7 @@ process.chdir(root);
 const metadata = JSON.parse(fs.readFileSync("package.json", "utf8"));
 assert.match(
   metadata.version,
-  /^\d+\.\d+\.\d+$/u,
+  /^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u,
   "Release version must be plain SemVer",
 );
 execFileSync("npm", ["run", "build"], { stdio: "inherit" });
@@ -84,12 +84,26 @@ const sbom = {
   },
   components,
 };
-const sbomName = `faac-${metadata.version}.cdx.json`;
+const archiveName = `${metadata.version}.tgz`;
+assert.equal(
+  packed.filename,
+  `faac-${metadata.version}.tgz`,
+  "Unexpected npm archive name",
+);
+fs.renameSync(
+  path.join(directory, packed.filename),
+  path.join(directory, archiveName),
+);
+const sbomName = `${metadata.version}.cdx.json`;
 fs.writeFileSync(
   path.join(directory, sbomName),
   JSON.stringify(sbom, null, 2) + "\n",
 );
-const assets = [packed.filename, sbomName];
+// Remove only the current version's obsolete generated inventory filename.
+fs.rmSync(path.join(directory, `faac-${metadata.version}.cdx.json`), {
+  force: true,
+});
+const assets = [archiveName, sbomName];
 const checksums =
   assets
     .map(

@@ -1,99 +1,68 @@
-# AI delivery, releases, and containers
+# PR checks, explicit AI tasks, and releases
 
-The workflows delegate routine work while retaining deterministic checks, explicit model choice, and a visible audit trail. Installing workflow files does not activate missing credentials or grant a Copilot account entitlement.
+faac follows the checked-in wfform-style workflow: prepare work, open a PR, review its evidence, merge, then explicitly publish a release. There is no delivery controller, automatic repair loop, label-triggered merge, scheduled task purchaser, or automatic release dispatch.
 
-## Everyday flow
+## Delegate one task to Copilot
 
-1. Create a clear issue: requested behavior, scope, acceptance checks, and relevant files.
-2. Add a `kind:` label and the maintainer-authorized `ai:task` label.
-3. The controller snapshots the request and submits one Copilot task using `mai-code-1.1-flash`.
-4. Copilot opens a PR. Checks and native Copilot review run under the configured account permissions.
-5. Add `ai:merge` when the PR is authorized to merge after its gates pass. Add `ai:pause` to stop automation.
-
-Features, bug fixes, and release preparation target `develop`; hotfixes target `main`. Read [GitFlow](GITFLOW.md) for branches and local worktrees.
-
-| Label           | Meaning                                                           |
-| --------------- | ----------------------------------------------------------------- |
-| `ai:task`       | A trusted maintainer authorizes the issue's current request       |
-| `kind:feature`  | Feature work; also the default kind                               |
-| `kind:bugfix`   | Fix a nonurgent defect                                            |
-| `kind:hotfix`   | Fix an urgent `main` defect                                       |
-| `kind:release`  | Prepare a release on `develop`                                    |
-| `version:0.1.1` | Requested plain semantic version for release preparation          |
-| `ai:merge`      | Authorize merge after required checks and review gates pass       |
-| `ai:release`    | Authorize release dispatch for the exact PR head targeting `main` |
-| `ai:pause`      | Pause controller actions on that issue or PR                      |
-
-A changed issue prompt is not silently resubmitted under the old authorization. Create a new authorized issue for changed work. A changed PR head invalidates `ai:release` authorization: remove and re-add the label to authorize the new head. Fork PRs are not automatically repaired or merged.
-
-## Configure hosted automation
-
-Store durable credentials in **GitHub repository Actions secrets**, not files or issue text:
-
-| Secret                  | Purpose                                                    | Required access                                                                                                  |
-| ----------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `FAAC_COPILOT_TOKEN`    | GitHub Agent Tasks API using the explicit task model       | A user token with Agent tasks read/write and access to the repository; endpoint/account eligibility also applies |
-| `FAAC_AUTOMATION_TOKEN` | PR lifecycle, review requests, merge, and release dispatch | Repository contents, issues, pull requests, and Actions read/write; Administration read; Checks read             |
-
-Administration read is used to inspect branch protection; Checks read retrieves check runs for the exact PR head. These are read permissions, not authorization to weaken repository policy.
-
-Use the narrowest repository access. A temporary setup token is not automatically installed as an Actions secret. The built-in `GITHUB_TOKEN` can perform some limited work, but is not a substitute for Agent Tasks access; PR workflows created through limited tokens can require approval. The controller reports missing credentials or permissions rather than fabricating progress.
-
-Enable Actions and the required Copilot coding/review features for the repository/account. GitHub's Agent Tasks endpoint eligibility may depend on the plan or organization configuration. The review model itself is selected by GitHub, not pinned to the task model. Where available, select **Lite** native review effort in GitHub settings. See [model policy](MODEL_PROFILES.md) and [the checked-in policy](../../.github/copilot-model-policy.json).
-
-The controller uses trusted `main` code for privileged events; it does not check out or execute an untrusted PR head with its secrets. Required checks are **Quality, Package, Container, Security, and GitFlow**. Native AI review and the merge controller are additional gates; an AI comment is not a substitute for a passing test.
-
-## Costs, retries, and timing
-
-The default policy permits one initial task per authorized issue, one repair per PR, three native review requests per PR, and at most two billable actions in a controller run. There is no `Auto` selection, alternate premium model, or indefinite retry loop. The policy stops if MAI-Code-1.1-Flash is unavailable for the account.
-
-Intent and result receipts prevent duplicate submissions. A timeout after submission remains uncertain until reconciled; do not delete its receipt to force a retry. Inspect the issue, task, and PR state first. Fresh authorization is required for genuinely new work.
-
-Reconciliation runs on relevant issue/PR/check events and hourly. Review completion can wait for the next hourly pass. To reconcile sooner, use Actions → **AI delivery** → **Run workflow**. Leave `issue_number` empty for the existing queue, or provide an existing issue/PR to authorize it. There are no custom slash-comment commands.
-
-## Delegate from your terminal
-
-Write a plain-text task file outside tracked source or under ignored `.local/`:
+Write a bounded request with allowed files, expected behavior, tests, and the PR target:
 
 ```bash
 mkdir -p .local
 cat > .local/task.md <<'TASK'
 Improve the error shown for an unknown slash command.
-Keep existing command behavior. Add a focused regression test and run make check.
+Keep existing command behavior. Add a focused regression test and run make verify.
+Open a PR into develop.
 TASK
 make ai.plan KIND=feature PROMPT_FILE=.local/task.md
-make ai.status
 ```
 
-The plan command prepares JSON without submitting work. With `FAAC_COPILOT_TOKEN` supplied securely in your environment:
+The plan command prepares a request without submitting it. Supply `FAAC_COPILOT_TOKEN` securely in the current process, then explicitly submit:
 
 ```bash
 make ai.submit KIND=feature PROMPT_FILE=.local/task.md \
   RECEIPT=.local/clearer-command-task.json
 ```
 
-The receipt path must be new. For release preparation, add `KIND=release RELEASE_VERSION=0.1.1`. For a local worktree rather than a remote AI task, use `make gitflow`; see [GitFlow](GITFLOW.md).
+The token needs repository access and GitHub Agent Tasks read/write permission; account entitlement also applies. No permanent Actions secret is needed for this local helper. Never put the value in the task file, command arguments, or Git.
+
+Each submission uses the explicit `mai-code-1.1-flash` model and a new receipt path. It does not fall back to Auto or a premium model. A timeout can mean the request was accepted: inspect the receipt and actual GitHub task before doing anything again. The helper does not upload uncommitted local work.
+
+Use `KIND=bugfix`, `KIND=hotfix`, or `KIND=release` for those tasks. Release preparation also needs `RELEASE_VERSION=0.1.1`. `HEAD_REF` targets an existing authorized work branch when applicable. No background process resubmits, repairs, or advances the PR.
+
+## Review and merge
+
+A maintainer or explicitly authorized coordinating agent requests review, handles supported findings, and merges through the protected PR. Issue labels organize work; they do not authorize external actions. Copilot's `work:hotfix` label selects the same-repository hotfix check lane only.
+
+Native Copilot review chooses its own model; the task model cannot select it. Where the account exposes review effort, Lite is the inexpensive option. Quota failure is not a successful review, including a `COMMENTED` response saying no review was performed. A local AI review is separate evidence and must not be represented as native Copilot approval. See [model selection](MODEL_PROFILES.md).
+
+The required names are **Quality, Package, Container, Security, and GitFlow**. All five jobs run only on **any PR into `develop`** or a **hotfix PR into `main`**. Ordinary `develop` → `main` promotion skips all five without allocating their runners. Required check names remain configured, but skipped checks are not new test evidence. The coordinator must preserve the validated full Git tree; exact-tree evidence is enforced only by explicit release validation. No push, merge, scheduled, or manual CI duplication is configured. [GitFlow](GITFLOW.md) defines the lanes and the changed-tree recovery path.
 
 ## Release a version
 
-First merge a reviewed version change to `main`. `package.json` and the lockfile must agree. Update the changelog and keep checks green. The requested version below must match the current package version.
+Prepare the version/changelog change through `develop`, then promote the already validated tree to `main`. A release uses the current committed version; do not bump it merely to change filenames. After the merged source is ready:
 
 ```bash
-gh workflow run release.yml --ref main -f version=0.1.0
+gh workflow run release.yml --ref main -f version=0.1.1
 ```
 
-Alternatively, authorize the exact promotion/hotfix PR with `ai:release`. After merge, the controller dispatches `release.yml` only if that merge commit is still current `main`, using the committed package version. `ai:merge` alone does not publish a release. A matching `vMAJOR.MINOR.PATCH` tag also triggers the release workflow.
+Replace `0.1.1` with the new version actually committed on `main`. Existing `0.1.0` assets are immutable; this example is not an instruction to rebuild or replace them.
 
-The workflow validates the source revision, runs application/terminal/package/container checks, creates a draft release, publishes tested artifacts, and then makes the release public. Artifacts are:
+Release dispatch is explicit. Neither a tag push, label, completed check, nor merge starts publication. The workflow checks current `main`, the committed version, and its merged main PR. A hotfix supplies its own successful checks; a develop promotion must match the full Git tree from a successful merged develop PR. It reads actual GitHub PR, check-run, job, and commit metadata, records the source PR and check runs, and blocks publication if the evidence is missing or inconsistent. A changed or unproven tree must return through the PR quality lane.
 
-- `faac-VERSION.tgz`: installable npm tarball.
-- `faac-VERSION.cdx.json`: CycloneDX inventory of locked production npm dependencies.
-- `SHA256SUMS`: asset checksums.
-- `ghcr.io/consciontologic/faac:VERSION` and a commit-specific tag; `latest` updates after release completion.
+Publication reuses that source evidence rather than rerunning application tests, PTY checks, dependency auditing, or scanners. It builds the npm package and container, validates archive contents and identity, verifies checksums, and publishes provenance. It does not rerun package/container smokes, tests, or scanners: those results come from the eligible PR. Archive and checksum validation protect publication integrity without repeating those jobs.
 
-The workflow uses GitHub's release environment, package permission, and provenance attestations. Environment approval rules are controlled in GitHub settings. The hosted release builds Linux AMD64 images; local Docker builds use the host's architecture. No npm registry publication is configured. The npm inventory does not describe operating-system packages in the container.
+Package publication uses no GitHub deployment environment: there is no server deployment. Release run names, release titles, Git tags, and image version tags use the bare semantic version. `make git` publishes the prepared work branch; the explicit workflow dispatch publishes the version after its protected PRs reach `main`.
 
-## Build and test artifacts locally
+Assets use bare versions:
+
+- `VERSION.tgz`, for example `0.1.0.tgz`: installable npm tarball.
+- `VERSION.cdx.json`, for example `0.1.0.cdx.json`: locked production npm dependency inventory.
+- `SHA256SUMS`: checksums for those assets.
+- `ghcr.io/consciontologic/faac:VERSION`: Linux AMD64 image, with only a semantic-version tag.
+
+No npm registry publication is configured. The CycloneDX inventory does not cover container OS packages. Never move a published tag or replace its assets. If publication fails after verified artifacts exist, diagnose first and rerun the failed publication job to reuse the same artifacts.
+
+## Build artifacts locally
 
 ```bash
 make package
@@ -102,13 +71,11 @@ make image
 make image.test
 ```
 
-Package assets land in `build/package/`. The image smoke test uses `faac:local`, so build it first. An installed tarball can be tested without a global registry publication. CI artifacts and a local image are not proof that a public release exists. If publication fails after artifacts exist, rerun the failed publication job so it reuses those same artifacts; do not rebuild different contents under an immutable version.
+Package output lives in `build/package/`. Build `faac:local` before the image smoke test. Local commands remain available when you deliberately need them; they do not enable extra hosted CI triggers.
 
 ## Run the container
 
-The image includes Node.js 22, Git, Bash, ripgrep, and Python. It runs the `faac` entrypoint as a nonroot user, with `/workspace` as the working directory. Add project-specific toolchains in a derived image when needed.
-
-For a local build, use `faac:local`:
+The image includes Node.js 22, Git, Bash, ripgrep, and Python. It uses a nonroot `faac` entrypoint and `/workspace` as the working directory. Project-specific test toolchains may require a derived image.
 
 ```bash
 mkdir -p "$HOME/.local/share/faac"
@@ -119,13 +86,21 @@ docker run --rm -it \
   --env FAAC_HOME=/state \
   --env HOME=/state/home \
   --env OPENROUTER_API_KEY \
-  faac:local
+  ghcr.io/consciontologic/faac:0.1.0
 ```
 
-`OPENROUTER_API_KEY` must already be set securely if you use that option; otherwise connect through the hidden prompt and persist the encrypted vault in the mounted state directory. Replace `faac:local` with `ghcr.io/consciontologic/faac:0.1.0` only after that version has been published. Avoid putting a literal key on the command line.
+Set `OPENROUTER_API_KEY` securely before running, or omit it and connect through the hidden prompt. The state mount preserves sessions and the encrypted vault. The workspace mount permits host-file edits. Do not mount the Docker socket. Use `faac:local` for a locally built image.
 
-The workspace mount allows edits to the host files you chose. The state mount preserves sessions across container exits. The container contains a shell but is not a security boundary for arbitrary mounted files or forwarded credentials. Do not mount the Docker socket into an agent workspace.
+## Diagnose a blocked step
 
-## Diagnose a stopped workflow
+Read the failed job and its PR/source revision. A missing eligible source run needs a real PR event, not a manual CI substitute. Changed-tree promotion needs fresh checks through `develop`. Missing Copilot access needs account configuration; an uncertain task needs reconciliation. Native review quota cannot be fixed by treating an error comment as approval. Keep receipts and evidence intact.
 
-Inspect Actions logs, the receipt, and the PR checks. Missing token/model access needs account configuration; a failed deterministic check needs a code fix; an uncertain submission needs reconciliation. Exhausted repair or review budgets stop automatically and need a deliberate new task. Keep the recorded evidence intact rather than repeatedly clicking retry.
+If GitHub clears a merged run's PR association, historical recovery requires a same-repository source branch used by exactly one PR, no retargeting, matching immutable parent/tree data, and checks completed before merge. Ambiguous fork, reused-branch, or retargeted history is rejected; validate the source through a fresh PR instead of bypassing the evidence gate.
+
+Historical setup results, including the original controller and manual diagnostics, are recorded in [verification](../reports/VERIFICATION.md). They describe the earlier configuration, not the current trigger policy.
+
+## Read the logs
+
+Workflow steps use clear labels and short status markers: 🏃 running, ✅ passed, and ❌ failed. Grouped output keeps command detail expandable; durations and the job summary show where time went. Read the failing command's output before retrying. A successful artifact build is not a replacement for the recorded source-PR evidence.
+
+The faac terminal supports `NO_COLOR=1` and `FAAC_ASCII=1` when color or Unicode is inconvenient. These are application display options; GitHub controls how its own workflow UI renders step names and groups.

@@ -1,4 +1,4 @@
-# faac development and guarded AI delivery. Implementations live in xops/.
+# faac development, GitFlow, releases and explicit AI task helpers. Implementations live in xops/.
 PYTHON ?= python3
 .DEFAULT_GOAL := help
 AGENT ?= codex
@@ -17,16 +17,16 @@ REFS ?=
 RUN_ID ?=
 export AGENT KIND NAME APPLY PROMPT_FILE RECEIPT RELEASE_VERSION HEAD_REF ACTION STATUS SCOPE SUMMARY REFS RUN_ID
 
-.PHONY: help verify check test test.ops docs.check build test.terminal package package.test image image.test git git.dry gitflow ai.plan ai.submit ai.status track.add track.list roadmap.status
+.PHONY: help verify check test test.ops docs.check build test.terminal package package.test image image.test git git.dry gitflow ai.plan ai.submit track.add track.list roadmap.status
 
-## help              Show development and delivery commands
+## help              Show development and repository commands
 help:
 	@awk '/^## / { sub(/^## /,"  make "); print }' $(MAKEFILE_LIST)
 
 ## verify            Run application, operations, and documentation checks
 verify: check
 
-## check             Typecheck and test the app; validate delivery and docs
+## check             Typecheck and test the app; validate GitFlow and docs
 check:
 	@npm run check
 	@$(MAKE) test.ops docs.check
@@ -35,7 +35,7 @@ check:
 test:
 	@npm test
 
-## test.ops          Run Git publication and AI delivery policy tests
+## test.ops          Run Git publication, release evidence and AI task tests
 test.ops:
 	@$(PYTHON) -m unittest discover -s xops/makefile -p 'test_*.py'
 	@$(PYTHON) -m unittest discover -s tests/devops -p 'test_*.py'
@@ -57,7 +57,7 @@ package:
 	@npm run package
 
 ## package.test      Build and install-test the npm tarball
-package.test:
+package.test: package
 	@npm run test:package
 
 ## image             Build faac:local
@@ -87,10 +87,6 @@ ai.plan:
 ## ai.submit         Submit once with FAAC_COPILOT_TOKEN and a new RECEIPT path
 ai.submit:
 	@$(PYTHON) xops/agent/local_commands.py ai-submit
-
-## ai.status         Show automation policy and required credentials without secrets
-ai.status:
-	@$(PYTHON) xops/agent/delivery.py status
 
 ## track.add         Append a tracking row using ACTION STATUS SCOPE SUMMARY
 track.add:

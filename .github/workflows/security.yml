@@ -1,12 +1,8 @@
-name: Security
+name: 🛡️ Security
 on:
   pull_request:
-    branches: [main, develop]
-  push:
-    branches: [main, develop]
-  schedule:
-    - cron: "24 7 * * 1"
-  workflow_dispatch:
+    branches: [develop, main]
+    types: [opened, synchronize, reopened, ready_for_review, edited, labeled, unlabeled]
 permissions:
   contents: read
 concurrency:
@@ -14,25 +10,46 @@ concurrency:
   cancel-in-progress: true
 jobs:
   security:
+    if: >-
+      github.event_name == 'pull_request' && (
+        github.base_ref == 'develop' || (github.base_ref == 'main' && (
+          startsWith(github.head_ref, 'hotfix/') ||
+          startsWith(github.head_ref, 'codex/hotfix/') ||
+          startsWith(github.head_ref, 'claude/hotfix/') ||
+          (github.event.pull_request.head.repo.full_name == github.repository &&
+           startsWith(github.head_ref, 'copilot/') &&
+           contains(github.event.pull_request.labels.*.name, 'work:hotfix'))
+        )))
     name: Security
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out exact PR source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      - name: Set up Node.js 22
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "22"
           cache: npm
-      - run: npm ci --ignore-scripts
+      - name: Install locked dependencies
+        run: bash xops/ci/step.sh "Install locked dependencies" npm ci --ignore-scripts --no-audit
       - name: Check production dependencies
-        run: npm audit --omit=dev --audit-level=high
+        run: bash xops/ci/step.sh "Audit production dependencies" npm audit --omit=dev --audit-level=high
       - name: Scan Git history for credentials without printing them
         run: |
           mkdir -p "$RUNNER_TEMP/security"
           curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz --output "$RUNNER_TEMP/security/gitleaks.tar.gz"
           printf '%s  %s\n' '551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb' "$RUNNER_TEMP/security/gitleaks.tar.gz" | sha256sum --check --strict
           tar -xzf "$RUNNER_TEMP/security/gitleaks.tar.gz" -C "$RUNNER_TEMP/security" gitleaks
-          "$RUNNER_TEMP/security/gitleaks" git --redact .
+          bash xops/ci/step.sh "Scan Git history for credentials" "$RUNNER_TEMP/security/gitleaks" git --redact .
+      - name: Job summary
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf "### 🛡️ Security\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"

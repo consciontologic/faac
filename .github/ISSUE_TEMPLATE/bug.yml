@@ -30,4 +30,4 @@ body:
       description: Relevant error, session state, and whether a hosted provider was involved
   - type: markdown
     attributes:
-      value: A maintainer can apply `ai:task` to delegate this issue. Opening an issue does not spend Copilot credits.
+      value: Opening or labeling an issue does not submit an AI task or spend Copilot credits. A maintainer can explicitly delegate the agreed scope using the local MAI task helper.

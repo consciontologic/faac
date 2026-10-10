@@ -18,17 +18,39 @@ def plan(kind, name):
     return f'{kind}/{name}', 'origin/main' if kind == 'hotfix' else 'origin/develop'
 
 
+def hotfix_pr(pr, repository='consciontologic/faac'):
+    head = pr.get('head', {})
+    branch = head.get('ref', '')
+    prefixes = ('hotfix/', 'codex/hotfix/', 'claude/hotfix/')
+    return (any(branch.startswith(prefix) for prefix in prefixes)
+            or (branch.startswith('copilot/')
+                and head.get('repo', {}).get('full_name') == repository
+                and 'work:hotfix' in {label.get('name') for label in pr.get('labels', [])}))
+
+
+def quality_pr(pr, repository='consciontologic/faac'):
+    base = pr.get('base', {}).get('ref')
+    return base == 'develop' or (base == 'main' and hotfix_pr(pr, repository))
+
+
 def valid_lane(head, base):
-    if head == 'develop' and base == 'main': return True
-    if head == 'main' and base == 'develop': return True
-    for prefix in ('codex/', 'claude/'):
-        if head.startswith(prefix): head = head[len(prefix):]
-    if head.startswith('copilot/') or head.startswith('dependabot/'):
-        return base in {'develop', 'main'} if head.startswith('copilot/') else base == 'develop'
-    kind, _, name = head.partition('/')
-    try: plan(kind, name)
-    except ValueError: return False
-    return base == ('main' if kind == 'hotfix' else 'develop')
+    # Branch planning suggests conventions; intake intentionally accepts ANY
+    # source branch into develop, including forks and platform-owned branches.
+    return bool(head) and (base == 'develop' or (base == 'main' and (
+        head == 'develop' or any(head.startswith(prefix) for prefix in
+                                ('hotfix/', 'codex/hotfix/', 'claude/hotfix/')))))
+
+
+def check_event(event, event_name, repository):
+    if event_name != 'pull_request':
+        raise ValueError('GitFlow checks run only for pull_request events')
+    pr = event.get('pull_request') or {}
+    if pr.get('base', {}).get('repo', {}).get('full_name') != repository:
+        raise ValueError('PR target repository differs from the workflow repository')
+    head, base = pr.get('head', {}).get('ref', ''), pr.get('base', {}).get('ref', '')
+    if quality_pr(pr, repository):
+        return f'GitFlow: {head} -> {base}; quality checks run on this PR.'
+    raise ValueError('GitFlow checks run only for develop PRs and main hotfix PRs')
 
 
 def main():
@@ -41,11 +63,15 @@ def main():
     args = parser.parse_args()
     if args.check_event:
         event = json.loads(Path(os.environ['GITHUB_EVENT_PATH']).read_text())
-        pr = event.get('pull_request')
-        if not pr: print('GitFlow: not a pull request.'); return
-        head, base = pr['head']['ref'], pr['base']['ref']
-        if not valid_lane(head, base): raise SystemExit(f'Invalid GitFlow lane: {head} -> {base}')
-        print(f'GitFlow: {head} -> {base}'); return
+        from copilot_task import REPO
+        if os.environ.get('GITHUB_REPOSITORY') != REPO:
+            raise SystemExit('Repository mismatch')
+        message = check_event(event, os.environ.get('GITHUB_EVENT_NAME'), REPO)
+        print(message)
+        if os.environ.get('GITHUB_STEP_SUMMARY'):
+            with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+                summary.write(message + '\n')
+        return
     if not args.kind or not args.name: parser.error('kind and name are required')
     branch, base = plan(args.kind, args.name)
     if args.agent: branch = args.agent + '/' + branch

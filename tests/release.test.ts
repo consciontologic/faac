@@ -51,17 +51,81 @@ test("release validation accepts exact main and rejects mismatched version, bran
       });
     const valid = validate();
     assert.equal(valid.status, 0, valid.stderr);
-    assert.match(valid.stdout, /tag=v0\.1\.0/u);
+    assert.match(valid.stdout, /tag=0\.1\.0/u);
     assert.match(valid.stdout, /image=ghcr\.io\/consciontologic\/faac/u);
+    const evidence = {
+      release_sha: sha,
+      tree_sha: tree,
+      source_pr: 12,
+      source_head_sha: sha,
+      run_ids: [41, 42, 41],
+      promotion_pr: 13,
+    };
+    const summary = path.join(fixture, "summary.md");
+    const summarize = (data: unknown) => {
+      fs.writeFileSync(
+        path.join(fixture, "evidence.json"),
+        JSON.stringify(data),
+      );
+      return spawnSync(
+        process.execPath,
+        ["xops/package/release.mjs", "summary-evidence", "evidence.json"],
+        {
+          cwd: fixture,
+          encoding: "utf8",
+          env: {
+            ...env,
+            GITHUB_SHA: sha,
+            GITHUB_REPOSITORY: "consciontologic/faac",
+            GITHUB_STEP_SUMMARY: summary,
+          },
+        },
+      );
+    };
+    const reused = summarize(evidence);
+    assert.equal(reused.status, 0, reused.stderr);
+    assert.match(reused.stdout, /consciontologic\/faac\/pull\/12/u);
+    assert.equal(reused.stdout.match(/actions\/runs\/41/gu)?.length, 1);
+    assert.equal(fs.readFileSync(summary, "utf8"), reused.stdout);
+    for (const invalid of [
+      { ...evidence, release_sha: "0".repeat(40) },
+      { ...evidence, run_ids: [] },
+      { ...evidence, run_ids: ["41"] },
+      { ...evidence, run_ids: { Quality: 41 } },
+    ]) {
+      assert.notEqual(summarize(invalid).status, 0);
+      assert.equal(
+        fs.readFileSync(summary, "utf8"),
+        reused.stdout,
+        "Invalid evidence must not be appended to the release summary",
+      );
+    }
     for (const [overrides, reason] of [
       [{ FAAC_RELEASE_VERSION: "0.2.0" }, /Dispatch version must match/u],
       [{ GITHUB_REF: "refs/heads/develop" }, /Only main/u],
+      [{ GITHUB_REF: "refs/tags/v0.1.0" }, /Only main/u],
+      [{ GITHUB_REF: "refs/tags/faac-0.1.0" }, /Only main/u],
       [{ GITHUB_SHA: "0".repeat(40) }, /Checkout differs/u],
     ] as [Record<string, string>, RegExp][]) {
       const rejected = validate(overrides);
       assert.notEqual(rejected.status, 0);
       assert.match(rejected.stderr, reason);
     }
+    git(["update-ref", "refs/tags/0.1.0", sha]);
+    const tagged = validate({ GITHUB_REF: "refs/tags/0.1.0" });
+    assert.notEqual(tagged.status, 0);
+    assert.match(tagged.stderr, /Only main may dispatch/u);
+    fs.writeFileSync(
+      path.join(fixture, "package.json"),
+      JSON.stringify({ name: "faac", version: "01.1.0", type: "module" }),
+    );
+    const invalidSemVer = validate({ FAAC_RELEASE_VERSION: "01.1.0" });
+    assert.notEqual(invalidSemVer.status, 0);
+    assert.match(invalidSemVer.stderr, /plain SemVer/u);
+    fs.writeFileSync(
+      path.join(fixture, "package.json"),
+      JSON.stringify({ name: "faac", version: "0.1.0", type: "module" }),
+    );
     const next = git(["commit-tree", tree, "-p", sha], "main advanced\n");
     git(["update-ref", "refs/remotes/origin/main", next]);
     const stale = validate();
@@ -87,6 +151,29 @@ else if(args[0]==='manifest'){
 `;
     fs.writeFileSync(path.join(fixture, "package.json"), '{"type":"module"}');
     fs.writeFileSync(path.join(fixture, "docker"), fakeDocker, { mode: 0o755 });
+    fs.writeFileSync(recorder, "");
+    const invalidVersion = spawnSync(
+      process.execPath,
+      [path.resolve("xops/package/publish-container.mjs")],
+      {
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          PATH: fixture + path.delimiter + process.env.PATH,
+          RECORD: recorder,
+          CASE: "absent",
+          RELEASE_IMAGE: "ghcr.io/consciontologic/faac",
+          RELEASE_VERSION: "01.1.0",
+          RELEASE_SHA: "d".repeat(40),
+        },
+      },
+    );
+    assert.notEqual(invalidVersion.status, 0);
+    assert.equal(
+      fs.readFileSync(recorder, "utf8"),
+      "",
+      "Invalid SemVer must fail before Docker is called",
+    );
     for (const scenario of ["different", "network", "same", "absent"]) {
       fs.writeFileSync(recorder, "");
       const result = spawnSync(
@@ -118,9 +205,84 @@ else if(args[0]==='manifest'){
         );
       } else {
         assert.equal(result.status, 0, result.stderr);
-        assert.equal(calls.filter((call) => call[0] === "push").length, 2);
+        assert.deepEqual(
+          calls.filter((call) => call[0] === "push"),
+          [["push", "ghcr.io/consciontologic/faac:0.1.0"]],
+        );
       }
     }
+  } finally {
+    fs.rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+test("release publication uses bare SemVer for its tag, title and asset filenames", () => {
+  const fixture = fs.mkdtempSync(path.join(os.tmpdir(), "faac-release-names-"));
+  try {
+    fs.mkdirSync(path.join(fixture, "xops/package"), { recursive: true });
+    fs.mkdirSync(path.join(fixture, "bin"));
+    fs.copyFileSync(
+      "xops/package/release.mjs",
+      path.join(fixture, "xops/package/release.mjs"),
+    );
+    fs.writeFileSync(
+      path.join(fixture, "package.json"),
+      JSON.stringify({ name: "faac", version: "0.1.0", type: "module" }),
+    );
+    fs.writeFileSync(
+      path.join(fixture, "bin/git"),
+      `#!${process.execPath}\nconsole.log(process.env.GITHUB_SHA);\n`,
+      { mode: 0o755 },
+    );
+    const recorder = path.join(fixture, "calls.jsonl");
+    fs.writeFileSync(
+      path.join(fixture, "bin/gh"),
+      `#!${process.execPath}\nimport fs from 'node:fs';
+const args=process.argv.slice(2);fs.appendFileSync(process.env.RECORD,JSON.stringify(args)+'\\n');
+if(args[0]==='api' && args[1].endsWith('/git/ref/heads/main'))console.log(process.env.GITHUB_SHA);
+else if((args[0]==='api' && args[1].includes('/git/ref/tags/')) || (args[0]==='release' && args[1]==='view')) {console.error('HTTP 404: not found');process.exitCode=1;}
+else console.log('{}');
+`,
+      { mode: 0o755 },
+    );
+    const result = spawnSync(
+      process.execPath,
+      ["xops/package/release.mjs", "publish"],
+      {
+        cwd: fixture,
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          PATH: path.join(fixture, "bin") + path.delimiter + process.env.PATH,
+          RECORD: recorder,
+          GITHUB_SHA: "d".repeat(40),
+          GITHUB_REPOSITORY: "consciontologic/faac",
+        },
+      },
+    );
+    assert.equal(result.status, 0, result.stderr);
+    const calls = fs
+      .readFileSync(recorder, "utf8")
+      .trim()
+      .split("\n")
+      .map((line) => JSON.parse(line) as string[]);
+    const tag = calls.find(
+      (args) => args[0] === "api" && args.includes("POST"),
+    );
+    assert(tag?.includes("ref=refs/tags/0.1.0"));
+    const release = calls.find(
+      (args) => args[0] === "release" && args[1] === "create",
+    );
+    assert(release);
+    assert.deepEqual(release.slice(0, 6), [
+      "release",
+      "create",
+      "0.1.0",
+      "build/package/0.1.0.tgz",
+      "build/package/0.1.0.cdx.json",
+      "build/package/SHA256SUMS",
+    ]);
+    assert.equal(release[release.indexOf("--title") + 1], "0.1.0");
   } finally {
     fs.rmSync(fixture, { recursive: true, force: true });
   }

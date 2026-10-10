@@ -11,12 +11,12 @@ const run = (command, args) =>
 const version = JSON.parse(fs.readFileSync("package.json", "utf8")).version;
 assert.match(
   version,
-  /^\d+\.\d+\.\d+$/u,
+  /^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u,
   "package.json must contain plain SemVer",
 );
 const sha = process.env.GITHUB_SHA || run("git", ["rev-parse", "HEAD"]);
 assert.match(sha, /^[a-f0-9]{40}$/u, "Release commit must be a complete SHA");
-const tag = `v${version}`;
+const tag = version;
 const repository = process.env.GITHUB_REPOSITORY || "consciontologic/faac";
 assert.match(repository, /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/u);
 const image = `ghcr.io/${repository.toLowerCase()}`;
@@ -31,21 +31,41 @@ assert.equal(
 
 if (process.argv[2] === "validate") {
   const ref = process.env.GITHUB_REF;
-  assert(
-    ref === "refs/heads/main" || ref === `refs/tags/${tag}`,
-    "Only main or a matching version tag may release",
-  );
+  assert.equal(ref, "refs/heads/main", "Only main may dispatch a release");
   assert.equal(
     run("git", ["rev-parse", "origin/main"]),
     sha,
     "Release commit must be current main",
   );
-  if (ref.startsWith("refs/tags/"))
-    assert.equal(run("git", ["rev-parse", `${tag}^{commit}`]), sha);
   const output = `version=${version}\ntag=${tag}\nsha=${sha}\nimage=${image}\n`;
   if (process.env.GITHUB_OUTPUT)
     fs.appendFileSync(process.env.GITHUB_OUTPUT, output);
   process.stdout.write(output);
+} else if (process.argv[2] === "summary-evidence") {
+  const evidence = JSON.parse(
+    fs.readFileSync(process.argv[3] || "build/release-evidence.json", "utf8"),
+  );
+  assert.equal(
+    evidence.release_sha,
+    sha,
+    "Evidence identifies another release commit",
+  );
+  assert.match(evidence.tree_sha, /^[a-f0-9]{40}$/u);
+  assert.match(evidence.source_head_sha, /^[a-f0-9]{40}$/u);
+  assert(Number.isSafeInteger(evidence.source_pr) && evidence.source_pr > 0);
+  assert(
+    Array.isArray(evidence.run_ids),
+    "Evidence must list successful run IDs",
+  );
+  const runIds = [...new Set(evidence.run_ids)];
+  assert(
+    runIds.length > 0 &&
+      runIds.every((id) => Number.isSafeInteger(id) && id > 0),
+  );
+  const message = `### ♻️ Reused PR verification\n\nSource: [PR #${evidence.source_pr}](https://github.com/${repository}/pull/${evidence.source_pr}) at \`${evidence.source_head_sha}\`.\n\nExact Git tree: \`${evidence.tree_sha}\`.\n\nSuccessful checks: ${runIds.map((id) => `[run ${id}](https://github.com/${repository}/actions/runs/${id})`).join(", ")}.\n\n`;
+  process.stdout.write(message);
+  if (process.env.GITHUB_STEP_SUMMARY)
+    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, message);
 } else if (process.argv[2] === "publish") {
   assert.equal(
     run("gh", [
@@ -94,8 +114,8 @@ if (process.argv[2] === "validate") {
     { encoding: "utf8" },
   );
   const assets = [
-    `build/package/faac-${version}.tgz`,
-    `build/package/faac-${version}.cdx.json`,
+    `build/package/${version}.tgz`,
+    `build/package/${version}.cdx.json`,
     "build/package/SHA256SUMS",
   ];
   if (existing.status === 0) {
@@ -168,7 +188,7 @@ if (process.argv[2] === "validate") {
       "--draft",
       "--generate-notes",
       "--title",
-      `faac ${version}`,
+      version,
     ]);
   }
   console.log(
@@ -186,5 +206,5 @@ if (process.argv[2] === "validate") {
   ]);
 } else
   throw new Error(
-    "Usage: node xops/package/release.mjs validate|publish|finish",
+    "Usage: node xops/package/release.mjs validate|summary-evidence|publish|finish",
   );

@@ -3,15 +3,15 @@
 There are two independent model systems:
 
 - **faac runtime:** OpenRouter/Groq models that pass strict free-only routing. Configure them with `/models`, `/route`, and `/params`.
-- **Repository automation:** GitHub Copilot performs development tasks and reviews. Its account access and billing are separate from faac's free-only policy.
+- **Explicit repository delegation:** GitHub Copilot performs assigned development tasks and separately requested reviews. Its account access and billing are separate from faac's free-only policy.
 
 ## Repository task model
 
-The configured choice is **MAI-Code-1.1-Flash**, API model ID `mai-code-1.1-flash`. The automation uses an explicit allowlist and does not fall back to `Auto` or an arbitrary premium model. If the account, endpoint, or task cannot use it, the automation stops visibly.
+The configured choice is **MAI-Code-1.1-Flash**, API model ID `mai-code-1.1-flash`. The local task helper uses an explicit allowlist and does not fall back to `Auto` or an arbitrary premium model. If the account, endpoint, or task cannot use it, the helper stops visibly.
 
 GitHub's [2026-08-11 availability announcement](https://github.blog/changelog/2026-08-11-mai-code-1-1-flash-available-in-github-copilot/) describes a 73% lower list price than MAI-Code-1-Flash and a 0.25× premium-request multiplier for annual subscribers; usage-based accounts use provider list pricing. This is the reason for the inexpensive default, checked on 2026-10-10. It is not a fixed per-task bill.
 
-Availability and billing can change. Before enabling automation, verify the model is available to the account and examine GitHub's current pricing. “Cheap” does not mean anonymous, unlimited, or guaranteed free. The controller limits task submissions, repairs, review requests, and actions per run; [DevOps](DEVOPS.md) describes those bounds.
+Availability and billing can change. Before submitting a task, verify the model is available to the account and examine GitHub's current pricing. “Cheap” does not mean anonymous, unlimited, or guaranteed free. Each helper invocation submits one explicitly requested task. There is no automatic delivery controller, repair purchaser, or scheduled retry. [DevOps](DEVOPS.md) describes the request and receipt flow.
 
 ## Reviews
 

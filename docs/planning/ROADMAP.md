@@ -2,13 +2,13 @@
 
 This is the sequenced project plan. Checked items are implemented; remaining live or hosted verification stays explicit.
 
-| Phase                                 | State                                                  |
-| ------------------------------------- | ------------------------------------------------------ |
-| 1. Terminal coding agent              | Implemented and tested                                 |
-| 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending      |
-| 3. Upstream synchronization           | Implemented and tested                                 |
-| 4. Repository delivery                | Configured and locally verified; hosted checks pending |
-| 5. Additional live evidence           | Requires external accounts/quota conditions            |
+| Phase                                 | State                                             |
+| ------------------------------------- | ------------------------------------------------- |
+| 1. Terminal coding agent              | Implemented and tested                            |
+| 2. Preservation and free-only routing | Implemented; live cross-provider evidence pending |
+| 3. Upstream synchronization           | Implemented and tested                            |
+| 4. PR checks and explicit publication | Locally verified; hosted PR evidence pending        |
+| 5. Additional live evidence           | Requires external accounts/quota conditions       |
 
 ## Phase 1 — Terminal coding agent
 
@@ -41,16 +41,23 @@ Scope: `sync`. Acceptance: real Git fixture tests and a public upstream fetch.
 - [x] Quarantine unknown semantic changes; activate atomically and retain rollback state.
 - [x] Pin request snapshots and verify locking, corruption recovery, and failed-fetch handling.
 
-## Phase 4 — Repository delivery
+## Phase 4 — PR checks and explicit publication
 
-Scope: `delivery`. Acceptance: repository checks, package/container smoke tests, workflow checks, and verified GitHub settings.
+Scope: `pr-policy`. Acceptance: policy tests, workflow lint, eligible PR evidence, and exact-tree release authorization.
 
 - [x] Create the public repository and project metadata.
 - [x] Apply agentic-workspace and replace documentation templates with faac documents.
-- [x] Validate GitFlow checks, branch publication tooling, and AI task/review controllers.
-- [x] Validate package assets and container setup through their smoke tests.
-- [ ] Publish and verify protected main/develop branches and required workflow checks.
-- [ ] Configure durable automation credentials and verify an actual Copilot task/review run.
+- [x] Validate the guarded local publication tool and package/container setup.
+- [x] Complete an explicitly requested hosted MAI-Code-1.1-Flash task.
+- [x] Verify removal of the delivery controller and label-driven actions.
+- [x] Verify all five CI jobs run only for any PR into develop or hotfix PRs into main, with no runners for ordinary promotion.
+- [x] Verify exact-tree prior PR evidence is enforced only during explicit release validation.
+- [x] Verify explicit release authorization reuses prior PR results without rerunning tests, smokes, or scanners.
+- [x] Observe successful eligible PR jobs on GitHub with the revised policy.
+- [ ] Observe all-five promotion skips on GitHub with the revised policy.
+- [ ] Obtain an actual completed native Copilot review when account quota permits.
+
+The earlier controller and manually dispatched diagnostics remain dated evidence in [verification](../reports/VERIFICATION.md). They do not establish the revised policy's hosted success. Automatic delivery and permanent controller credentials are no longer planned. The proven public release/container and explicit MAI task remain valid historical results.
 
 ## Phase 5 — Additional live evidence
 
@@ -59,7 +66,7 @@ Scope: `live-validation`. These are explicit evidence gaps, not claims of missin
 - [ ] Verify Groq authenticated coding with a confirmed Free-plan account.
 - [ ] Verify authenticated fallback between providers while preserving tool state.
 - [ ] Observe a natural quota-triggered fallback and record the actual failure scope.
-- [ ] Verify a tagged GitHub release and published GHCR image from the installed workflow.
+- [x] Verify a versioned GitHub release and published GHCR image from the installed workflow.
 
 ## Completion discipline
 

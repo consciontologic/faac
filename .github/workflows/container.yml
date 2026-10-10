@@ -1,10 +1,8 @@
-name: Container
+name: 🐳 Container
 on:
   pull_request:
-    branches: [main, develop]
-  push:
-    branches: [main, develop]
-  workflow_dispatch:
+    branches: [develop, main]
+    types: [opened, synchronize, reopened, ready_for_review, edited, labeled, unlabeled]
 permissions:
   contents: read
 concurrency:
@@ -12,17 +10,37 @@ concurrency:
   cancel-in-progress: true
 jobs:
   container:
+    if: >-
+      github.event_name == 'pull_request' && (
+        github.base_ref == 'develop' || (github.base_ref == 'main' && (
+          startsWith(github.head_ref, 'hotfix/') ||
+          startsWith(github.head_ref, 'codex/hotfix/') ||
+          startsWith(github.head_ref, 'claude/hotfix/') ||
+          (github.event.pull_request.head.repo.full_name == github.repository &&
+           startsWith(github.head_ref, 'copilot/') &&
+           contains(github.event.pull_request.labels.*.name, 'work:hotfix'))
+        )))
     name: Container
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out exact PR source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      - name: Set up Node.js 22
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: "22"
       - name: Build without registry credentials
-        run: docker build --tag faac:ci .
+        run: bash xops/ci/step.sh "Build container" docker build --tag faac:ci .
       - name: Test mounts, edits, non-root runtime and resume without network
-        run: node xops/package/container-smoke.mjs faac:ci
+        run: bash xops/ci/step.sh "Test container mounts and session resume" node xops/package/container-smoke.mjs faac:ci
+      - name: Job summary
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf "### 🐳 Container\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"

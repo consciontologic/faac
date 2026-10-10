@@ -3,6 +3,7 @@
 **Ask for a code change. Keep your work when the model changes.**
 
 [![CI](https://github.com/consciontologic/faac/actions/workflows/ci.yml/badge.svg)](https://github.com/consciontologic/faac/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/consciontologic/faac)](https://github.com/consciontologic/faac/releases/latest)
 [![Node.js 22+](https://img.shields.io/badge/node-%3E%3D22-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -17,6 +18,19 @@ faac is a terminal coding assistant powered by hosted free models. It reads your
 - **Strict free routing:** official OpenRouter and Groq APIs; no silent paid fallback, local model, or running OmniRoute server.
 - **A usable terminal:** streaming Markdown and highlighted code, diffs, multiline editing, history, slash completion, cancellation, narrow layouts, and `NO_COLOR`.
 - **Reviewed upstream updates:** a dedicated Git cache, validated data extraction, atomic activation, quarantine, and rollback.
+
+## Install the release
+
+Requires Node.js 22+, npm, and Git. The package is published as a GitHub release asset:
+
+```bash
+npm install --global --prefix "$HOME/.local" \
+  https://github.com/consciontologic/faac/releases/download/0.1.0/0.1.0.tgz
+export PATH="$HOME/.local/bin:$PATH"
+faac --version
+```
+
+[Release assets and checksums](https://github.com/consciontologic/faac/releases/tag/0.1.0) · [Container instructions](docs/guides/DEVOPS.md#run-the-container)
 
 ## Install from source
 
@@ -95,7 +109,7 @@ make package.test
 
 Tests using simulated providers are separate from opted-in authenticated tests. Actual OpenRouter coding, process restart/resume, and alternate-model inference after an injected interruption passed on 2026-10-10. Groq authenticated fallback and natural quota exhaustion remain unverified. See [the evidence and reproduction steps](docs/reports/VERIFICATION.md).
 
-The repository includes GitFlow checks, cost-controlled Copilot delegation, package verification, release automation, and a GHCR container workflow. Credential- and account-dependent automation must be configured before it can run; see [DevOps](docs/guides/DEVOPS.md).
+All five CI jobs run only for PRs into `develop` or hotfix PRs into `main`. Ordinary promotion skips every job; explicit release validation checks the exact tree against prior eligible PR evidence. Copilot delegation is explicit, and releases are manually dispatched; no delivery controller purchases tasks or merges PRs. See [GitFlow](docs/guides/GITFLOW.md) and [DevOps](docs/guides/DEVOPS.md).
 
 ## Source and license
 

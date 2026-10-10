@@ -9,7 +9,7 @@ const root = path.resolve(import.meta.dirname, "../..");
 const metadata = JSON.parse(
   fs.readFileSync(path.join(root, "package.json"), "utf8"),
 );
-const archive = path.join(root, `build/package/faac-${metadata.version}.tgz`);
+const archive = path.join(root, `build/package/${metadata.version}.tgz`);
 assert(fs.existsSync(archive), "Run npm run package first");
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "faac-package-"));
 const env = {

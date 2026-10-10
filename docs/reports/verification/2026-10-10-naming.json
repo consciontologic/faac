@@ -1,0 +1,53 @@
+{
+  "release": "https://github.com/consciontologic/faac/releases/tag/0.1.0",
+  "name": "0.1.0",
+  "tag": "0.1.0",
+  "source_commit": "7c837e1d9bfdc5c7fab3da48012bef5f05d6da98",
+  "assets": [
+    {
+      "name": "0.1.0.cdx.json",
+      "sha256": "785db7aeb8a67d3c9e068005aaf6a3f7816a1aef20a076947dfabc28c7364f39",
+      "url": "https://github.com/consciontologic/faac/releases/download/0.1.0/0.1.0.cdx.json"
+    },
+    {
+      "name": "0.1.0.tgz",
+      "sha256": "3683583afb5e37807da25be968774b9bef48f12ee0a6c8e4a4c61128bede8620",
+      "url": "https://github.com/consciontologic/faac/releases/download/0.1.0/0.1.0.tgz"
+    },
+    {
+      "name": "SHA256SUMS",
+      "sha256": "6c261379f81ffba255f3661ad8772d0a22470a284f60565f8067e349fc9fa502",
+      "url": "https://github.com/consciontologic/faac/releases/download/0.1.0/SHA256SUMS"
+    }
+  ],
+  "application_bytes_unchanged": true,
+  "container": "ghcr.io/consciontologic/faac:0.1.0",
+  "container_digest": "sha256:b7ea0636769ed0473f00c75d6bc65ba3bf2a29fe48b4b7499921ee50c80f4a27",
+  "scope": "Public GitHub asset name migration verified by anonymous downloads; no container rebuild.",
+  "verified_at": "2026-10-10",
+  "old_tag_removed": "v0.1.0",
+  "install": {
+    "source_url": "https://github.com/consciontologic/faac/releases/download/0.1.0/0.1.0.tgz",
+    "installed_version": "faac 0.1.0",
+    "status_exit": 0,
+    "workspace_preserved": true,
+    "provider_requests": 0
+  },
+  "release_environment_tag_pattern": "*.*.*",
+  "paused_workflows": [
+    "Release",
+    "AI delivery"
+  ],
+  "pause_reason": "Trusted main still contains the old naming/review controller. Re-enable only after protected PR fixes are promoted to main.",
+  "legacy_container_aliases": [
+    "latest",
+    "sha-7c837e1d9bfdc5c7fab3da48012bef5f05d6da98"
+  ],
+  "legacy_alias_note": "The existing SemVer image is unchanged. Future release code no longer publishes these convenience aliases; existing registry aliases have not been deleted.",
+  "legacy_alias_cleanup_blocker": {
+    "endpoint": "GET /user/packages/container/faac/versions",
+    "status": 403,
+    "message": "Resource not accessible by personal access token",
+    "impact": "Legacy convenience aliases retained. The requested SemVer image tag works; no published manifest was deleted."
+  }
+}

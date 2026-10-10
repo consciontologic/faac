@@ -26,7 +26,7 @@ make image
 make image.test
 ```
 
-`make check` covers application types/tests and repository operations/documentation checks. Terminal tests launch actual pseudoterminals. Package tests install and exercise the tarball. Container checks build and inspect the image. Missing optional test dependencies are a failed prerequisite, not evidence that the check passed.
+`make check` covers application types/tests and repository operations/documentation checks. Terminal tests launch actual pseudoterminals. Package tests install and exercise the tarball. Release asset filenames use only the version: `0.1.0.tgz` and `0.1.0.cdx.json`; Git tags and release names also use `0.1.0`. Container checks build and inspect the image. Missing optional test dependencies are a failed prerequisite, not evidence that the check passed.
 
 For a small application change, begin with its focused test:
 

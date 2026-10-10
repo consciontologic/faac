@@ -14,8 +14,10 @@ Credentials belong in environment variables, a secret manager, or faac's passphr
 
 Upstream synchronization fetches into a faac-owned Git cache and parses a bounded subset of source as data. It never imports fetched TypeScript, installs upstream packages, or runs repository scripts. Unknown compatibility changes quarantine the affected integration.
 
-## Repository automation
+## Repository checks and publication
 
-AI issue and PR workflows must run only within the authorized label/branch policy, with minimal token scopes, explicit model choice, and bounded budgets. PR text and source are untrusted inputs. Required checks and merge gates remain necessary even when implementation and review are delegated. See [DevOps](docs/guides/DEVOPS.md) for credential roles and trigger rules.
+PR text and source are untrusted inputs. Eligible PR jobs run with read-only permissions and no provider or publication secrets. Explicit Copilot tasks use a process-scoped token, one chosen model, and durable submission receipts; there is no delivery controller or label-driven task execution.
+
+All five CI jobs run only for PRs into develop or hotfix PRs into main. Ordinary promotion skips them all; the coordinator preserves the validated source tree. Explicit release validation proves that tree passed eligible PR checks before allowing publication. Publication uses trusted main code and artifact integrity checks without rerunning quality/security jobs. Do not bypass branch protections or accept an error comment as completed review. See [DevOps](docs/guides/DEVOPS.md).
 
 Rotate a credential through its provider when exposure is confirmed, remove it from active configuration, and review access logs. Removing a value from the latest Git revision does not remove it from history.

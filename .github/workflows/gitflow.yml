@@ -1,18 +1,40 @@
-name: GitFlow
+name: 🌿 GitFlow
 on:
   pull_request:
-    branches: [main, develop]
-    types: [opened, synchronize, reopened, edited, ready_for_review]
-  push:
-    branches: [main, develop]
+    branches: [develop, main]
+    types: [opened, synchronize, reopened, ready_for_review, edited, labeled, unlabeled]
 permissions:
   contents: read
+concurrency:
+  group: gitflow-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 jobs:
   gitflow:
+    if: >-
+      github.event_name == 'pull_request' && (
+        github.base_ref == 'develop' || (github.base_ref == 'main' && (
+          startsWith(github.head_ref, 'hotfix/') ||
+          startsWith(github.head_ref, 'codex/hotfix/') ||
+          startsWith(github.head_ref, 'claude/hotfix/') ||
+          (github.event.pull_request.head.repo.full_name == github.repository &&
+           startsWith(github.head_ref, 'copilot/') &&
+           contains(github.event.pull_request.labels.*.name, 'work:hotfix'))
+        )))
     name: GitFlow
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out exact PR source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - run: python3 xops/agent/gitflow.py --check-event
+      - name: Validate eligible PR lane
+        run: bash xops/ci/step.sh "Validate GitFlow lane" python3 xops/agent/gitflow.py --check-event
+      - name: Job summary
+        if: always()
+        env:
+          RESULT: ${{ job.status }}
+          SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf "### 🌿 GitFlow\n\nStatus: **%s** · PR source: \`%s\`\n" "$RESULT" "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
